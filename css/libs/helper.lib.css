@@ -1,0 +1,39 @@
+.required-star
+{
+	font-size: 16px;
+	color: red;
+}
+
+.loading-big
+{
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	background-image: url(../../img/loading.gif);
+}
+
+.text-small
+{
+	font-size: 12px;
+}
+
+.text-med
+{
+	font-size: 20px;
+}
+
+.text-large
+{
+	font-size: 28px;
+}
+
+.low-margin-bottom
+{
+	margin-bottom: 5px;
+}
+
+a.tooltipLink:hover
+{
+	cursor: help;
+	text-decoration: none;
+}

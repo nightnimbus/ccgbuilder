@@ -1,0 +1,344 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"background-c",
+				"background-color"
+			],
+			[
+				"b",
+				"bMouseOnNavSearchForm"
+			],
+			[
+				"bind",
+				"bindSearchShowHoverIntent"
+			],
+			[
+				"n",
+				"transparent"
+			],
+			[
+				"clearSele",
+				"clearSelectionInterval"
+			],
+			[
+				"ma",
+				"margin-top"
+			],
+			[
+				"bo",
+				"border"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"marg",
+				"margin"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"fon",
+				"font-family"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"back",
+				"background-color"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 219.0,
+		"selected_items":
+		[
+		],
+		"width": 370.0
+	},
+	"console":
+	{
+		"height": 153.0,
+		"history":
+		[
+			"import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')",
+			"https://sublime.wbond.net/alpha/packages.json"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/wamp/www/backbone_examples/register_users/js/main.js",
+		"/C/Stuff/Programming/Web/libs/initializr/index.html",
+		"/C/wamp/www/backbone_examples/register_users/js/require.js",
+		"/C/wamp/www/CCG Builder/index.html",
+		"/C/wamp/www/backbone_examples/register_users/css/libs/helper.lib.css",
+		"/C/wamp/www/CCG Builder/css/main.css",
+		"/C/wamp/www/CCG Builder/css/bootstrap.css",
+		"/C/wamp/www/CCG Builder/css/bootstrap-responsive.css",
+		"/C/wamp/www/CCG Builder/js/main.js",
+		"/C/Stuff/Programming/Web/backups/CCG Builder/js/plugins.js",
+		"/C/wamp/www/CCG Builder/js/plugins/social-media/css/social-media.css",
+		"/C/wamp/www/bootstrap_examples/4 pictures/ext/pluxxiSTD/plugins/jSocial/js/jquery.jsocial.js",
+		"/C/wamp/www/CCG Builder/js/plugins/social-media/js/social-media.js",
+		"/C/wamp/www/CCG Builder/js/plugins/social-media.js",
+		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.010/script.js",
+		"/C/wamp/www/CCG Builder/css/social-media.css",
+		"/C/wamp/www/CCG Builder/css/style.css",
+		"/C/wamp/www/bootstrap_examples/4 pictures/index.php",
+		"/C/wamp/www/TCG Maker/index.html",
+		"/C/wamp/www/TCG Maker/js/main.js",
+		"/C/wamp/www/TCG Maker/css/bootstrap-responsive.css",
+		"/C/wamp/www/TCG Maker/css/bootstrap.css",
+		"/C/wamp/www/TCG Maker/css/main.css",
+		"/C/Stuff/Programming/Web/libs/initializr/js/funclibs/hoverIntent.funclib.js",
+		"/C/wamp/www/TCG Maker/js/plugins/hoverIntent.js",
+		"/C/wamp/www/TCG Maker/js/plugins.js",
+		"/C/wamp/www/ThemeForest Themes/New folder/index.html",
+		"/C/wamp/www/ThemeForest Themes/New folder/css/bootstrap-responsive.css",
+		"/C/wamp/www/ThemeForest Themes/New folder/css/bootstrap.css",
+		"/C/wamp/www/ThemeForest Themes/New folder/css/main.css",
+		"/C/wamp/www/bootstrap_examples/4 pictures/css/bootstrap-responsive.css",
+		"/C/wamp/www/bootstrap_examples/4 pictures/css/bootstrap.css",
+		"/C/wamp/www/bootstrap_examples/4 pictures/css/custom.css",
+		"/C/wamp/www/bootstrap_examples/4 pictures/js/app/select.js",
+		"/C/wamp/www/bootstrap_examples/4 pictures/select.ajax.php",
+		"/C/wamp/www/bootstrap_examples/4 pictures/createUser.php",
+		"/C/wamp/www/bootstrap_examples/4 pictures/select.php",
+		"/C/wamp/www/calcmodules/index.php",
+		"/C/wamp/www/bootstrap_examples/4 pictures/ext/pluxxiSTD/php/connect.php",
+		"/C/wamp/www/bootstrap_examples/4 pictures/ext/pluxxiSTD/php/inc.php",
+		"/C/wamp/www/bootstrap_examples/4 pictures/select.html",
+		"/C/wamp/www/bootstrap_examples/4 pictures/select.js",
+		"/C/wamp/www/bootstrap_examples/4 pictures/js/libs/bootstrap-alert.extended.js",
+		"/C/wamp/www/bootstrap_examples/4 pictures/js/libs/alert.extended.js",
+		"/C/wamp/www/bootstrap_examples/4 pictures/index.html",
+		"/C/wamp/www/bootstrap_examples/4 pictures/.htaccess",
+		"/C/wamp/www/bootstrap_examples/4 pictures/js/plugins/magnificent-popup/css/magnific-popup.css",
+		"/C/wamp/www/bootstrap_examples/4 pictures/js/plugins.js",
+		"/C/Program Files (x86)/Sublime Text 3/Data/Packages/Default/Preferences.sublime-settings",
+		"/C/Program Files (x86)/Sublime Text 3/Data/Packages/User/Preferences.sublime-settings",
+		"/C/Users/tahmidkarim/web8/main.css",
+		"/C/Users/tahmidkarim/web8/index.html",
+		"/D/Software/Portable/Sublime Text 3/Data/Packages/User/Default (Windows).sublime-keymap",
+		"/D/Software/Portable/Sublime Text 3/Data/Packages/Browser Refresh/Default (Windows).sublime-keymap",
+		"/D/Software/Portable/Sublime Text 3/Data/Packages/Default/Preferences.sublime-settings",
+		"/D/Software/Portable/Sublime Text 3/Data/Packages/User/Preferences.sublime-settings",
+		"/D/Software/Portable/Sublime Text 3/Data/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/tahmidkarim/Desktop/Sublime Text 3/Data/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"required-star",
+			"selector + \" ",
+			"\".jquery-social-media",
+			"#jquery",
+			"\"#jquery",
+			"#jquery",
+			"/icons/",
+			"img",
+			"css3",
+			"images",
+			".row-header",
+			".right-side-bar",
+			"@media",
+			"                        \n",
+			"5",
+			".nav ",
+			">\n",
+			".navbar-inner",
+			".navbar",
+			".container",
+			"@media",
+			".span3",
+			"@media",
+			"fixed-top",
+			"@media",
+			".container",
+			".active",
+			".navbar-inner",
+			".navbar",
+			".navbar-inner",
+			".navbar .nav>.active>a",
+			".nav > li .active",
+			".nav .active",
+			".nav.active",
+			".navbar.active",
+			".active",
+			"%;",
+			".navbar ",
+			".navbar",
+			".navbar-inner",
+			".nav",
+			".navbar",
+			".collapse",
+			".nav-collapse",
+			".container",
+			":hover",
+			"hover",
+			"<img ",
+			"mfp-zoom",
+			"350x350",
+			"cursor",
+			".image",
+			"800x800",
+			".span",
+			"@media",
+			"divider",
+			"http://placehold.it/200x200",
+			".span",
+			"center",
+			"centered",
+			".container",
+			"select",
+			"auto",
+			"009bdf"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"hlpr-required-star",
+			"\"",
+			"selector + \"",
+			".jquery-social-media",
+			"selector + \"",
+			".jquery-social-media",
+			"/img/icons/",
+			"../../..",
+			"css3-social-media",
+			"img/icons",
+			".container-header",
+			".sub-bar",
+			"7",
+			"<img class=\"img-spacing\" ",
+			"mfp-zoom img-spacing",
+			"200x200",
+			"500x500",
+			"http://placehold.it/250x250"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"project": "index.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 58.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
