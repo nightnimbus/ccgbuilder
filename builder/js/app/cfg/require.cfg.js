@@ -46,22 +46,22 @@ requirejs.config(
             "../../../js/vendor/modernizr.min"
         ],
 
-        // Plugin paths
+        // Plugin Paths
         "bootstrap":
         [
             "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min",
             "../../../js/vendor/bootstrap.min"
         ],
 
-        "bootstrap-alert":
-        [
-            
-        ],
-
         "localstorage":
         [
             "//cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.0/backbone.localStorage-min",
             "../../../js/vendor/plugins/backbone/localStorage.min"
+        ],
+
+        "transform":
+        [
+            "../../../js/vendor/plugins/jquery/transform/js/transform.min"
         ]
     },
 
@@ -107,6 +107,11 @@ requirejs.config(
         "localstorage":
         {
             deps: ["backbone"]
+        },
+
+        "transform":
+        {
+            deps: ["jquery"]
         }
     }
 });

@@ -1,63 +1,27 @@
-require(["jquery", "backbone"], function($, Backbone)
-{
-	defaults:
+define(
 	[
-		name: "",
-		selected: false,
-		pos:
-		{
-			top: 0,
-			left: 0,
-			bottom: 0,
-			right: 0
-		}
+		"jquery",
+		"backbone"
 	],
-
-	initialize: function()
+function($, Backbone)
+{
+	var ComponentModel = Backbone.Model.extend(
 	{
-		this.on("change:name", function(model, name)
+		defaults:
 		{
-			$("#component-name").text(name);
-		});
-
-		this.on("change:selected", function(model, selected)
-		{
-			if(!selected)
-			{
-				$("#container-component").removeClass("component-selected");
-				$("#container-component").addClass("component-default");
-			}
-
-			else
-			{
-				$("#container-component").removeClass("component-default");
-				$("#container-component").addClass("component-selected");
-			}
-		});
-
-		this.on("change:pos", function(model, pos)
-		{
-			var finalPos =
+			name: "",
+			selected: false,
+			width: 200,
+			height: 100,
+			pos:
 			{
 				top: 0,
 				left: 0,
 				bottom: 0,
 				right: 0
-			};
+			}
+		}
+	});
 
-			
-			
-			$("#container-component").css(
-			{
-				"top": pos["top"],
-				"left": pos["left"],
-				"bottom": pos["bottom"],
-				"right": pos["right"]
-			});
-		});
-	},
-	render: function()
-	{
-
-	}
+	return ComponentModel;
 });

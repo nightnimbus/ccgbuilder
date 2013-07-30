@@ -67,6 +67,8 @@ function($, ASync)
 		{
 			if(stepIndex >= 0 && stepIndex < this.steps.length && this.stepContentSelector.length > 0)
 			{
+				onComplete = (typeof onComplete === "function") ? onComplete : function(){};
+
 				if(!this.steps[stepIndex].rendered)
 					$(this.stepContentSelector).append(this.steps[stepIndex].render(onComplete).el);
 				else

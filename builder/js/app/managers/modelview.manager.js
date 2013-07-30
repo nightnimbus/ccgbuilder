@@ -8,14 +8,17 @@ define(["underscore", "backbone"], function(_, Backbone)
 	_.extend(ModelViewManager.prototype, {},
 	{
 		modelViews: {},
+		count: 0,
 
 		add: function(view)
 		{
 			this.modelViews[view.model.cid] = view;
+			this.count++;
 		},
 		remove: function(cid)
 		{
 			delete this.modelViews[cid];
+			this.count--;
 		},
 		createDocumentFragment: function()
 		{

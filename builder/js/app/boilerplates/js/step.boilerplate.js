@@ -47,7 +47,7 @@ function(
 				HbsManager.loadTemplate("js/app/boilerplates/hbs/step.hbs",
 				function(template)
 				{
-					self.$el.html(HbsManager.templates["step"]());
+					self.$el.html(template());
 					onComplete();
 				});
 

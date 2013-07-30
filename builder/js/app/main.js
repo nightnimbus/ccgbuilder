@@ -3,30 +3,35 @@ define(
 		"jquery",
 		"managers/step.manager",
 		"managers/view.manager",
+		"genlib/globals.class",
 		"bb/views/step-buttons.view",
 		"bb/views/steps/choose-name.view",
 		"bb/views/steps/choose-template.view",
 		"bb/views/steps/template-components.view",
 		"bb/views/steps/finalize.view",
+		"bb/views/subviews/components.subview",
 		"jqueryui"
 	],
 function(
 	$,
 	StepManager,
 	ViewManager,
+	Globals,
 	StepButtonsView,
 	ChooseNameView,
 	ChooseTemplateView,
 	TemplateComponentsView,
-	FinalizeView)
+	FinalizeView,
+	ComponentsSubView)
 {
 	$(function()
 	{
 		console.log("App initializing...");
 
+		Globals.initialize();
+
 		ViewManager.views.stepButtons = new StepButtonsView();
 		ViewManager.views.stepButtons.render();
-
 
 		// Steps
 		ViewManager.views.chooseName = new ChooseNameView();
@@ -36,6 +41,7 @@ function(
 		StepManager.addStep(ViewManager.views.chooseTemplate);
 
 		ViewManager.views.templateComponents = new TemplateComponentsView();
+		ViewManager.views.templateComponents.componentsSubView = new ComponentsSubView();
 		StepManager.addStep(ViewManager.views.templateComponents);
 
 		ViewManager.views.finalize = new FinalizeView();

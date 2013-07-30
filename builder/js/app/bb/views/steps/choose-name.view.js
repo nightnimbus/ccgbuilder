@@ -49,7 +49,7 @@ function(
 				HbsManager.loadTemplate("js/app/hbs/step-chooseName.hbs",
 				function(template)
 				{
-					self.$el.html(HbsManager.templates["step-chooseName"]());
+					self.$el.html(template());
 					onComplete();
 				});
 

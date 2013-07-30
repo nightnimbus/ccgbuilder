@@ -1,13 +1,18 @@
-define([
-	"jquery",
-	"backbone",
-	"managers/hbs.manager",
-	"managers/view.manager",
-	"genlib/objectevent.class"],
+define(
+	[
+		"jquery",
+		"backbone",
+		"managers/hbs.manager",
+		"managers/step.manager",
+		"managers/view.manager",
+		"managers/modelview.manager",
+		"genlib/objectevent.class"
+	],
 function(
 	$,
 	Backbone,
 	HbsManager,
+	StepManager,
 	ViewManager,
 	ObjectEvent)
 {
@@ -20,6 +25,7 @@ function(
 		selectors: {},
 		stepTitle: "Template Components",
 		lastBgUrl: "",
+		componentsSubView: null,
 		events:
 		{
 			"click #addComponentBtn": "onClickAddComponent"
@@ -38,7 +44,7 @@ function(
 				)
 				ViewManager.views.stepButtons.enableNextButton();
 			else
-				ViewManager.views.stepButtons.enableNextButton();
+				ViewManager.views.stepButtons.disableNextButton();
 		},
 		render: function(onComplete)
 		{
@@ -49,7 +55,7 @@ function(
 				HbsManager.loadTemplate("js/app/hbs/step-templateComponents.hbs",
 				function(template)
 				{
-					self.$el.html(HbsManager.templates["step-templateComponents"]());
+					self.$el.html(template());
 					onComplete();
 				});
 
@@ -128,7 +134,10 @@ function(
 		},
 		onClickAddComponent: function(e)
 		{
-			
+			this.componentsSubView.addNewComponent();
+			this.$el.find("#componentsTemplatePreview").append(this.componentsSubView.render().el);
+
+			return false;
 		},
 		initTemplatePreview: function()
 		{

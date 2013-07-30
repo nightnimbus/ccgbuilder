@@ -69,12 +69,12 @@ function(
 			{
 				var self = this;
 
-				if(Modernizr.draganddrop)
+				if(Modernizr.draganddrop && !Globals.IS_MOBILE_DEVICE)
 				{
 					HbsManager.loadTemplate("js/app/hbs/step-chooseTemplate.hbs",
 					function(template)
 					{
-						self.$el.html(HbsManager.templates["step-chooseTemplate"]());
+						self.$el.html(template());
 						self.initDragNDropSelection();
 						onComplete();
 					});
@@ -85,8 +85,22 @@ function(
 					HbsManager.loadTemplate("js/app/hbs/step-chooseTemplate-fallback.hbs",
 					function(template)
 					{
+						var infoText = "";
+
+						if(Globals.IS_MOBILE_DEVICE)
+						{
+							infoText = 'You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to upload your <b>own</b> template background.';
+						}
+
+						else
+						{
+							infoText = 'You are using an <strong>outdated</strong> browser.' +
+							'Please <a href="http://browsehappy.com/">upgrade your browser</a> ' +
+							'or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a>' +
+							'to upload your <b>own</b> template background.';
+						}
+
 						self.$el.html(HbsManager.templates["step-chooseTemplate-fallback"]());
-						self.registerFallbackEvents();
 
 						onComplete();
 					});
@@ -258,7 +272,7 @@ function(
 						this.cardTemplateData[sizeStr] = url;
 					}
 
-					this.setPreviewBackground(prefix + this.cardTemplateSizes[0] + suffix);
+					this.setPreviewBackground(this.cardTemplateData[this.cardTemplateSizes[0]]);
 				}
 			}
 

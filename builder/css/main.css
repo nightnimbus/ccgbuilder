@@ -59,6 +59,18 @@
 	font-size: 30px;
 }
 
+.container-component
+{
+	border: 1px solid red;
+	background-color: rgba(255, 0, 0, 0.3);
+	background-color: rgb(100, 0, 0);
+}
+
+.component-name
+{
+	color: white;
+}
+
 input.chooseName
 {
 	margin: 0 auto;
