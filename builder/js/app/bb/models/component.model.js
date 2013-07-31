@@ -11,15 +11,16 @@ function($, Backbone)
 		{
 			name: "",
 			selected: false,
+			fillColor: "#FF0000",
+			x: 0,
+			y: 0,
 			width: 200,
 			height: 100,
-			pos:
-			{
-				top: 0,
-				left: 0,
-				bottom: 0,
-				right: 0
-			}
+			zIndex: 0,
+			borderWidth: 0,
+			borderColor: "#000000",
+			fontString: "12pt Calibri",
+			fontColor: "white"
 		}
 	});
 

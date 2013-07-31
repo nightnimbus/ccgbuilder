@@ -2,6 +2,7 @@ define(
 	[
 		"jquery",
 		"backbone",
+		"managers/view.manager",
 		"managers/modelview.manager",
 		"bb/views/modelviews/component.modelview",
 		"bb/models/component.model"
@@ -9,14 +10,16 @@ define(
 function(
 	$,
 	Backbone,
+	ViewManager,
 	ModelViewManager,
 	ComponentModelView,
 	ComponentModel)
 {
 	var ComponentsSubView = Backbone.View.extend(
 	{
-		tagName: "div",
+		tagName: "#componentsCanvas",
 		componentViewManager: null,
+		canvasHelper: null,
 		maxComponents: 10,
 		events:
 		{
@@ -26,10 +29,8 @@ function(
 		initialize: function(options)
 		{
 			if(typeof options !== "undefined")
-			{
-				this.maxComponents = (typeof options.maxComponents === "undefined") ? this.maxComponents : options.maxComponents;
-			}
-			
+				this.canvasHelper = (typeof options.canvasHelper === "undefined") ? this.canvasHelper : options.canvasHelper;
+
 			this.componentViewManager = new ModelViewManager();
 		},
 		addNewComponent: function()
@@ -42,20 +43,26 @@ function(
 				this.componentViewManager.add(
 					new ComponentModelView(
 					{
+						canvasHelper: self.canvasHelper,
 						model: new ComponentModel(
 						{
-							name: name
+							name: name,
+							x: 0, y: 0,
+							width: self.canvasHelper.canvas.width,
+							height: 30,
+							fillColor: "#FF0000"
 						})
 					})
 				);
+
+				this.componentViewManager.modelViewsArray[this.componentViewManager.count-1].render();
 			}
 		},
 		render: function()
 		{
-			var frag = this.componentViewManager.createDocumentFragment();
-			this.$el.html(frag);
+			this.canvasHelper.clear();
 
-			return this;
+			this.componentViewManager.renderAll(null, "zIndex");
 		}
 	});
 

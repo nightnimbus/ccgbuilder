@@ -89,7 +89,9 @@ function(
 
 						if(Globals.IS_MOBILE_DEVICE)
 						{
-							infoText = 'You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to upload your <b>own</b> template background.';
+							infoText = 'You are using a <strong>mobile</strong> device.' +
+							'To upload your own card template, you will need to be on a computer.' +
+							'For now, you can choose one of the amazing community card templates to the right of this box.';
 						}
 
 						else

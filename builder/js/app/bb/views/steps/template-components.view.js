@@ -5,7 +5,7 @@ define(
 		"managers/hbs.manager",
 		"managers/step.manager",
 		"managers/view.manager",
-		"managers/modelview.manager",
+		"helpers/canvas.helper",
 		"genlib/objectevent.class"
 	],
 function(
@@ -14,6 +14,7 @@ function(
 	HbsManager,
 	StepManager,
 	ViewManager,
+	CanvasHelper,
 	ObjectEvent)
 {
 	var TemplateComponentsView = Backbone.View.extend(
@@ -24,7 +25,8 @@ function(
 		reqFields: {},
 		selectors: {},
 		stepTitle: "Template Components",
-		lastBgUrl: "",
+		lastBgData: "",
+		canvasHelper: null,
 		componentsSubView: null,
 		events:
 		{
@@ -35,7 +37,7 @@ function(
 		{
 			this.reqFields.hasComponents = false;
 
-			this.selectors.templatePreview = "#componentsTemplatePreview";
+			this.selectors.canvas = "componentsCanvas";
 		},
 		checkReqFields: function(context)
 		{
@@ -56,6 +58,10 @@ function(
 				function(template)
 				{
 					self.$el.html(template());
+
+					self.canvasHelper = new CanvasHelper(document.getElementById(self.selectors.canvas));
+					self.componentsSubView.canvasHelper = self.canvasHelper;
+
 					onComplete();
 				});
 
@@ -66,6 +72,10 @@ function(
 				onComplete();
 
 			return this;
+		},
+		renderCanvas: function(cardTemplate)
+		{
+			this.canvasHelper.drawImage(cardTemplate, 0, 0);
 		},
 		show: function()
 		{
@@ -135,19 +145,16 @@ function(
 		onClickAddComponent: function(e)
 		{
 			this.componentsSubView.addNewComponent();
-			this.$el.find("#componentsTemplatePreview").append(this.componentsSubView.render().el);
-
 			return false;
 		},
 		initTemplatePreview: function()
 		{
 			var data = ViewManager.views.chooseTemplate.cardTemplateData["300x400"];
-			var url = "url(" + data + ") no-repeat center";
 
-			if(typeof data !== "undefined" && this.lastBgUrl != url)
+			if(typeof data !== "undefined" && this.lastBgData != data)
 			{
-				$(this.selectors.templatePreview).css("background", url);
-				this.lastBgUrl = url;
+				this.renderCanvas(data);
+				this.lastBgData = data;
 			}
 		}
 	});
