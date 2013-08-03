@@ -11,7 +11,7 @@ function($, Backbone)
 		{
 			name: "",
 			selected: false,
-			readyForSelect: false,
+			mousedown: false,
 			x: 0,
 			y: 0,
 			width: 200,

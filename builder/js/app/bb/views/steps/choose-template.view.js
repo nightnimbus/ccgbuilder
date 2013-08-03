@@ -10,6 +10,7 @@ define(
 		"helpers/string.helper",
 		"genlib/objectevent.class",
 		"genlib/globals.class",
+		"bb/views/steps/step.view",
 		"bootstrap"
 	],
 function(
@@ -22,9 +23,10 @@ function(
 	BootstrapAlertHelper,
 	StringHelper,
 	ObjectEvent,
-	Globals)
+	Globals,
+	Step)
 {
-	var ChooseTemplateView = Backbone.View.extend(
+	var ChooseTemplateView = Step.extend(
 	{
 		tagName: "div",
 		finalized: false,

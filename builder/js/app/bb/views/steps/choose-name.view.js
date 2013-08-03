@@ -3,16 +3,18 @@ define([
 	"backbone",
 	"managers/hbs.manager",
 	"managers/view.manager",
-	"genlib/objectevent.class"
+	"genlib/objectevent.class",
+	"bb/views/steps/step.view"
 	],
 function(
 	$,
 	Backbone,
 	HbsManager,
 	ViewManager,
-	ObjectEvent)
+	ObjectEvent,
+	Step)
 {
-	var ChooseNameView = Backbone.View.extend(
+	var ChooseNameView = Step.extend(
 	{
 		tagName: "div",
 		finalized: false,

@@ -23,47 +23,36 @@ function(
 		{
 			if(typeof options !== "undefined")
 				this.canvasHelper = options.canvasHelper;
-
-			var self = this;
-
-			this.listenTo(this.model, "change:name", function(model, name)
-			{
-				//self.$el.find(".component-name").text(name);
-			});
-
-			this.listenTo(this.model, "change:selected", function(model, selected)
-			{
-				if(!selected)
-				{
-					//self.$el.removeClass("component-selected");
-					//self.$el.addClass("component-default");
-				}
-
-				else
-				{
-					//self.$el.removeClass("component-default");
-					//self.$el.addClass("component-selected");
-				}
-
-				ViewManager.views.templateComponents.renderCanvas();
-			});
-
-			this.listenTo(this.model, "change:x change:y", function(model, pos)
-			{
-				console.log("change:x change:y");
-			});
 		},
 		render: function()
 		{
-			$("canvas" + this.canvasHelper.canvasSelector).drawRect(
+			if(this.model.get("selected"))
 			{
-				x: this.model.get("x"),
-				y: this.model.get("y"),
-				width: this.model.get("width"),
-				height: this.model.get("height"),
-				fillStyle: this.model.get("fillColor"),
-				fromCenter: false
-			});
+				$("canvas" + this.canvasHelper.canvasSelector).drawRect(
+				{
+					x: this.model.get("x"),
+					y: this.model.get("y"),
+					width: this.model.get("width"),
+					height: this.model.get("height"),
+					fillStyle: this.model.get("fillColor"),
+					strokeWidth: 2,
+					strokeStyle: "#FFF",
+					fromCenter: false
+				});
+			}
+
+			else
+			{
+				$("canvas" + this.canvasHelper.canvasSelector).drawRect(
+				{
+					x: this.model.get("x"),
+					y: this.model.get("y"),
+					width: this.model.get("width"),
+					height: this.model.get("height"),
+					fillStyle: this.model.get("fillColor"),
+					fromCenter: false
+				});
+			}
 
 			var nameHeight = this.canvasHelper.getTextHeight(12);
 

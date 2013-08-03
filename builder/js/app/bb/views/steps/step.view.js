@@ -1,15 +1,11 @@
-define([
-	"jquery",
+define(
+	[
 	"backbone",
-	"managers/hbs.manager",
-	"managers/view.manager",
-	"genlib/objectevent.class"],
+	"managers/view.manager"
+	],
 function(
-	$,
 	Backbone,
-	HbsManager,
-	ViewManager,
-	ObjectEvent)
+	ViewManager)
 {
 	var Step = Backbone.View.extend(
 	{
@@ -18,60 +14,36 @@ function(
 		rendered: false,
 		reqFields: {},
 		selectors: {},
-		stepTitle: "Step",
-		events:
-		{
+		stepTitle: "Template Components",
 
-		},
-
-		initialize: function()
-		{
-			// define reqFields here
-			// define selectors here
-		},
 		checkReqFields: function(context)
 		{
 			/*if(
-				context.someReqField
+				context.reqField
 				)
 				ViewManager.views.stepButtons.enableNextButton();
 			else
 				ViewManager.views.stepButtons.disableNextButton();*/
-		},
-		render: function(onComplete)
-		{
-			if(this.rendered == false)
-			{
-				var self = this;
 
-				HbsManager.loadTemplate("js/app/boilerplates/hbs/step.hbs",
-				function(template)
-				{
-					self.$el.html(template());
-					onComplete();
-				});
-
-				this.rendered = true;
-			}
-
-			else
-				onComplete();
-
-			return this;
+			ViewManager.views.stepButtons.disableNextButton();
 		},
 		show: function()
 		{
-
+			
 		},
 		hide: function()
 		{
 
 		},
+		remove: function()
+		{
+			
+		},
 		finalize: function(onSuccess, onError)
 		{
 			var self = this;
 
-			$.ajax(
+			/*$.ajax(
 			{
 				url: "php/step.finalize.ajax.php",
 				method: "POST",
@@ -89,13 +61,13 @@ function(
 			.fail(function()
 			{
 				onError("Ajax request failed.");
-			});
+			});*/
 		},
 		deFinalize: function()
 		{
 			var self = this;
 
-			$.ajax(
+			/*$.ajax(
 			{
 				url: "php/step.definalize.ajax.php",
 				method: "POST",
@@ -113,7 +85,7 @@ function(
 			.fail(function()
 			{
 				onError("Ajax request failed.");
-			});
+			});*/
 		},
 		onPreventDefault: function(e)
 		{

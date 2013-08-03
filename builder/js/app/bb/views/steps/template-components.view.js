@@ -7,6 +7,7 @@ define(
 		"managers/view.manager",
 		"helpers/canvas.helper",
 		"genlib/objectevent.class",
+		"bb/views/steps/step.view",
 		"jcanvas"
 	],
 function(
@@ -16,9 +17,10 @@ function(
 	StepManager,
 	ViewManager,
 	CanvasHelper,
-	ObjectEvent)
+	ObjectEvent,
+	Step)
 {
-	var TemplateComponentsView = Backbone.View.extend(
+	var TemplateComponentsView = Step.extend(
 	{
 		tagName: "div",
 		finalized: false,

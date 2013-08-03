@@ -32,26 +32,27 @@ function(
 		attachEvents: function()
 		{
 			var self = this;
-			var selector = "";
 
-			if(this.canvasHelper == null)
-				selector = "canvas";
-			else
-				selector = this.canvasHelper.canvasSelector;
-
-			$(selector).on("mousedown", function(e)
+			$(this.canvasHelper.canvasSelector).on("mousedown", function(e)
 			{
 				self.onMouseDownCanvas(e, self);
 			});
 
-			$(selector).on("mouseup", function(e)
+			$(this.canvasHelper.canvasSelector).on("mouseup", function(e)
 			{
 				self.onMouseUpCanvas(e, self);
+			});
+
+			$(this.canvasHelper.canvasSelector).on("mousemove", function(e)
+			{
+				self.onMouseMoveCanvas(e, self);
 			});
 		},
 		detachEvents: function()
 		{
-			$.off(["mousedown,mouseup"], this.canvasHelper.canvasSelector);
+			$.off("mousedown", this.canvasHelper.canvasSelector);
+			$.off("mouseup", this.canvasHelper.canvasSelector);
+			$.off("mousemove", this.canvasHelper.canvasSelector);
 		},
 		addNewComponent: function()
 		{
@@ -93,7 +94,7 @@ function(
 					component.model.get("width"),
 					component.model.get("height")))
 				{
-					component.model.set({readyForSelect: true});
+					component.model.set({mousedown: true});
 				}
 			}
 		},
@@ -104,7 +105,6 @@ function(
 			for(var i = 0; i < self.componentViewManager.count; i++)
 			{
 				var component = self.componentViewManager.modelViewsArray[i];
-				component.model.set({selected: false});
 
 				if(self.canvasHelper.pointWithinBounds(
 					mouseCoords.x, mouseCoords.y,
@@ -113,16 +113,24 @@ function(
 					component.model.get("width"),
 					component.model.get("height")))
 				{
-					if(component.model.get("readyForSelect"))
-					{
-						alert("clicked " + component.model.get("name"));
+					if(component.model.get("mousedown"))
 						component.model.set({selected: true});
-					}
 				}
 
 				else
-					component.model.set({readyForSelect: false});
+				{
+					if(!component.model.get("mousedown"))
+						component.model.set({selected: false});
+				}
+
+				component.model.set({mousedown: false});
 			}
+
+			ViewManager.views.templateComponents.renderCanvas();
+		},
+		onMouseMoveCanvas: function(e, self)
+		{
+			
 		},
 		render: function()
 		{

@@ -1,0 +1,15 @@
+images:
+	- navbar (1170px by 75px)
+	- logo (700px by (w/e you want))
+	- the orange dragon 'C' character
+
+fonts:
+	- the standard font (like start button text, the logo font)
+
+colors (all rgb please):
+	- top color (first color of the 3)
+	- middle gradient start and end (from bottom left to top right)
+	- footer color (minus the color of the banner of course)
+	- both of the "Build Your CCG" background colors
+	- the contact us text box background colors
+	- the contact us submit button color
