@@ -17,21 +17,41 @@ function(
 {
 	var ComponentsSubView = Backbone.View.extend(
 	{
-		tagName: "#componentsCanvas",
 		componentViewManager: null,
 		canvasHelper: null,
 		maxComponents: 10,
 		events:
 		{
-
+			
 		},
 
 		initialize: function(options)
 		{
-			if(typeof options !== "undefined")
-				this.canvasHelper = (typeof options.canvasHelper === "undefined") ? this.canvasHelper : options.canvasHelper;
-
 			this.componentViewManager = new ModelViewManager();
+		},
+		attachEvents: function()
+		{
+			var self = this;
+			var selector = "";
+
+			if(this.canvasHelper == null)
+				selector = "canvas";
+			else
+				selector = this.canvasHelper.canvasSelector;
+
+			$(selector).on("mousedown", function(e)
+			{
+				self.onMouseDownCanvas(e, self);
+			});
+
+			$(selector).on("mouseup", function(e)
+			{
+				self.onMouseUpCanvas(e, self);
+			});
+		},
+		detachEvents: function()
+		{
+			$.off(["mousedown,mouseup"], this.canvasHelper.canvasSelector);
 		},
 		addNewComponent: function()
 		{
@@ -58,10 +78,54 @@ function(
 				this.componentViewManager.modelViewsArray[this.componentViewManager.count-1].render();
 			}
 		},
+		onMouseDownCanvas: function(e, self)
+		{
+			var mouseCoords = self.canvasHelper.getMouseCoords(e);
+
+			for(var i = 0; i < self.componentViewManager.count; i++)
+			{
+				var component = self.componentViewManager.modelViewsArray[i];
+
+				if(self.canvasHelper.pointWithinBounds(
+					mouseCoords.x, mouseCoords.y,
+					component.model.get("x"),
+					component.model.get("y"),
+					component.model.get("width"),
+					component.model.get("height")))
+				{
+					component.model.set({readyForSelect: true});
+				}
+			}
+		},
+		onMouseUpCanvas: function(e, self)
+		{
+			var mouseCoords = self.canvasHelper.getMouseCoords(e);
+
+			for(var i = 0; i < self.componentViewManager.count; i++)
+			{
+				var component = self.componentViewManager.modelViewsArray[i];
+				component.model.set({selected: false});
+
+				if(self.canvasHelper.pointWithinBounds(
+					mouseCoords.x, mouseCoords.y,
+					component.model.get("x"),
+					component.model.get("y"),
+					component.model.get("width"),
+					component.model.get("height")))
+				{
+					if(component.model.get("readyForSelect"))
+					{
+						alert("clicked " + component.model.get("name"));
+						component.model.set({selected: true});
+					}
+				}
+
+				else
+					component.model.set({readyForSelect: false});
+			}
+		},
 		render: function()
 		{
-			this.canvasHelper.clear();
-
 			this.componentViewManager.renderAll(null, "zIndex");
 		}
 	});

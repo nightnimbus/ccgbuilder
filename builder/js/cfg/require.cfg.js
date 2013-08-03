@@ -59,9 +59,9 @@ requirejs.config(
             "../../../js/vendor/plugins/backbone/localStorage.min"
         ],
 
-        "transform":
+        "jcanvas":
         [
-            "../../../js/vendor/plugins/jquery/transform/js/transform.min"
+            "../../../js/vendor/plugins/jquery/jcanvas/js/jcanvas.min"
         ]
     },
 
@@ -109,7 +109,7 @@ requirejs.config(
             deps: ["backbone"]
         },
 
-        "transform":
+        "jcanvas":
         {
             deps: ["jquery"]
         }

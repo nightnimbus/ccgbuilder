@@ -3,9 +3,14 @@ define(["underscore"], function(_)
 	var CanvasHelper = function(canvas)
 	{
 		this.canvas = null;
+		this.canvasSelector = "";
 
 		if(typeof canvas !== "undefined")
+		{
 			this.canvas = canvas;
+			this.canvasSelector = "#" + canvas.id;
+		}
+
 		else
 			this.canvas = this.createCanvas();
 	};
@@ -136,11 +141,13 @@ define(["underscore"], function(_)
 			context.fillStyle = fontColor;
 			context.fillText(text, x, y);
 		},
-		withinBounds: function(x1, y1, x2, y2, width2, height2)
+		pointWithinBounds: function(x1, y1, x2, y2, w2, h2)
 		{
-			return (
-				x1 >= x2 && x1 <= width2 &&
-				y1 >= y2 && y1 <= height2);
+			return(
+				x1 >= x2 &&
+				x1 <= w2 &&
+				y1 >= y2 &&
+				y1 <= h2);
 		},
 		getMouseCoords: function(e)
 		{
@@ -152,6 +159,17 @@ define(["underscore"], function(_)
 			};
 
 			return coords;
+		},
+		getTextWidth: function(text)
+		{
+			var context = this.canvas.getContext("2d");
+			return context.measureText(text).width;
+		},
+		getTextHeight: function(fontSize, lineHeight)
+		{
+			lineHeight = (typeof lineHeight === "integer") ? lineHeight : 1.5;
+			var context = this.canvas.getContext("2d");
+			return fontSize * lineHeight;
 		}
 	});
 

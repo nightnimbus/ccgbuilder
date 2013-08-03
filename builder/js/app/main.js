@@ -52,8 +52,8 @@ function(
 		ViewManager.views.stepButtons.updateButtonStates();
 
 
-		//StepManager.preRenderAll("#step-content");
 		StepManager.start("#step-content");
+
 
 		// Hide Loading Gif
 		$("#loading-templates").hide();

@@ -25,7 +25,7 @@ function(
 			this.modelViewsArray.push(view);
 			this.modelViews[view.model.cid] = view;
 
-			this.count++;
+			this.count += 1;
 		},
 		remove: function(cid)
 		{
@@ -43,7 +43,7 @@ function(
 			var orderedModelViews = ArrayHelper.sortByKey(this.modelViewsArray, "zIndex");
 
 
-			for(var i = 0; i < this.orderedModelViews.length; i++)
+			for(var i = 0; i < this.modelViewsArray.length; i++)
 			{
 				if(parent != null)
 					parent.appendChild(this.modelViewsArray[i].render().el);

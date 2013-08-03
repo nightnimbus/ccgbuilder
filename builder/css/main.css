@@ -36,7 +36,13 @@
 .card-template-selection > span
 {
 	display: inline-block;
-	margin-bottom: 5px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+}
+
+.card-template-selection > span:last-child
+{
+	margin-right: 0px;
 }
 
 .card-template-selection > span.no-margin-bottom
@@ -133,6 +139,21 @@ input.chooseName-success-input:focus
 {
 	margin: 0 auto;
 	width: 60%;
+}
+
+#step-content
+{
+	width: 100%;
+
+	/*
+	+ 750px (main-content height)
+	- 80px (step-buttons height)
+	- 20px (main-content padding-bottom)
+	- 20px (main-content margin-bottom)
+	- 10px (just some padding) */
+	height: 620px;
+
+	overflow: auto;
 }
 
 #step-buttons

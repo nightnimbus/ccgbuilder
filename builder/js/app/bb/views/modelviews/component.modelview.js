@@ -3,7 +3,7 @@ define(
 		"backbone",
 		"managers/hbs.manager",
 		"managers/view.manager",
-		"transform"
+		"jcanvas"
 	],
 function(
 	Backbone,
@@ -12,11 +12,11 @@ function(
 {
 	var ComponentModelView = Backbone.View.extend(
 	{
+		el: "#componentsCanvas",
 		canvasHelper: null,
 		events:
 		{
-			"mousedown #componentsCanvas": "onMouseDownCanvas",
-			"mouseup #componentsCanvas": "onMouseUpCanvas"
+
 		},
 
 		initialize: function(options)
@@ -45,7 +45,7 @@ function(
 					//self.$el.addClass("component-selected");
 				}
 
-				ViewManager.views.templateComponents.componentsSubView.render();
+				ViewManager.views.templateComponents.renderCanvas();
 			});
 
 			this.listenTo(this.model, "change:x change:y", function(model, pos)
@@ -53,53 +53,32 @@ function(
 				console.log("change:x change:y");
 			});
 		},
-		onMouseDownCanvas: function(e)
-		{
-			var mouseCoords = this.canvasHelper.withinBounds(e);
-			if(this.canvasHelper.withinBounds(
-				mouseCoords.x, mouseCoords.y,
-				this.model.get("x"),
-				this.model.get("y"),
-				this.model.get("width"),
-				this.model.get("height")))
-			{
-				this.model.set({selected: true});
-			}
-
-			return false;
-		},
-		onMouseDownCanvas: function(e)
-		{
-			var mouseCoords = this.canvasHelper.withinBounds(e);
-			if(this.canvasHelper.withinBounds(
-				mouseCoords.x, mouseCoords.y,
-				this.model.get("x"),
-				this.model.get("y"),
-				this.model.get("width"),
-				this.model.get("height")))
-			{
-				this.model.set({selected: false});
-			}
-
-			console.log(this.model.get("name"));
-
-			return false;
-		},
 		render: function()
 		{
-			this.canvasHelper.drawRect(
-				this.model.get("fillColor"),
-				this.model.get("x"), this.model.get("y"),
-				this.model.get("width"), this.model.get("height"),
-				this.model.get("borderWidth"), this.model.get("borderColor"));
+			$("canvas" + this.canvasHelper.canvasSelector).drawRect(
+			{
+				x: this.model.get("x"),
+				y: this.model.get("y"),
+				width: this.model.get("width"),
+				height: this.model.get("height"),
+				fillStyle: this.model.get("fillColor"),
+				fromCenter: false
+			});
 
-			this.canvasHelper.drawText(
-				this.model.get("fontString"),
-				this.model.get("fontColor"),
-				this.model.get("name"),
-				this.model.get("x") + this.model.get("width") / 2,
-				this.model.get("y") + (this.model.get("height") / 2) + 5,
-				"center");
+			var nameHeight = this.canvasHelper.getTextHeight(12);
+
+			$("canvas" + this.canvasHelper.canvasSelector).drawText(
+			{
+				x: this.model.get("width") / 2,
+				y: this.model.get("height") / 2 - (nameHeight / 2),
+				text: this.model.get("name"),
+				align: "left",
+				fillStyle: "red",
+				strokeStyle: "white",
+				fontSize: "12pt",
+				fontFamily: "Calibri",
+				fromCenter: false
+			});
 		}
 	});
 

@@ -159,7 +159,10 @@ function($, ASync)
 		cleanupFinalization: function()
 		{
 			for(var i = 0; i < this.steps.length-1; i++)
+			{
+				this.steps[i].remove();
 				this.steps[i].$el.remove(); // Cleans up js events so no mem leaks. Also removes the DOM element, so DOM reflows happen.
+			}
 		}
 	};
 

@@ -51,6 +51,7 @@ function(
 
 			this.cardTemplateSizes = new Array("150x200", "300x400");
 
+			this.selectors.alertContainer = ".container-alerts";
 			this.selectors.templatePreview = "#templatePreview";
 			this.selectors.selectionTemplates = "#cardTemplateSelection > span";
 		},
@@ -68,16 +69,75 @@ function(
 			if(this.rendered == false)
 			{
 				var self = this;
+				var html = '' +
+				'<div class="main-content-header">' +
+				    '<div class="row">' +
+				        '<h1>Choose a Card Template Background</h1>' +
+				    '</div>' +
+				'</div>' +
+
+				'<div class="row">' +
+				    '<div class="container-alerts">' +
+				        '<div id="imgReqsAlert" class="alert alert-error alert-block">' +
+				            '<button type="button" class="close">&times;</button>' +
+				            '<h4 class="alert-heading">That image is invalid!</h4><br/>' +
+				            '<b>The image requirements are:</b>' +
+				            '<ul>' +
+				                '<li>JPEG,PNG</li>' +
+				                '<li>< 500 KB</li>' +
+				                '<li>3:4 aspect ratio</li>' +
+				            '</ul>' +
+				        '</div>' +
+				    '</div>' +
+				'</div>' +
+
+				'<div class="row">' +
+				    '<span class="span5">' +
+				        '<h4 style="text-align: left; padding-left: 15%">' +
+
+				            'Drag and Drop a Template Background <strong class="required-star text-med">*</strong>' +
+				            '<a id="imgreqsTooltip" class="tooltipLink" href="#"' +
+				                'data-toggle="tooltip"' +
+				                'data-placement="right"' +
+				                'data-html="true"' +
+				                'title="' +
+				                '<h4>Image Requirements:</h4>' +
+				                '<ul>' +
+				                    '<li>JPEG,PNG</li>' +
+				                    '<li>< 500 KB</li>' +
+				                    '<li>3:4 aspect ratio</li>' +
+				                '</ul>' +
+				                '">(?)' +
+				            '</a>' +
+				            ':' +
+
+				        '</h4>' +
+				        '<div id="templatePreview" class="card-template-preview"></div>' +
+				    '</span>' +
+
+				    '<span class="span2"><h2>OR</h2></span>' +
+
+				    '<span class="span5">' +
+				        '<h4>Drag over a Template Background:</h4>' +
+				        '<div id="cardTemplateSelection" class="card-template-selection text-left">' +
+				            '<span id="template01"><img src="../img/card-templates/template01_150x200.jpg"></span>' +
+				            '<span id="template01"><img src="../img/card-templates/template01_150x200.jpg"></span>' +
+				            '<span id="template01" class="no-margin-bottom"><img src="../img/card-templates/template01_150x200.jpg"></span>' +
+				         	'<span id="template01" class="no-margin-bottom"><img src="../img/card-templates/template01_150x200.jpg"></span>' +
+				        '</div>' +
+				    '</span>' +
+				'</div>';
 
 				if(Modernizr.draganddrop && !Globals.IS_MOBILE_DEVICE)
 				{
-					HbsManager.loadTemplate("js/app/hbs/step-chooseTemplate.hbs",
-					function(template)
-					{
-						self.$el.html(template());
-						self.initDragNDropSelection();
-						onComplete();
-					});
+					this.$el.html(html);
+
+					// This doesn't even append to the body...
+					// But it works if I have this here. Why? I have no fucking clue.
+					$("body").append(this.el);
+
+					this.initFeatures();
+					onComplete();
 				}
 
 				else
@@ -89,20 +149,20 @@ function(
 
 						if(Globals.IS_MOBILE_DEVICE)
 						{
-							infoText = 'You are using a <strong>mobile</strong> device.' +
-							'To upload your own card template, you will need to be on a computer.' +
-							'For now, you can choose one of the amazing community card templates to the right of this box.';
+							infoText = 'You are using a <strong>mobile</strong> device. ' +
+							'To upload your own card template, you will need to be on a computer. ' +
+							'For now, you can choose one of the amazing community card templates on the right.';
 						}
 
 						else
 						{
-							infoText = 'You are using an <strong>outdated</strong> browser.' +
+							infoText = 'You are using an <strong>outdated</strong> browser. ' +
 							'Please <a href="http://browsehappy.com/">upgrade your browser</a> ' +
-							'or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a>' +
+							'or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> ' +
 							'to upload your <b>own</b> template background.';
 						}
 
-						self.$el.html(HbsManager.templates["step-chooseTemplate-fallback"]());
+						self.$el.html(template({infoText: infoText}));
 
 						onComplete();
 					});
@@ -121,6 +181,10 @@ function(
 
 		},
 		hide: function()
+		{
+
+		},
+		remove: function()
 		{
 
 		},
@@ -301,10 +365,10 @@ function(
 			$(e.currentTarget).tooltip("hide");
 			return false;
 		},
-		initDragNDropSelection: function()
+		initFeatures: function()
 		{
 			$(".alert").alert();
-			BootstrapAlertHelper.initAllAlerts(".container-alerts", function(alertSelector)
+			BootstrapAlertHelper.initAllAlerts(this.selectors.alertContainer, function(alertSelector)
 			{
 				BootstrapAlertHelper.hideAlert(alertSelector, 200, function()
 				{

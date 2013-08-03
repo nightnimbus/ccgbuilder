@@ -6,7 +6,8 @@ define(
 		"managers/step.manager",
 		"managers/view.manager",
 		"helpers/canvas.helper",
-		"genlib/objectevent.class"
+		"genlib/objectevent.class",
+		"jcanvas"
 	],
 function(
 	$,
@@ -37,7 +38,7 @@ function(
 		{
 			this.reqFields.hasComponents = false;
 
-			this.selectors.canvas = "componentsCanvas";
+			this.selectors.canvas = "#componentsCanvas";
 		},
 		checkReqFields: function(context)
 		{
@@ -53,18 +54,37 @@ function(
 			if(this.rendered == false)
 			{
 				var self = this;
+				var html = '' +
+				'<div class="main-content-header">' +
+				    '<div class="row">' +
+				        '<h1>Assign Template Components</h1>' +
+				    '</div>' +
+				'</div>' +
 
-				HbsManager.loadTemplate("js/app/hbs/step-templateComponents.hbs",
-				function(template)
-				{
-					self.$el.html(template());
+				'<div class="row">' +
+				    '<span class="span12">' +
+				    	'<div class="container-addComponent">' +
+				    		'<button id="addComponentBtn" class="btn btn-large">Add Component</button>' +
+				    	'</div>' +
+				    	
+				    	'<div>' +
+				    		'<canvas id="componentsCanvas" width="300" height="400"></canvas>' +
+				    	'</div>' +
+				    '</span>' +
+				'</div>';
 
-					self.canvasHelper = new CanvasHelper(document.getElementById(self.selectors.canvas));
-					self.componentsSubView.canvasHelper = self.canvasHelper;
+				this.$el.html(html);
 
-					onComplete();
-				});
+				// This doesn't even append to the body...
+				// But it works if I have this here. Why? I have no fucking clue.
+				$("body").append(this.el);
 
+				var canvasSelector = this.selectors.canvas.split("#")[1];
+				this.canvasHelper = new CanvasHelper(document.getElementById(canvasSelector));
+				this.componentsSubView.canvasHelper = this.canvasHelper;
+				this.componentsSubView.attachEvents();
+
+				onComplete();
 				this.rendered = true;
 			}
 
@@ -73,9 +93,15 @@ function(
 
 			return this;
 		},
-		renderCanvas: function(cardTemplate)
+		renderCanvas: function()
 		{
-			this.canvasHelper.drawImage(cardTemplate, 0, 0);
+			$(this.selectors.canvas).drawImage(
+			{
+				source: ViewManager.views.chooseTemplate.cardTemplateData["300x400"],
+				fromCenter: false
+			});
+
+			this.componentsSubView.render();
 		},
 		show: function()
 		{
@@ -84,6 +110,10 @@ function(
 		hide: function()
 		{
 
+		},
+		remove: function()
+		{
+			this.componentsSubView.detachEvents();
 		},
 		finalize: function(onSuccess, onError)
 		{

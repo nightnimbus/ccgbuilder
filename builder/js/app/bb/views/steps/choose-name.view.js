@@ -45,13 +45,21 @@ function(
 			if(this.rendered == false)
 			{
 				var self = this;
+				var html = '' +
+				'<div class="main-content-header">' +
+				    '<div class="row">' +
+				        '<h1>Name Your CCG</h1>' +
+				    '</div>' +
+				'</div>' +
 
-				HbsManager.loadTemplate("js/app/hbs/step-chooseName.hbs",
-				function(template)
-				{
-					self.$el.html(template());
-					onComplete();
-				});
+				'<div class="row">' +
+				    '<span class="span12">' +
+				        '<input id="ccgName" class="chooseName text-center" type="text" placeholder="Choose a Name...">' +
+				    '</span>' +
+				'</div>';
+
+				self.$el.html(html);
+				onComplete();
 
 				this.rendered = true;
 			}
@@ -66,6 +74,10 @@ function(
 			$(this.selectors.ccgName).focus();
 		},
 		hide: function()
+		{
+
+		},
+		remove: function()
 		{
 
 		},
