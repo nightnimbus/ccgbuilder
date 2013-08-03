@@ -1,15 +1,20 @@
 images:
-	- navbar (1170px by 75px)
-	- logo (700px by (w/e you want))
-	- the orange dragon 'C' character
-
+	- navbar (1170px by 75px): C:\wamp\www\ccgbuilder\img\web design assets\nav.png
+	- logo (700px by (w/e you want)): C:\wamp\www\ccgbuilder\img\web design assets\logo.png 
+	- the orange dragon 'C' character: C:\wamp\www\ccgbuilder\img\web design assets\ccg_yellow.png
+	- Stripe: C:\wamp\www\ccgbuilder\img\web design assets\stripe.png
 fonts:
-	- the standard font (like start button text, the logo font)
+	- the standard font (like start button text, the logo font): Logo uses orbitron(you don't need it for anything else) 
+	general font is Agency FB: C:\wamp\www\ccgbuilder\img\web design assets\AGENCYR.TTF
+                                   C:\wamp\www\ccgbuilder\img\web design assets\AGENCYB.TTF
 
 colors (all rgb please):
-	- top color (first color of the 3)
-	- middle gradient start and end (from bottom left to top right)
-	- footer color (minus the color of the banner of course)
-	- both of the "Build Your CCG" background colors
-	- the contact us text box background colors
-	- the contact us submit button color
+	- top color (first color of the 3) behind logo: 255 173 51 Stripe:255 175 35
+	- middle gradient start and end (from bottom left to top right): bottom: 188 188 188 top: 250 250 250
+	- footer color (minus the color of the banner of course): 141 141 141
+	- both of the "Build Your CCG" background colors:
+        pattern: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAQElEQVQYlW2OwQ0AMAgCbw7XcMFubj81RVpeGgIcQHK1gJC/+shjtkLNTmpTaZMm05IB76YzfTedaW46k28Opg1VYQ5hW3JdzwAAAABJRU5ErkJggg==
+        lighter: 89 89 89
+	Darker: 22 22 22	
+	- the contact us text box background colors: 64 64 64
+	- the contact us submit button color: 217 217 217
