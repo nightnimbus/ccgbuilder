@@ -89,8 +89,7 @@ function(
 							name: name,
 							x: 0, y: 0,
 							width: self.canvasHelper.canvas.width / 2,
-							height: 30,
-							fillColor: "#FF0000"
+							height: 30
 						})
 					})
 				);

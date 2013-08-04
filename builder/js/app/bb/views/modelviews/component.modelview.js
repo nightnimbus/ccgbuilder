@@ -52,6 +52,14 @@ function(
 		},
 		render: function()
 		{
+			// RECT
+			var fillColor = "";
+
+			if(this.model.get("type") == "text")
+				fillColor = "#F00000";
+			else if(this.model.get("type") == "image")
+				fillColor = "#0A6800";
+
 			if(this.model.get("selected"))
 			{
 				$(this.canvasHelper.canvasSelector).drawRect(
@@ -60,7 +68,7 @@ function(
 					y: this.model.get("y"),
 					width: this.model.get("width"),
 					height: this.model.get("height"),
-					fillStyle: this.model.get("fillColor"),
+					fillStyle: fillColor,
 					strokeWidth: 2,
 					strokeStyle: "#FFF",
 					fromCenter: false
@@ -75,11 +83,13 @@ function(
 					y: this.model.get("y"),
 					width: this.model.get("width"),
 					height: this.model.get("height"),
-					fillStyle: this.model.get("fillColor"),
+					fillStyle: fillColor,
 					fromCenter: false
 				});
 			}
 
+
+			// NAME
 			var fontSize = "12pt";
 			var nameHeight = this.canvasHelper.getTextHeight(12);
 
