@@ -53,9 +53,9 @@ body
     margin-bottom: 30px;
 	color: white;
 	height: 460px;
-	background: url(../img/patterns/build-tcg-background.jpg);
+	background: url(../assets/img/patterns/build-tcg-background.jpg);
 	
-    background: url(../img/patterns/window.png) repeat, silver;
+    background: url(../assets/img/patterns/window.png) repeat, silver;
     -webkit-box-shadow: 15px 15px 10px rgb(12, 12, 12);
        -moz-box-shadow: 15px 15px 10px rgb(12, 12, 12);
     	-ms-box-shadow: 15px 15px 10px rgb(12, 12, 12);
@@ -136,7 +136,7 @@ body
 {
 	width: 200px;
 	height: 150px;
-	background: url(../img/logo.png);
+	background: url(../assets/img/logo.png);
 }
 
 .footer-container

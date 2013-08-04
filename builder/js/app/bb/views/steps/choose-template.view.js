@@ -122,10 +122,10 @@ function(
 				    '<span class="span5">' +
 				        '<h4>Drag over a Template Background:</h4>' +
 				        '<div id="cardTemplateSelection" class="card-template-selection text-left">' +
-				            '<span id="template01"><img src="../img/card-templates/template01_150x200.jpg"></span>' +
-				            '<span id="template01"><img src="../img/card-templates/template01_150x200.jpg"></span>' +
-				            '<span id="template01" class="no-margin-bottom"><img src="../img/card-templates/template01_150x200.jpg"></span>' +
-				         	'<span id="template01" class="no-margin-bottom"><img src="../img/card-templates/template01_150x200.jpg"></span>' +
+				            '<span id="template01"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
+				            '<span id="template01"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
+				            '<span id="template01" class="no-margin-bottom"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
+				         	'<span id="template01" class="no-margin-bottom"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
 				        '</div>' +
 				    '</span>' +
 				'</div>';

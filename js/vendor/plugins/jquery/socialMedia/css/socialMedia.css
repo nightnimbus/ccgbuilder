@@ -16,14 +16,14 @@
  -moz-border-radius:3px; -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); -webkit-border-radius:3px; -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); border-radius:3px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-li.delicious { background-image:url("../../../../../../img/icons/delicious.png"); }
-li.digg { background-image:url("../../../../../../img/icons/digg.png"); }
-li.facebook { background-image:url("../../../../../../img/icons/facebook.png"); }
-li.flickr { background-image:url("../../../../../../img/icons/flickr.png"); }
-li.linkedin { background-image:url("../../../../../../img/icons/linkedin.png"); }
-li.reddit { background-image:url("../../../../../../img/icons/reddit.png"); }
-li.rss { background-image:url("../../../../../../img/icons/rss.png"); }
-li.twitter { background-image:url("../../../../../../img/icons/twitter.png"); }
+li.delicious { background-image:url("../../../../../../assets/img/icons/delicious.png"); }
+li.digg { background-image:url("../../../../../../assets/img/icons/digg.png"); }
+li.facebook { background-image:url("../../../../../../assets/img/icons/facebook.png"); }
+li.flickr { background-image:url("../../../../../../assets/img/icons/flickr.png"); }
+li.linkedin { background-image:url("../../../../../../assets/img/icons/linkedin.png"); }
+li.reddit { background-image:url("../../../../../../assets/img/icons/reddit.png"); }
+li.rss { background-image:url("../../../../../../assets/img/icons/rss.png"); }
+li.twitter { background-image:url("../../../../../../assets/img/icons/twitter.png"); }
 
 /* SOCIAL ICONS - css3-social-media */
 

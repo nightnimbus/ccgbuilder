@@ -23,6 +23,32 @@ function(
 		{
 			if(typeof options !== "undefined")
 				this.canvasHelper = options.canvasHelper;
+
+			var self = this;
+
+			this.listenTo(this.model, "change:x change:y", function(model)
+			{
+				var boundX = 0;
+				var boundY = 0;
+
+
+				if(model.get("x") > (this.canvasHelper.canvas.width - model.get("width")))
+					boundX = this.canvasHelper.canvas.width - model.get("width");
+				else if(model.get("x") < 0)
+					boundX = 0;
+				else
+					boundX = model.get("x");
+
+				if(model.get("y") > (this.canvasHelper.canvas.height - model.get("height")))
+					boundY = this.canvasHelper.canvas.height - model.get("height");
+				else if(model.get("y") < 0)
+					boundY = 0;
+				else
+					boundY = model.get("y");
+
+
+				self.model.set({x: boundX, y: boundY});
+			});
 		},
 		render: function()
 		{
@@ -58,8 +84,8 @@ function(
 
 			$("canvas" + this.canvasHelper.canvasSelector).drawText(
 			{
-				x: this.model.get("width") / 2,
-				y: this.model.get("height") / 2 - (nameHeight / 2),
+				x: this.model.get("x") + this.model.get("width") / 2,
+				y: this.model.get("y") + this.model.get("height") / 2 - (nameHeight / 2),
 				text: this.model.get("name"),
 				align: "left",
 				fillStyle: "red",

@@ -12,6 +12,8 @@ function($, Backbone)
 			name: "",
 			selected: false,
 			mousedown: false,
+			mousedownDisplacement: {x: 0, y: 0},
+			isMoving: false,
 			x: 0,
 			y: 0,
 			width: 200,
