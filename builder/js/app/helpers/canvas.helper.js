@@ -1,22 +1,26 @@
-define(["underscore"], function(_)
+define(
+	[
+		"underscore",
+		"genlib/class.class"
+	],
+function(_)
 {
-	var CanvasHelper = function(canvas)
+	var CanvasHelper = Class.extend(
 	{
-		this.canvas = null;
-		this.canvasSelector = "";
-
-		if(typeof canvas !== "undefined")
+		init: function(canvas)
 		{
-			this.canvas = canvas;
-			this.canvasSelector = "#" + canvas.id;
-		}
+			this.canvas = null;
+			this.canvasSelector = "";
 
-		else
-			this.canvas = this.createCanvas();
-	};
+			if(typeof canvas !== "undefined")
+			{
+				this.canvas = canvas;
+				this.canvasSelector = "#" + canvas.id;
+			}
 
-	_.extend(CanvasHelper.prototype, {},
-	{
+			else
+				this.canvas = this.createCanvas();
+		},
 		createCanvas: function(width, height, parent)
 		{
 			width = (typeof width !== "undefined" && width > 0) ? width : 100;

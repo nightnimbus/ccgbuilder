@@ -2,19 +2,15 @@ define(
 	[
 		"underscore",
 		"backbone",
-		"helpers/array.helper"
+		"helpers/array.helper",
+		"genlib/class.class"
 	],
 function(
 	_,
 	Backbone,
 	ArrayHelper)
 {
-	var ModelViewManager = function()
-	{
-		
-	};
-
-	_.extend(ModelViewManager.prototype, {},
+	var ModelViewManager = Class.extend(
 	{
 		modelViews: {},
 		modelViewsArray: [],

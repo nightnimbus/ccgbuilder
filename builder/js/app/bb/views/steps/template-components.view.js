@@ -7,6 +7,7 @@ define(
 		"managers/view.manager",
 		"helpers/canvas.helper",
 		"genlib/objectevent.class",
+		"other/dialogs/editcomponent.dialog",
 		"bb/views/steps/step.view",
 		"jcanvas"
 	],
@@ -18,6 +19,7 @@ function(
 	ViewManager,
 	CanvasHelper,
 	ObjectEvent,
+	EditComponentDialog,
 	Step)
 {
 	var TemplateComponentsView = Step.extend(
@@ -101,7 +103,7 @@ function(
 				var canvasSelector = this.selectors.canvas.split("#")[1];
 				this.canvasHelper = new CanvasHelper(document.getElementById(canvasSelector));
 				this.componentsSubView.canvasHelper = this.canvasHelper;
-				this.componentsSubView.selectors.editComponentDialog = this.selectors.editComponentDialog;
+				this.componentsSubView.editComponentDialog = new EditComponentDialog(this.selectors.editComponentDialog);
 				this.componentsSubView.attachEvents();
 
 				onComplete();

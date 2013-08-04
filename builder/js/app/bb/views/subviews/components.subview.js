@@ -63,7 +63,7 @@ function(
 				self.onKeyDown(e, self);
 			});
 
-			this.registerEditComponentDialog();
+			this.editComponentDialog.initialize(this.componentViewManager);
 		},
 		detachEvents: function()
 		{
@@ -250,7 +250,7 @@ function(
 		{
 			var self = this;
 
-			$(this.selectors.editComponentDialog).dialog(
+			/*$(this.selectors.editComponentDialog).dialog(
 			{
 				autoOpen: false,
 				width: 300,
@@ -288,7 +288,7 @@ function(
 				{
 					ViewManager.views.templateComponents.renderCanvas();
 				}
-			});
+			});*/
 		},
 		openEditComponentDialog: function(component)
 		{
@@ -297,12 +297,12 @@ function(
 			var layer = component.model.get("layer");
 			var cid = component.model.cid;
 
-			$(this.selectors.editComponentDialog + " [name='name']").val(name);
-			$(this.selectors.editComponentDialog + " [name='type'] option[value='" + type + "']").prop("selected", true);
-			$(this.selectors.editComponentDialog + " [name='layer']").val(layer);
-			$(this.selectors.editComponentDialog + " [name='componentCID']").val(cid);
+			$(this.editComponentDialog.selector + " [name='name']").val(name);
+			$(this.editComponentDialog.selector + " [name='type'] option[value='" + type + "']").prop("selected", true);
+			$(this.editComponentDialog.selector + " [name='layer']").val(layer);
+			$(this.editComponentDialog.selector + " [name='componentCID']").val(cid);
 
-			$(this.selectors.editComponentDialog).dialog("open");
+			this.editComponentDialog.getDialog().dialog("open");
 		},
 		render: function()
 		{
