@@ -54,7 +54,7 @@ function(
 		{
 			if(this.model.get("selected"))
 			{
-				$("canvas" + this.canvasHelper.canvasSelector).drawRect(
+				$(this.canvasHelper.canvasSelector).drawRect(
 				{
 					x: this.model.get("x"),
 					y: this.model.get("y"),
@@ -69,7 +69,7 @@ function(
 
 			else
 			{
-				$("canvas" + this.canvasHelper.canvasSelector).drawRect(
+				$(this.canvasHelper.canvasSelector).drawRect(
 				{
 					x: this.model.get("x"),
 					y: this.model.get("y"),
@@ -80,9 +80,13 @@ function(
 				});
 			}
 
+			var fontSize = "12pt";
 			var nameHeight = this.canvasHelper.getTextHeight(12);
 
-			$("canvas" + this.canvasHelper.canvasSelector).drawText(
+			if(this.model.get("name").length > 15)
+				fontSize = "9pt";
+
+			$(this.canvasHelper.canvasSelector).drawText(
 			{
 				x: this.model.get("x") + this.model.get("width") / 2,
 				y: this.model.get("y") + this.model.get("height") / 2 - (nameHeight / 2),
@@ -90,7 +94,7 @@ function(
 				align: "left",
 				fillStyle: "red",
 				strokeStyle: "white",
-				fontSize: "12pt",
+				fontSize: fontSize,
 				fontFamily: "Calibri",
 				fromCenter: false
 			});

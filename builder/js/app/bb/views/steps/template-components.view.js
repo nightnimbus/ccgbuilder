@@ -41,6 +41,7 @@ function(
 			this.reqFields.hasComponents = false;
 
 			this.selectors.canvas = "#componentsCanvas";
+			this.selectors.editComponentDialog = "#editComponentDialog";
 		},
 		checkReqFields: function(context)
 		{
@@ -73,6 +74,22 @@ function(
 				    		'<canvas id="componentsCanvas" width="300" height="400"></canvas>' +
 				    	'</div>' +
 				    '</span>' +
+				'</div>' +
+				'<div id="editComponentDialog" title="Edit Component">' +
+					'<form>' +
+					 	'<fieldset>' +
+						    '<label for="name">Name</label>' +
+						    '<input type="text" name="name" maxlength="20" class="text ui-widget-content ui-corner-all" />' +
+						    '<label for="type">Type</label>' +
+						    '<select name="type">' +
+						    	'<option value="text">Text</option>' +
+						    	'<option value="image">Image</option>' +
+						    '</select>' +
+						    '<label for="layer">Layer</label>' +
+						    '<input type="text" name="layer" maxlength="2" class="text ui-widget-content ui-corner-all" onkeypress="return isKeyNumerical(event);" />' +
+						    '<input type="hidden" name="componentCID" />' +
+						'</fieldset>' +
+					'</form>' +
 				'</div>';
 
 				this.$el.html(html);
@@ -84,6 +101,7 @@ function(
 				var canvasSelector = this.selectors.canvas.split("#")[1];
 				this.canvasHelper = new CanvasHelper(document.getElementById(canvasSelector));
 				this.componentsSubView.canvasHelper = this.canvasHelper;
+				this.componentsSubView.selectors.editComponentDialog = this.selectors.editComponentDialog;
 				this.componentsSubView.attachEvents();
 
 				onComplete();
@@ -97,6 +115,8 @@ function(
 		},
 		renderCanvas: function()
 		{
+			this.canvasHelper.clear();
+
 			$(this.selectors.canvas).drawImage(
 			{
 				source: ViewManager.views.chooseTemplate.cardTemplateData["300x400"],

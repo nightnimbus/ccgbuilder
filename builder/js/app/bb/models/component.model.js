@@ -10,15 +10,15 @@ function($, Backbone)
 		defaults:
 		{
 			name: "",
+			type: "text",
 			selected: false,
 			mousedown: false,
 			mousedownDisplacement: {x: 0, y: 0},
-			isMoving: false,
 			x: 0,
 			y: 0,
 			width: 200,
 			height: 100,
-			zIndex: 0,
+			layer: 3
 		}
 	});
 

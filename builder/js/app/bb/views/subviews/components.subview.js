@@ -5,7 +5,8 @@ define(
 		"managers/view.manager",
 		"managers/modelview.manager",
 		"bb/views/modelviews/component.modelview",
-		"bb/models/component.model"
+		"bb/models/component.model",
+		"jqueryui"
 	],
 function(
 	$,
@@ -21,6 +22,7 @@ function(
 		canvasHelper: null,
 		maxComponents: 10,
 		mouseCoords: {x: 0, y: 0},
+		selectors: {},
 		events:
 		{
 
@@ -51,16 +53,24 @@ function(
 				self.onMouseMoveCanvas(e, self);
 			});
 
+			$(this.canvasHelper.canvasSelector).on("dblclick", function(e)
+			{
+				self.onDblClickCanvas(e, self);
+			});
+
 			$("body").on("keydown", function(e)
 			{
 				self.onKeyDown(e, self);
 			});
+
+			this.registerEditComponentDialog();
 		},
 		detachEvents: function()
 		{
 			$.off("mousedown", this.canvasHelper.canvasSelector);
 			$.off("mouseup", this.canvasHelper.canvasSelector);
 			$.off("mousemove", this.canvasHelper.canvasSelector);
+			$.off("dblclick", this.canvasHelper.canvasSelector);
 			$.off("keydown", "body");
 		},
 		addNewComponent: function()
@@ -101,15 +111,19 @@ function(
 					component.model.get("width"),
 					component.model.get("height")))
 				{
-					component.model.set(
+					// left click
+					if(e.which == 1)
 					{
-						mousedown: true,
-						mousedownDisplacement:
+						component.model.set(
 						{
-							x: self.mouseCoords.x - component.model.get("x"),
-							y: self.mouseCoords.y - component.model.get("y")
-						}
-					});
+							mousedown: true,
+							mousedownDisplacement:
+							{
+								x: self.mouseCoords.x - component.model.get("x"),
+								y: self.mouseCoords.y - component.model.get("y")
+							}
+						});
+					}
 				}
 			}
 		},
@@ -119,28 +133,22 @@ function(
 			{
 				var component = self.componentViewManager.modelViewsArray[i];
 
-				if(!component.model.get("isMoving"))
+				if(self.canvasHelper.pointWithinBounds(
+					self.mouseCoords.x, self.mouseCoords.y,
+					component.model.get("x"),
+					component.model.get("y"),
+					component.model.get("width"),
+					component.model.get("height")))
 				{
-					if(self.canvasHelper.pointWithinBounds(
-						self.mouseCoords.x, self.mouseCoords.y,
-						component.model.get("x"),
-						component.model.get("y"),
-						component.model.get("width"),
-						component.model.get("height")))
-					{
-						if(component.model.get("mousedown"))
-							component.model.set({selected: true});
-					}
-
-					else
-					{
-						if(!component.model.get("mousedown"))
-							component.model.set({selected: false});
-					}
+					if(component.model.get("mousedown"))
+						component.model.set({selected: true});
 				}
 
 				else
-					component.model.set({isMoving: false});
+				{
+					if(!component.model.get("mousedown"))
+						component.model.set({selected: false});
+				}
 
 				component.model.set({mousedown: false});
 			}
@@ -173,6 +181,23 @@ function(
 
 					ViewManager.views.templateComponents.renderCanvas();
 					break;
+				}
+			}
+		},
+		onDblClickCanvas: function(e, self)
+		{
+			for(var i = 0; i < self.componentViewManager.count; i++)
+			{
+				var component = self.componentViewManager.modelViewsArray[i];
+
+				if(self.canvasHelper.pointWithinBounds(
+					self.mouseCoords.x, self.mouseCoords.y,
+					component.model.get("x"),
+					component.model.get("y"),
+					component.model.get("width"),
+					component.model.get("height")))
+				{
+					self.openEditComponentDialog(component);
 				}
 			}
 		},
@@ -221,9 +246,67 @@ function(
 			for(var i = 0; i < this.componentViewManager.count; i++)
 				this.componentViewManager.modelViewsArray[i].model.set({selected: false});
 		},
+		registerEditComponentDialog: function()
+		{
+			var self = this;
+
+			$(this.selectors.editComponentDialog).dialog(
+			{
+				autoOpen: false,
+				width: 300,
+				height: 350,
+				modal: true,
+				resizable: false,
+				buttons:
+				{
+					"Update": function()
+					{
+						var thisSelector = "#" + $(this).attr("id");
+						var name = $(thisSelector + " [name='name']").val();
+						var type = $(thisSelector + " [name='type'] option:selected").attr("value");
+						var layer = $(thisSelector + " [name='layer']").val();
+						var component = self.componentViewManager.modelViews[$(thisSelector + " [name='componentCID']").val()];
+
+						// If nothing changes, then don't update.
+						if(name != component.model.get("name") && name.length > 0)
+							component.model.set({name: name});
+
+						if(type != component.model.get("type"))
+							component.model.set({type: type});
+
+						if(layer != component.model.get("layer"))
+							component.model.set({layer: layer});
+
+						$(this).dialog("close");
+					},
+					Cancel: function()
+					{
+						$(this).dialog("close");
+					}
+				},
+				close: function()
+				{
+					ViewManager.views.templateComponents.renderCanvas();
+				}
+			});
+		},
+		openEditComponentDialog: function(component)
+		{
+			var name = component.model.get("name");
+			var type = component.model.get("type");
+			var layer = component.model.get("layer");
+			var cid = component.model.cid;
+
+			$(this.selectors.editComponentDialog + " [name='name']").val(name);
+			$(this.selectors.editComponentDialog + " [name='type'] option[value='" + type + "']").prop("selected", true);
+			$(this.selectors.editComponentDialog + " [name='layer']").val(layer);
+			$(this.selectors.editComponentDialog + " [name='componentCID']").val(cid);
+
+			$(this.selectors.editComponentDialog).dialog("open");
+		},
 		render: function()
 		{
-			this.componentViewManager.renderAll(null, "zIndex");
+			this.componentViewManager.renderAll(null);
 		}
 	});
 
