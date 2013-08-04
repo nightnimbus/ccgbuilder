@@ -7,7 +7,6 @@ define(
 		"managers/view.manager",
 		"helpers/canvas.helper",
 		"genlib/objectevent.class",
-		"other/dialogs/editcomponent.dialog",
 		"bb/views/steps/step.view",
 		"jcanvas"
 	],
@@ -19,7 +18,6 @@ function(
 	ViewManager,
 	CanvasHelper,
 	ObjectEvent,
-	EditComponentDialog,
 	Step)
 {
 	var TemplateComponentsView = Step.extend(
@@ -43,7 +41,6 @@ function(
 			this.reqFields.hasComponents = false;
 
 			this.selectors.canvas = "#componentsCanvas";
-			this.selectors.editComponentDialog = "#editComponentDialog";
 		},
 		checkReqFields: function(context)
 		{
@@ -89,7 +86,13 @@ function(
 						    '</select>' +
 						    '<label for="layer">Layer</label>' +
 						    '<input type="text" name="layer" maxlength="2" class="text ui-widget-content ui-corner-all" onkeypress="return isKeyNumerical(event);" />' +
-						    '<input type="hidden" name="componentCID" />' +
+						'</fieldset>' +
+					'</form>' +
+				'</div>' +
+				'<div id="deleteComponentDialog" title="Delete This Component?">' +
+					'<form>' +
+						'<fieldset>' +
+							'<p>Are you sure you want to <b>delete</b> "<span name="componentName"></span>"?</p>' +
 						'</fieldset>' +
 					'</form>' +
 				'</div>';
@@ -103,7 +106,6 @@ function(
 				var canvasSelector = this.selectors.canvas.split("#")[1];
 				this.canvasHelper = new CanvasHelper(document.getElementById(canvasSelector));
 				this.componentsSubView.canvasHelper = this.canvasHelper;
-				this.componentsSubView.editComponentDialog = new EditComponentDialog(this.selectors.editComponentDialog);
 				this.componentsSubView.attachEvents();
 
 				onComplete();
@@ -117,15 +119,19 @@ function(
 		},
 		renderCanvas: function()
 		{
+			var self = this;
+
 			this.canvasHelper.clear();
 
 			$(this.selectors.canvas).drawImage(
 			{
 				source: ViewManager.views.chooseTemplate.cardTemplateData["300x400"],
-				fromCenter: false
+				fromCenter: false,
+				load: function()
+				{
+					self.componentsSubView.render();
+				}
 			});
-
-			this.componentsSubView.render();
 		},
 		show: function()
 		{

@@ -6,6 +6,8 @@ define(
 		"managers/modelview.manager",
 		"bb/views/modelviews/component.modelview",
 		"bb/models/component.model",
+		"other/dialogs/editComponent.dialog",
+		"other/dialogs/deleteComponentYesNo.dialog",
 		"jqueryui"
 	],
 function(
@@ -14,7 +16,10 @@ function(
 	ViewManager,
 	ModelViewManager,
 	ComponentModelView,
-	ComponentModel)
+	ComponentModel,
+	EditComponentDialog,
+	DeleteComponentYesNoDialog
+	)
 {
 	var ComponentsSubView = Backbone.View.extend(
 	{
@@ -22,6 +27,7 @@ function(
 		canvasHelper: null,
 		maxComponents: 10,
 		mouseCoords: {x: 0, y: 0},
+		selectedComponent: null,
 		selectors: {},
 		events:
 		{
@@ -36,34 +42,38 @@ function(
 		{
 			var self = this;
 
+			this.editComponentDialog = new EditComponentDialog("#editComponentDialog");
+			this.deleteComponentYesNoDialog = new DeleteComponentYesNoDialog("#deleteComponentDialog");
+
 			// Have to register my own events because
 			// backbone won't work with the mouse events for some reason.
 			$(this.canvasHelper.canvasSelector).on("mousedown", function(e)
 			{
-				self.onMouseDownCanvas(e, self);
+				self.onMouseDownCanvas(e);
 			});
 
 			$(this.canvasHelper.canvasSelector).on("mouseup", function(e)
 			{
-				self.onMouseUpCanvas(e, self);
+				self.onMouseUpCanvas(e);
 			});
 
 			$(this.canvasHelper.canvasSelector).on("mousemove", function(e)
 			{
-				self.onMouseMoveCanvas(e, self);
+				self.onMouseMoveCanvas(e);
 			});
 
 			$(this.canvasHelper.canvasSelector).on("dblclick", function(e)
 			{
-				self.onDblClickCanvas(e, self);
+				self.onDblClickCanvas(e);
 			});
 
 			$("body").on("keydown", function(e)
 			{
-				self.onKeyDown(e, self);
+				self.onKeyDown(e);
 			});
 
 			this.editComponentDialog.initialize(this.componentViewManager);
+			this.deleteComponentYesNoDialog.initialize(this.componentViewManager);
 		},
 		detachEvents: function()
 		{
@@ -78,7 +88,7 @@ function(
 			if(this.componentViewManager.count < this.maxComponents)
 			{
 				var self = this;
-				var name = "Component" + (self.componentViewManager.count + 1).toString();
+				var name = "Component" + (this.componentViewManager.count + 1).toString();
 
 				this.componentViewManager.add(
 					new ComponentModelView(
@@ -97,14 +107,14 @@ function(
 				this.componentViewManager.modelViewsArray[this.componentViewManager.count-1].render();
 			}
 		},
-		onMouseDownCanvas: function(e, self)
+		onMouseDownCanvas: function(e)
 		{
-			for(var i = 0; i < self.componentViewManager.count; i++)
+			for(var i = 0; i < this.componentViewManager.count; i++)
 			{
-				var component = self.componentViewManager.modelViewsArray[i];
+				var component = this.componentViewManager.modelViewsArray[i];
 
-				if(self.canvasHelper.pointWithinBounds(
-					self.mouseCoords.x, self.mouseCoords.y,
+				if(this.canvasHelper.pointWithinBounds(
+					this.mouseCoords.x, this.mouseCoords.y,
 					component.model.get("x"),
 					component.model.get("y"),
 					component.model.get("width"),
@@ -118,29 +128,29 @@ function(
 							mousedown: true,
 							mousedownDisplacement:
 							{
-								x: self.mouseCoords.x - component.model.get("x"),
-								y: self.mouseCoords.y - component.model.get("y")
+								x: this.mouseCoords.x - component.model.get("x"),
+								y: this.mouseCoords.y - component.model.get("y")
 							}
 						});
 					}
 				}
 			}
 		},
-		onMouseUpCanvas: function(e, self)
+		onMouseUpCanvas: function(e)
 		{
-			for(var i = 0; i < self.componentViewManager.count; i++)
+			for(var i = 0; i < this.componentViewManager.count; i++)
 			{
-				var component = self.componentViewManager.modelViewsArray[i];
+				var component = this.componentViewManager.modelViewsArray[i];
 
-				if(self.canvasHelper.pointWithinBounds(
-					self.mouseCoords.x, self.mouseCoords.y,
+				if(this.canvasHelper.pointWithinBounds(
+					this.mouseCoords.x, this.mouseCoords.y,
 					component.model.get("x"),
 					component.model.get("y"),
 					component.model.get("width"),
 					component.model.get("height")))
 				{
 					if(component.model.get("mousedown"))
-						component.model.set({selected: true});
+						this.selectComponent(component);
 				}
 
 				else
@@ -154,21 +164,21 @@ function(
 
 			ViewManager.views.templateComponents.renderCanvas();
 		},
-		onMouseMoveCanvas: function(e, self)
+		onMouseMoveCanvas: function(e)
 		{
-			var mouseCoords = self.canvasHelper.getMouseCoords(e);
-			self.mouseCoords = mouseCoords;
+			var mouseCoords = this.canvasHelper.getMouseCoords(e);
+			this.mouseCoords = mouseCoords;
 
-			for(var i = 0; i < self.componentViewManager.count; i++)
+			for(var i = 0; i < this.componentViewManager.count; i++)
 			{
-				var component = self.componentViewManager.modelViewsArray[i];
+				var component = this.componentViewManager.modelViewsArray[i];
 
 				if(component.model.get("mousedown"))
 				{
 					if(!component.model.get("selected"))
 					{
-						self.deselectAllComponents();
-						component.model.set({selected: true});
+						this.deselectAllComponents();
+						this.selectComponent(component);
 					}
 
 					var mdd = component.model.get("mousedownDisplacement");
@@ -183,61 +193,72 @@ function(
 				}
 			}
 		},
-		onDblClickCanvas: function(e, self)
+		onDblClickCanvas: function(e)
 		{
-			for(var i = 0; i < self.componentViewManager.count; i++)
+			for(var i = 0; i < this.componentViewManager.count; i++)
 			{
-				var component = self.componentViewManager.modelViewsArray[i];
+				var component = this.componentViewManager.modelViewsArray[i];
 
-				if(self.canvasHelper.pointWithinBounds(
-					self.mouseCoords.x, self.mouseCoords.y,
+				if(this.canvasHelper.pointWithinBounds(
+					this.mouseCoords.x, this.mouseCoords.y,
 					component.model.get("x"),
 					component.model.get("y"),
 					component.model.get("width"),
 					component.model.get("height")))
 				{
-					self.openEditComponentDialog(component);
+					this.openEditComponentDialog(component);
 				}
 			}
 		},
-		onKeyDown: function(e, self)
+		onKeyDown: function(e)
 		{
-			for(var i = 0; i < self.componentViewManager.count; i++)
+			var step = 3;
+
+			// If e.which is any one of the arrow keys
+			if(e.which >= 37 && e.which <= 40)
 			{
-				var component = self.componentViewManager.modelViewsArray[i];
+				e.preventDefault();
 
-				if(component.model.get("selected"))
+
+				// left
+				if(e.which == 37)
+					this.selectedComponent.model.set({x: this.selectedComponent.model.get("x") - step});
+
+				// right
+				else if(e.which == 39)
+					this.selectedComponent.model.set({x: this.selectedComponent.model.get("x") + step});
+
+				// up
+				else if(e.which == 38)
+					this.selectedComponent.model.set({y: this.selectedComponent.model.get("y") - step});
+
+				// down
+				else if(e.which == 40)
+					this.selectedComponent.model.set({y: this.selectedComponent.model.get("y") + step});
+
+
+				ViewManager.views.templateComponents.renderCanvas();
+			}
+
+			// delete key
+			else if(e.which == 46)
+			{
+				if(!this.selectedComponent.model.get("editing"))
 				{
-					var step = 3;
+					this.deleteComponentYesNoDialog.component = this.selectedComponent;
 
-					// If e.which is any one of the arrow keys
-					if(e.which >= 37 && e.which <= 40)
-					{
-						e.preventDefault();
+					$(this.deleteComponentYesNoDialog.selector + " [name='componentName']")
+					.text(this.selectedComponent.model.get("name"));
 
-
-						// left
-						if(e.which == 37)
-							component.model.set({x: component.model.get("x") - step});
-
-						// right
-						else if(e.which == 39)
-							component.model.set({x: component.model.get("x") + step});
-
-						// up
-						else if(e.which == 38)
-							component.model.set({y: component.model.get("y") - step});
-
-						// down
-						else if(e.which == 40)
-							component.model.set({y: component.model.get("y") + step});
-
-
-						ViewManager.views.templateComponents.renderCanvas();
-					}
-
-					break;
+					this.deleteComponentYesNoDialog.getDialog().dialog("open");
 				}
+			}
+
+			// enter key
+			else if(e.which == 13)
+			{
+				if(!this.selectedComponent.model.get("deleting"))
+					this.openEditComponentDialog(this.selectedComponent);
 			}
 		},
 		deselectAllComponents: function()
@@ -245,62 +266,22 @@ function(
 			for(var i = 0; i < this.componentViewManager.count; i++)
 				this.componentViewManager.modelViewsArray[i].model.set({selected: false});
 		},
-		registerEditComponentDialog: function()
+		selectComponent: function(component)
 		{
-			var self = this;
-
-			/*$(this.selectors.editComponentDialog).dialog(
-			{
-				autoOpen: false,
-				width: 300,
-				height: 350,
-				modal: true,
-				resizable: false,
-				buttons:
-				{
-					"Update": function()
-					{
-						var thisSelector = "#" + $(this).attr("id");
-						var name = $(thisSelector + " [name='name']").val();
-						var type = $(thisSelector + " [name='type'] option:selected").attr("value");
-						var layer = $(thisSelector + " [name='layer']").val();
-						var component = self.componentViewManager.modelViews[$(thisSelector + " [name='componentCID']").val()];
-
-						// If nothing changes, then don't update.
-						if(name != component.model.get("name") && name.length > 0)
-							component.model.set({name: name});
-
-						if(type != component.model.get("type"))
-							component.model.set({type: type});
-
-						if(layer != component.model.get("layer"))
-							component.model.set({layer: layer});
-
-						$(this).dialog("close");
-					},
-					Cancel: function()
-					{
-						$(this).dialog("close");
-					}
-				},
-				close: function()
-				{
-					ViewManager.views.templateComponents.renderCanvas();
-				}
-			});*/
+			component.model.set({selected: true});
+			this.selectedComponent = component;
 		},
 		openEditComponentDialog: function(component)
 		{
 			var name = component.model.get("name");
 			var type = component.model.get("type");
 			var layer = component.model.get("layer");
-			var cid = component.model.cid;
 
 			$(this.editComponentDialog.selector + " [name='name']").val(name);
 			$(this.editComponentDialog.selector + " [name='type'] option[value='" + type + "']").prop("selected", true);
 			$(this.editComponentDialog.selector + " [name='layer']").val(layer);
-			$(this.editComponentDialog.selector + " [name='componentCID']").val(cid);
 
+			this.editComponentDialog.component = component;
 			this.editComponentDialog.getDialog().dialog("open");
 		},
 		render: function()

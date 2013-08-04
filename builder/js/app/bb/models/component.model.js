@@ -13,6 +13,8 @@ function($, Backbone)
 			type: "text",
 			selected: false,
 			mousedown: false,
+			editing: false,
+			deleting: false,
 			mousedownDisplacement: {x: 0, y: 0},
 			x: 0,
 			y: 0,

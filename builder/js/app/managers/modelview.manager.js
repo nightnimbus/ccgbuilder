@@ -29,6 +29,15 @@ function(
 			delete this.modelViews[cid];
 			this.count--;
 		},
+		removeByIndex: function(index)
+		{
+			if(index >= 0 && index < this.modelViewsArray.length)
+			{
+				this.modelViewsArray.splice(index, 1);
+				delete this.modelViews[this.modelViewsArray[index].model.cid];
+				this.count--;
+			}
+		},
 		renderAll: function(parent, orderBy, orderLowToHigh)
 		{
 			parent = (typeof parent !== "undefined") ? parent : null;

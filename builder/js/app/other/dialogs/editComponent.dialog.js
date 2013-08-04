@@ -1,7 +1,7 @@
 define(
 	[
 		"jquery",
-		"genlib/dialog.class",
+		"other/dialogs/dialog.class",
 		"managers/view.manager"
 	],
 function(
@@ -11,6 +11,8 @@ function(
 {
 	var EditComponentDialog = Dialog.extend(
 	{
+		component: null,
+
 		initialize: function(componentViewManager)
 		{
 			var self = this;
@@ -26,20 +28,22 @@ function(
 				{
 					"Update": function()
 					{
-						var name = $(self.selector + " [name='name']").val();
-						var type = $(self.selector + " [name='type'] option:selected").attr("value");
-						var layer = $(self.selector + " [name='layer']").val();
-						var component = componentViewManager.modelViews[$(self.selector + " [name='componentCID']").val()];
+						if(typeof self.component !== "undefined" && self.component != null)
+						{
+							var name = $(self.selector + " [name='name']").val();
+							var type = $(self.selector + " [name='type'] option:selected").attr("value");
+							var layer = $(self.selector + " [name='layer']").val();
 
-						// If nothing changes, then don't update.
-						if(name != component.model.get("name") && name.length > 0)
-							component.model.set({name: name});
+							// If nothing changes, then don't update.
+							if(name != self.component.model.get("name") && name.length > 0)
+								self.component.model.set({name: name});
 
-						if(type != component.model.get("type"))
-							component.model.set({type: type});
+							if(type != self.component.model.get("type"))
+								self.component.model.set({type: type});
 
-						if(layer != component.model.get("layer"))
-							component.model.set({layer: layer});
+							if(layer != self.component.model.get("layer"))
+								self.component.model.set({layer: layer});
+						}
 
 						$(this).dialog("close");
 					},
@@ -48,8 +52,13 @@ function(
 						$(this).dialog("close");
 					}
 				},
+				open: function()
+				{
+					self.component.model.set({editing: true});
+				},
 				close: function()
 				{
+					self.component.model.set({editing: false});
 					ViewManager.views.templateComponents.renderCanvas();
 				}
 			});

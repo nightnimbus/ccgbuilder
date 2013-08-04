@@ -90,11 +90,14 @@ function(
 
 
 			// NAME
-			var fontSize = "12pt";
-			var nameHeight = this.canvasHelper.getTextHeight(12);
+			var fontSize = 12;
 
 			if(this.model.get("name").length > 15)
-				fontSize = "9pt";
+				fontSize = 9;
+
+			var nameHeight = this.canvasHelper.getTextHeight(fontSize);
+
+			fontSize = fontSize.toString() + "pt";
 
 			$(this.canvasHelper.canvasSelector).drawText(
 			{

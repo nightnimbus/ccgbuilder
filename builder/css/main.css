@@ -208,3 +208,10 @@ input.chooseName-success-input:focus
 	color: red;
 	font-size: 15px;
 }
+
+@media (max-width: 1024px) {
+	.main-content
+	{
+		margin-bottom: 0px;
+	}
+}
