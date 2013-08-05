@@ -41,8 +41,8 @@ function(
 			"dragenter #templatePreview": "onPreventDefault",
 			"dragover #templatePreview": "onPreventDefault",
 			"drop #templatePreview": "onDropTemplatePreview",
-			"ondragstart #cardTemplateSelection>span": "onDragStartSelection",
-			"click #cardTemplateSelection>span": "onClickSelection",
+			"ondragstart #cardTemplateSelection > span > a": "onDragStartSelection",
+			"click #cardTemplateSelection > span": "onClickSelection",
 			"mouseover #imgreqsTooltip": "onMouseOverImgReqsTooltip",
 			"mouseout #imgreqsTooltip": "onMouseOutImgReqsTooltip"
 		},
@@ -130,7 +130,10 @@ function(
 				    '</span>' +
 				'</div>';
 
-				if(Modernizr.draganddrop && !Globals.IS_MOBILE_DEVICE)
+				if(
+					Modernizr.draganddrop &&
+					!Globals.IS_MOBILE_DEVICE &&
+					!Globals.isLtIEVersion(10))
 				{
 					this.$el.html(html);
 
@@ -247,15 +250,6 @@ function(
 				onError("Ajax request failed.");
 			});
 		},
-		onPreventDefault: function(e)
-		{
-			e = e.originalEvent || e;
-
-			e.preventDefault();
-			e.stopPropagation();
-
-			return false;
-		},
 		onDropTemplatePreview: function(e)
 		{
 			e = e.originalEvent || e;
@@ -349,11 +343,12 @@ function(
 		onDragStartSelection: function(e)
 		{
 			e.dataTransfer.setData("Text", e.target.id);
+			console.log(e.dataTransfer.getData("Text"));
 		},
 		onClickSelection: function(e)
 		{
 			this.cardTemplateData[this.cardTemplateSizes[0]] = e.target.src;
-			this.setPreviewBackground(self.cardTemplateData[this.cardTemplateSizes[0]]);
+			this.setPreviewBackground(this.cardTemplateData[this.cardTemplateSizes[0]]);
 
 			return false;
 		},

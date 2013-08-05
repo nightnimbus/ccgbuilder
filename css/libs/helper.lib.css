@@ -47,6 +47,12 @@
 	cursor: default;
 }
 
+.no-link
+{
+	cursor: default;
+	border: none;
+}
+
 a.tooltipLink:hover
 {
 	cursor: help;

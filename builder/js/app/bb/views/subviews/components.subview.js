@@ -211,11 +211,11 @@ function(
 		},
 		onKeyDown: function(e)
 		{
-			var step = 3;
-
 			// If e.which is any one of the arrow keys
 			if(e.which >= 37 && e.which <= 40)
 			{
+				var step = 2;
+
 				e.preventDefault();
 
 

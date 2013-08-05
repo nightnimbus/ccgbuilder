@@ -131,12 +131,6 @@ body
 	visibility: hidden;
 }
 
-.container-header img.logo
-{
-	width: 200px;
-	height: 150px;
-}
-
 .footer-container
 {
 	margin-right: 80px;
@@ -159,8 +153,17 @@ body
 
 .container-logo
 {
-    width: 200px;
+	width: 717px;
+	height: 196px;
+	margin: 0 auto;
     margin-bottom: 10px;
+}
+
+.container-logo img.logo
+{
+	width: 717px;
+	height: 196px;
+	border: 0px;
 }
 
 

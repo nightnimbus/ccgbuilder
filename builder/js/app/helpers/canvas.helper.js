@@ -139,9 +139,8 @@ function(_)
 			if(yCentered)
 			{
 				var fontComponents = this.decompileFontString(fontString);
-
 				if(fontComponents != null)
-					y += (fontComponents.size * 1.5) / 2; // Height of text since line height is 1.5.
+					y += (context.measureText('M').width) / 2;
 			}
 
 			context.font = fontString;

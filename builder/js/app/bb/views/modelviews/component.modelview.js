@@ -90,125 +90,120 @@ function(
 
 
 			// NAME
-			var fontSize = 12;
+			this.canvasHelper.drawText(
+				"12pt Consolas",
+				"white",
+				this.model.get("name"),
+				this.model.get("x") + this.model.get("width") / 2,
+				this.model.get("y") + this.model.get("height") / 2,
+				"center", true);
 
-			if(this.model.get("name").length > 15)
-				fontSize = 9;
-
-			var nameHeight = this.canvasHelper.getTextHeight(fontSize);
-
-			fontSize = fontSize.toString() + "pt";
-
-			this.canvasHelper.getCanvas().drawText(
+			/*this.canvasHelper.getCanvas().drawText(
 			{
 				x: this.model.get("x") + this.model.get("width") / 2,
 				y: this.model.get("y") + this.model.get("height") / 2 - (nameHeight / 2),
 				text: this.model.get("name"),
 				align: "left",
-				fillStyle: "red",
 				strokeStyle: "white",
-				fontSize: fontSize,
-				fontFamily: "Arial",
+				fontSize: "12pt",
+				fontFamily: "Consolas",
 				fromCenter: false
-			});
+			});*/
 
 
 			// SCALE BOXES
 			if(this.model.get("selected"))
+				this.renderScaleBoxes(8, 8, "yellow");
+		},
+		renderScaleBoxes: function(boxWidth, boxHeight, color)
+		{
+			// top-left
+			this.canvasHelper.getCanvas().drawRect(
 			{
-				var numBoxes = 6;
-				var boxWidth = 8;
-				var boxHeight = 8;
-				var color = "yellow";
+				x: this.model.get("x"),
+				y: this.model.get("y"),
+				width: boxWidth,
+				height: boxHeight,
+				fillStyle: color,
+				fromCenter: true
+			});
 
-				// top-left
-				this.canvasHelper.getCanvas().drawRect(
-				{
-					x: this.model.get("x"),
-					y: this.model.get("y"),
-					width: boxWidth,
-					height: boxHeight,
-					fillStyle: color,
-					fromCenter: true
-				});
+			// top-middle
+			this.canvasHelper.getCanvas().drawRect(
+			{
+				x: this.model.get("x") + (this.model.get("width") / 2),
+				y: this.model.get("y"),
+				width: boxWidth,
+				height: boxHeight,
+				fillStyle: color,
+				fromCenter: true
+			});
 
-				// top-middle
-				this.canvasHelper.getCanvas().drawRect(
-				{
-					x: this.model.get("x") + (this.model.get("width") / 2),
-					y: this.model.get("y"),
-					width: boxWidth,
-					height: boxHeight,
-					fillStyle: color,
-					fromCenter: true
-				});
+			// top-right
+			this.canvasHelper.getCanvas().drawRect(
+			{
+				x: this.model.get("x") + this.model.get("width"),
+				y: this.model.get("y"),
+				width: boxWidth,
+				height: boxHeight,
+				fillStyle: color,
+				fromCenter: true
+			});
 
-				// top-right
-				this.canvasHelper.getCanvas().drawRect(
-				{
-					x: this.model.get("x") + this.model.get("width"),
-					y: this.model.get("y"),
-					width: boxWidth,
-					height: boxHeight,
-					fillStyle: color,
-					fromCenter: true
-				});
+			// side-left
+			this.canvasHelper.getCanvas().drawRect(
+			{
+				x: this.model.get("x"),
+				y: this.model.get("y") + (this.model.get("height") / 2),
+				width: boxWidth,
+				height: boxHeight,
+				fillStyle: color,
+				fromCenter: true
+			});
 
-				// side-left
-				this.canvasHelper.getCanvas().drawRect(
-				{
-					x: this.model.get("x"),
-					y: this.model.get("y") + (this.model.get("height") / 2),
-					width: boxWidth,
-					height: boxHeight,
-					fillStyle: color,
-					fromCenter: true
-				});
+			// side-right
+			this.canvasHelper.getCanvas().drawRect(
+			{
+				x: this.model.get("x") + this.model.get("width"),
+				y: this.model.get("y") + (this.model.get("height") / 2),
+				width: boxWidth,
+				height: boxHeight,
+				fillStyle: color,
+				fromCenter: true
+			});
 
-				// side-right
-				this.canvasHelper.getCanvas().drawRect(
-				{
-					x: this.model.get("x") + this.model.get("width"),
-					y: this.model.get("y") + (this.model.get("height") / 2),
-					width: boxWidth,
-					height: boxHeight,
-					fillStyle: color,
-					fromCenter: true
-				});
+			// bottom-left
+			this.canvasHelper.getCanvas().drawRect(
+			{
+				x: this.model.get("x"),
+				y: this.model.get("y") + this.model.get("height"),
+				width: boxWidth,
+				height: boxHeight,
+				fillStyle: color,
+				fromCenter: true
+			});
 
-				// bottom-left
-				this.canvasHelper.getCanvas().drawRect(
-				{
-					x: this.model.get("x"),
-					y: this.model.get("y") + this.model.get("height"),
-					width: boxWidth,
-					height: boxHeight,
-					fillStyle: color,
-					fromCenter: true
-				});
+			// bottom-middle
+			this.canvasHelper.getCanvas().drawRect(
+			{
+				x: this.model.get("x") + (this.model.get("width") / 2),
+				y: this.model.get("y") + this.model.get("height"),
+				width: boxWidth,
+				height: boxHeight,
+				fillStyle: color,
+				fromCenter: true
+			});
 
-				// bottom-middle
-				this.canvasHelper.getCanvas().drawRect(
-				{
-					x: this.model.get("x") + (this.model.get("width") / 2),
-					y: this.model.get("y") + this.model.get("height"),
-					width: boxWidth,
-					height: boxHeight,
-					fillStyle: color,
-					fromCenter: true
-				});
-
-				// bottom-right
-				this.canvasHelper.getCanvas().drawRect(
-				{
-					x: this.model.get("x") + this.model.get("width"),
-					y: this.model.get("y") + this.model.get("height"),
-					width: boxWidth,
-					height: boxHeight,
-					fillStyle: color,
-					fromCenter: true
-				});
-			}
+			// bottom-right
+			this.canvasHelper.getCanvas().drawRect(
+			{
+				x: this.model.get("x") + this.model.get("width"),
+				y: this.model.get("y") + this.model.get("height"),
+				width: boxWidth,
+				height: boxHeight,
+				fillStyle: color,
+				fromCenter: true
+			});
 		}
 	});
 
