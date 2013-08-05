@@ -26,7 +26,13 @@ function(
 		canvasHelper: null,
 		maxComponents: 10,
 		mouseCoords: {x: 0, y: 0},
-		selectedComponent: null,
+		selectedComponent: false,
+		mouseDownComponent: false,
+		mouseDisplacement:
+		{
+				x: 0,
+				y: 0
+		},
 		selectors: {},
 		events:
 		{
@@ -122,45 +128,29 @@ function(
 					// left click
 					if(e.which == 1)
 					{
-						component.model.set(
+						this.mouseDisplacement =
 						{
-							mousedown: true,
-							mousedownDisplacement:
-							{
-								x: this.mouseCoords.x - component.model.get("x"),
-								y: this.mouseCoords.y - component.model.get("y")
-							}
-						});
+							x: this.mouseCoords.x - component.model.get("x"),
+							y: this.mouseCoords.y - component.model.get("y")
+						}
+
+						this.mouseDownComponent = component;
 					}
 				}
 			}
 		},
 		onMouseUpCanvas: function(e)
 		{
-			for(var i = 0; i < this.componentViewManager.count; i++)
+			if(this.mouseDownComponent)
 			{
-				var component = this.componentViewManager.modelViewsArray[i];
-
-				if(this.canvasHelper.pointWithinBounds(
-					this.mouseCoords.x, this.mouseCoords.y,
-					component.model.get("x"),
-					component.model.get("y"),
-					component.model.get("width"),
-					component.model.get("height")))
-				{
-					if(component.model.get("mousedown"))
-						this.selectComponent(component);
-				}
-
-				else
-				{
-					if(!component.model.get("mousedown"))
-						component.model.set({selected: false});
-				}
-
-				component.model.set({mousedown: false});
+				this.deselectComponent(this.selectedComponent);
+				this.selectComponent(this.mouseDownComponent);
 			}
 
+			else
+				this.deselectComponent(this.selectedComponent);
+
+			this.mouseDownComponent = false;
 			ViewManager.views.templateComponents.renderCanvas();
 		},
 		onMouseMoveCanvas: function(e)
@@ -168,28 +158,19 @@ function(
 			var mouseCoords = this.canvasHelper.getMouseCoords(e);
 			this.mouseCoords = mouseCoords;
 
-			for(var i = 0; i < this.componentViewManager.count; i++)
+			if(this.mouseDownComponent)
 			{
-				var component = this.componentViewManager.modelViewsArray[i];
+				this.deselectComponent(this.selectedComponent);
+				this.selectComponent(this.mouseDownComponent);
 
-				if(component.model.get("mousedown"))
-				{
-					if(!component.model.get("selected"))
-					{
-						this.deselectAllComponents();
-						this.selectComponent(component);
-					}
+				var mdd = this.mouseDisplacement;
+				var displacedX = mouseCoords.x - mdd.x;
+				var displacedY = mouseCoords.y - mdd.y;
 
-					var mdd = component.model.get("mousedownDisplacement");
-					var displacedX = mouseCoords.x - mdd.x;
-					var displacedY = mouseCoords.y - mdd.y;
+				this.selectedComponent.model.set({x: displacedX, y: displacedY});
+				this.selectedComponent.model.set({isMoving: true});
 
-					component.model.set({x: displacedX, y: displacedY});
-					component.model.set({isMoving: true});
-
-					ViewManager.views.templateComponents.renderCanvas();
-					break;
-				}
+				ViewManager.views.templateComponents.renderCanvas();
 			}
 		},
 		onDblClickCanvas: function(e)
@@ -260,6 +241,14 @@ function(
 					this.openEditComponentDialog(this.selectedComponent);
 			}
 		},
+		deselectComponent: function(component)
+		{
+			if(component)
+			{
+				component.model.set({selected: false});
+				this.selectedComponent = false;
+			}
+		},
 		deselectAllComponents: function()
 		{
 			for(var i = 0; i < this.componentViewManager.count; i++)
@@ -267,8 +256,11 @@ function(
 		},
 		selectComponent: function(component)
 		{
-			component.model.set({selected: true});
-			this.selectedComponent = component;
+			if(component)
+			{
+				component.model.set({selected: true});
+				this.selectedComponent = component;
+			}
 		},
 		openEditComponentDialog: function(component)
 		{

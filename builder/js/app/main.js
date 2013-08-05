@@ -10,7 +10,8 @@ define(
 		"bb/views/steps/template-components.view",
 		"bb/views/steps/finalize.view",
 		"bb/views/subviews/components.subview",
-		"jqueryui"
+		"jqueryui",
+		"bootstrap"
 	],
 function(
 	$,

@@ -212,6 +212,7 @@ input.chooseName-success-input:focus
 @media (max-width: 1024px) {
 	.main-content
 	{
+		margin-top: 0px;
 		margin-bottom: 0px;
 	}
 }

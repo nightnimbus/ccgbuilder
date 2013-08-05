@@ -12,7 +12,6 @@ function($, Backbone)
 			name: "",
 			type: "text",
 			selected: false,
-			mousedown: false,
 			editing: false,
 			deleting: false,
 			mousedownDisplacement: {x: 0, y: 0},
