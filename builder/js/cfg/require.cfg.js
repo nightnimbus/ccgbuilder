@@ -12,7 +12,8 @@ requirejs.config(
 
         "jqueryui":
         [
-            "../../../js/vendor/jquery-ui/ui/minified/jquery-ui.min"
+            //"../../../js/vendor/jquery-ui/ui/minified/jquery-ui.min"
+            "../../../js/vendor/jquery-ui/js/jquery-ui.min"
         ],
 
         "json2":
