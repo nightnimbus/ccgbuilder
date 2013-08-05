@@ -7,7 +7,7 @@ function(_)
 {
 	var CanvasHelper = Class.extend(
 	{
-		init: function(canvas)
+		init: function(canvas, width, height)
 		{
 			this.canvas = null;
 			this.canvasSelector = "";
@@ -31,6 +31,10 @@ function(_)
 			parent.appendChild(canvas);
 
 			return canvas;
+		},
+		getCanvas: function()
+		{
+			return $(this.canvasSelector);
 		},
 		compileFontString: function(font, fontSize, fontStyle)
 		{

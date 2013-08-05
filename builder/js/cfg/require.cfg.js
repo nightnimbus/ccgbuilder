@@ -12,7 +12,6 @@ requirejs.config(
 
         "jqueryui":
         [
-            "//code.jquery.com/ui/1.10.3/jquery-ui.min",
             "../../../js/vendor/jquery-ui/ui/minified/jquery-ui.min"
         ],
 

@@ -7,8 +7,7 @@ define(
 		"bb/views/modelviews/component.modelview",
 		"bb/models/component.model",
 		"other/dialogs/editComponent.dialog",
-		"other/dialogs/deleteComponentYesNo.dialog",
-		"jqueryui"
+		"other/dialogs/deleteComponentYesNo.dialog"
 	],
 function(
 	$,
@@ -45,6 +44,9 @@ function(
 			this.editComponentDialog = new EditComponentDialog("#editComponentDialog");
 			this.deleteComponentYesNoDialog = new DeleteComponentYesNoDialog("#deleteComponentDialog");
 
+			this.editComponentDialog.initialize(this.componentViewManager);
+			this.deleteComponentYesNoDialog.initialize(this.componentViewManager);
+
 			// Have to register my own events because
 			// backbone won't work with the mouse events for some reason.
 			$(this.canvasHelper.canvasSelector).on("mousedown", function(e)
@@ -71,9 +73,6 @@ function(
 			{
 				self.onKeyDown(e);
 			});
-
-			this.editComponentDialog.initialize(this.componentViewManager);
-			this.deleteComponentYesNoDialog.initialize(this.componentViewManager);
 		},
 		detachEvents: function()
 		{
