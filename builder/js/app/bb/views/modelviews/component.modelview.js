@@ -1,19 +1,24 @@
 define(
 	[
 		"backbone",
+		"genlib/position.enum",
 		"managers/hbs.manager",
 		"managers/view.manager",
+		"bb/views/modelviews/scaleBox.manager",
 		"jcanvas"
 	],
 function(
 	Backbone,
+	Position,
 	HbsManager,
-	ViewManager)
+	ViewManager,
+	ScaleBoxManager)
 {
 	var ComponentModelView = Backbone.View.extend(
 	{
 		el: "#componentsCanvas",
 		canvasHelper: null,
+		scaleBoxManager: null,
 		events:
 		{
 
@@ -24,7 +29,18 @@ function(
 			if(typeof options !== "undefined")
 				this.canvasHelper = options.canvasHelper;
 
-			var self = this;
+			this.scaleBoxManager = new ScaleBoxManager(this.canvasHelper.getRawCanvas());
+			this.scaleBoxManager.initLayout(8, 8, "yellow",
+			[
+				Position.TOP_LEFT,
+				Position.TOP_MID,
+				Position.TOP_RIGHT,
+				Position.MID_LEFT,
+				Position.MID_RIGHT,
+				Position.BOTTOM_LEFT,
+				Position.BOTTOM_MID,
+				Position.BOTTOM_RIGHT
+			]);
 
 			this.listenTo(this.model, "change:x change:y", function(model)
 			{
@@ -47,7 +63,7 @@ function(
 					boundY = model.get("y");
 
 
-				self.model.set({x: boundX, y: boundY});
+				model.set({x: boundX, y: boundY});
 			});
 		},
 		render: function()
@@ -90,120 +106,34 @@ function(
 
 
 			// NAME
+			var fontSize = 12;
+
+			if(this.model.get("name").length > 15)
+				fontSize = 9;
+
+			var nameHeight = this.canvasHelper.getTextHeight(fontSize);
+
+			fontSize = fontSize.toString() + "pt";
+
 			this.canvasHelper.drawText(
 				"12pt Consolas",
 				"white",
 				this.model.get("name"),
 				this.model.get("x") + this.model.get("width") / 2,
 				this.model.get("y") + this.model.get("height") / 2,
-				"center", true);
-
-			/*this.canvasHelper.getCanvas().drawText(
-			{
-				x: this.model.get("x") + this.model.get("width") / 2,
-				y: this.model.get("y") + this.model.get("height") / 2 - (nameHeight / 2),
-				text: this.model.get("name"),
-				align: "left",
-				strokeStyle: "white",
-				fontSize: "12pt",
-				fontFamily: "Consolas",
-				fromCenter: false
-			});*/
+				"center",
+				true);
 
 
 			// SCALE BOXES
 			if(this.model.get("selected"))
-				this.renderScaleBoxes(8, 8, "yellow");
-		},
-		renderScaleBoxes: function(boxWidth, boxHeight, color)
-		{
-			// top-left
-			this.canvasHelper.getCanvas().drawRect(
 			{
-				x: this.model.get("x"),
-				y: this.model.get("y"),
-				width: boxWidth,
-				height: boxHeight,
-				fillStyle: color,
-				fromCenter: true
-			});
-
-			// top-middle
-			this.canvasHelper.getCanvas().drawRect(
-			{
-				x: this.model.get("x") + (this.model.get("width") / 2),
-				y: this.model.get("y"),
-				width: boxWidth,
-				height: boxHeight,
-				fillStyle: color,
-				fromCenter: true
-			});
-
-			// top-right
-			this.canvasHelper.getCanvas().drawRect(
-			{
-				x: this.model.get("x") + this.model.get("width"),
-				y: this.model.get("y"),
-				width: boxWidth,
-				height: boxHeight,
-				fillStyle: color,
-				fromCenter: true
-			});
-
-			// side-left
-			this.canvasHelper.getCanvas().drawRect(
-			{
-				x: this.model.get("x"),
-				y: this.model.get("y") + (this.model.get("height") / 2),
-				width: boxWidth,
-				height: boxHeight,
-				fillStyle: color,
-				fromCenter: true
-			});
-
-			// side-right
-			this.canvasHelper.getCanvas().drawRect(
-			{
-				x: this.model.get("x") + this.model.get("width"),
-				y: this.model.get("y") + (this.model.get("height") / 2),
-				width: boxWidth,
-				height: boxHeight,
-				fillStyle: color,
-				fromCenter: true
-			});
-
-			// bottom-left
-			this.canvasHelper.getCanvas().drawRect(
-			{
-				x: this.model.get("x"),
-				y: this.model.get("y") + this.model.get("height"),
-				width: boxWidth,
-				height: boxHeight,
-				fillStyle: color,
-				fromCenter: true
-			});
-
-			// bottom-middle
-			this.canvasHelper.getCanvas().drawRect(
-			{
-				x: this.model.get("x") + (this.model.get("width") / 2),
-				y: this.model.get("y") + this.model.get("height"),
-				width: boxWidth,
-				height: boxHeight,
-				fillStyle: color,
-				fromCenter: true
-			});
-
-			// bottom-right
-			this.canvasHelper.getCanvas().drawRect(
-			{
-				x: this.model.get("x") + this.model.get("width"),
-				y: this.model.get("y") + this.model.get("height"),
-				width: boxWidth,
-				height: boxHeight,
-				fillStyle: color,
-				fromCenter: true
-			});
+				this.scaleBoxManager.renderAll(
+					this.model.get("x"),
+					this.model.get("y"),
+					this.model.get("width"),
+					this.model.get("height"));
+			}
 		}
 	});
 

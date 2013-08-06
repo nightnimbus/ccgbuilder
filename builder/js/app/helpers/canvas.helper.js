@@ -12,7 +12,7 @@ function(_)
 			this.canvas = null;
 			this.canvasSelector = "";
 
-			if(typeof canvas !== "undefined")
+			if(typeof canvas !== "undefined" && canvas != null)
 			{
 				this.canvas = canvas;
 				this.canvasSelector = "#" + canvas.id;
@@ -35,6 +35,10 @@ function(_)
 		getCanvas: function()
 		{
 			return $(this.canvasSelector);
+		},
+		getRawCanvas: function()
+		{
+			return this.canvas;
 		},
 		compileFontString: function(font, fontSize, fontStyle)
 		{
@@ -147,14 +151,6 @@ function(_)
 			context.textAlign = textAlign;
 			context.fillStyle = fontColor;
 			context.fillText(text, x, y);
-		},
-		pointWithinBounds: function(x1, y1, x2, y2, w2, h2)
-		{
-			return(
-				x1 >= x2 &&
-				x1 <= x2 + w2 &&
-				y1 >= y2 &&
-				y1 <= y2 + h2);
 		},
 		getMouseCoords: function(e)
 		{

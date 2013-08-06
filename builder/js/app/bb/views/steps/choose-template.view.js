@@ -10,7 +10,8 @@ define(
 		"helpers/string.helper",
 		"genlib/objectevent.class",
 		"genlib/globals.class",
-		"bb/views/steps/step.view"
+		"bb/views/steps/step.view",
+		"bootstrap"
 	],
 function(
 	$,
@@ -48,11 +49,6 @@ function(
 
 		initialize: function()
 		{
-			// Bootstrap and JQuery UI both define $.fn.button, so we always want to use JQuery UI's $.fn.button.
-			// Bootstrap always loads after JQuery UI, so this will always work.
-			if($.fn.button.noConflict)
-				$.fn.button.noConflict();
-
 			this.reqFields.cardTemplate = false;
 
 			this.cardTemplateSizes = new Array("150x200", "300x400");

@@ -31,6 +31,11 @@ function(
 
 		Globals.initialize();
 
+		// Bootstrap and JQuery UI both define $.fn.button, so we always want to use JQuery UI's $.fn.button.
+		// Bootstrap always loads after JQuery UI, so this will always work.
+		if($.fn.button.noConflict)
+			$.fn.button.noConflict();
+
 		ViewManager.views.stepButtons = new StepButtonsView();
 		ViewManager.views.stepButtons.render();
 

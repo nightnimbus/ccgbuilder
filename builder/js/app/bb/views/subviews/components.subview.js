@@ -2,8 +2,10 @@ define(
 	[
 		"jquery",
 		"backbone",
+		"genlib/position.enum",
 		"managers/view.manager",
 		"managers/modelview.manager",
+		"helpers/math.helper",
 		"bb/views/modelviews/component.modelview",
 		"bb/models/component.model",
 		"other/dialogs/editComponent.dialog",
@@ -12,8 +14,10 @@ define(
 function(
 	$,
 	Backbone,
+	Position,
 	ViewManager,
 	ModelViewManager,
+	MathHelper,
 	ComponentModelView,
 	ComponentModel,
 	EditComponentDialog,
@@ -30,8 +34,8 @@ function(
 		mouseDownComponent: false,
 		mouseDisplacement:
 		{
-				x: 0,
-				y: 0
+			x: 0,
+			y: 0
 		},
 		selectors: {},
 		events:
@@ -118,10 +122,9 @@ function(
 			{
 				var component = this.componentViewManager.modelViewsArray[i];
 
-				if(this.canvasHelper.pointWithinBounds(
-					this.mouseCoords.x, this.mouseCoords.y,
-					component.model.get("x"),
-					component.model.get("y"),
+				if(MathHelper.pointWithinRect(
+					this.mouseCoords.x, component.model.get("x"),
+					this.mouseCoords.y, component.model.get("y"),
 					component.model.get("width"),
 					component.model.get("height")))
 				{
@@ -172,6 +175,17 @@ function(
 
 				ViewManager.views.templateComponents.renderCanvas();
 			}
+
+			else if(this.selectedComponent)
+			{
+				var mouseScaleBox = this.selectedComponent.scaleBoxManager
+				.getScaleBoxByPoint(mouseCoords.x, mouseCoords.y);
+
+				if(mouseScaleBox)
+					this.changeCursorByScaleBoxPosition(mouseScaleBox.position);
+				else
+					this.changeCursorByScaleBoxPosition(Position.NONE);
+			}
 		},
 		onDblClickCanvas: function(e)
 		{
@@ -179,7 +193,7 @@ function(
 			{
 				var component = this.componentViewManager.modelViewsArray[i];
 
-				if(this.canvasHelper.pointWithinBounds(
+				if(MathHelper.pointWithinRect(
 					this.mouseCoords.x, this.mouseCoords.y,
 					component.model.get("x"),
 					component.model.get("y"),
@@ -260,6 +274,47 @@ function(
 			{
 				component.model.set({selected: true});
 				this.selectedComponent = component;
+			}
+		},
+		changeCursorByScaleBoxPosition: function(position)
+		{
+			switch(position)
+			{
+				case Position.NONE:
+					this.canvasHelper.getCanvas().css("cursor", "default");
+					break;
+
+				case Position.TOP_LEFT:
+					this.canvasHelper.getCanvas().css("cursor", "nw-resize");
+					break;
+
+				case Position.TOP_MID:
+					this.canvasHelper.getCanvas().css("cursor", "n-resize");
+					break;
+
+				case Position.TOP_RIGHT:
+					this.canvasHelper.getCanvas().css("cursor", "ne-resize");
+					break;
+
+				case Position.MID_LEFT:
+					this.canvasHelper.getCanvas().css("cursor", "w-resize");
+					break;
+
+				case Position.MID_RIGHT:
+					this.canvasHelper.getCanvas().css("cursor", "e-resize");
+					break;
+
+				case Position.BOTTOM_LEFT:
+					this.canvasHelper.getCanvas().css("cursor", "sw-resize");
+					break;
+
+				case Position.BOTTOM_MID:
+					this.canvasHelper.getCanvas().css("cursor", "s-resize");
+					break;
+
+				case Position.BOTTOM_RIGHT:
+					this.canvasHelper.getCanvas().css("cursor", "se-resize");
+					break;
 			}
 		},
 		openEditComponentDialog: function(component)
