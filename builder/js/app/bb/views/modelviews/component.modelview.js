@@ -29,7 +29,7 @@ function(
 			if(typeof options !== "undefined")
 				this.canvasHelper = options.canvasHelper;
 
-			this.scaleBoxManager = new ScaleBoxManager(this.canvasHelper.getRawCanvas());
+			this.scaleBoxManager = new ScaleBoxManager(this.canvasHelper.getRawCanvas(), this.model);
 			this.scaleBoxManager.initLayout(8, 8, "yellow",
 			[
 				Position.TOP_LEFT,
@@ -64,6 +64,31 @@ function(
 
 
 				model.set({x: boundX, y: boundY});
+			});
+
+			this.listenTo(this.model, "change:width change:height", function(model)
+			{
+				if(model.get("width") <= model.get("minWidth"))
+					model.set({width: model.get("minWidth")});
+
+				if(model.get("height") <= model.get("minHeight"))
+					model.set({height: model.get("minHeight")});
+			});
+		},
+		translate: function(toX, toY, displacement)
+		{
+			toX = (typeof toX !== "undefined" && toX != false) ? toX : this.model.get("x");
+			toY = (typeof toY !== "undefined" && toY != false) ? toY : this.model.get("y");
+
+			displacement =
+			(typeof displacement === "object" && displacement != false)
+			? displacement
+			: {x: 0, y: 0};
+
+			this.model.set(
+			{
+				x: toX - displacement.x,
+				y: toY - displacement.y
 			});
 		},
 		render: function()

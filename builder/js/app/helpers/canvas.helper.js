@@ -152,6 +152,26 @@ function(_)
 			context.fillStyle = fontColor;
 			context.fillText(text, x, y);
 		},
+		resizeImage: function(tmpImg, width, height, encoding)
+		{
+			var data = null;
+			var context = this.canvas.getContext("2d");
+			var cachedWidth = this.canvas.width;
+			var cachedHeight = this.canvas.height;
+
+	        this.canvas.width = width;
+	        this.canvas.height = height;
+
+	        context.drawImage(tmpImg, 0, 0, width, height);
+
+	        data = this.canvas.toDataURL(encoding);
+	        this.clear();
+
+	        this.canvas.width = cachedWidth;
+	        this.canvas.height = cachedHeight;
+
+			return data;
+		},
 		getMouseCoords: function(e)
 		{
 			var rect = this.canvas.getBoundingClientRect();

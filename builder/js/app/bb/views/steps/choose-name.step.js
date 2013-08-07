@@ -3,6 +3,7 @@ define([
 	"backbone",
 	"managers/hbs.manager",
 	"managers/view.manager",
+	"helpers/general.helper",
 	"genlib/objectevent.class",
 	"bb/views/steps/step.view"
 	],
@@ -11,10 +12,11 @@ function(
 	Backbone,
 	HbsManager,
 	ViewManager,
+	GeneralHelper,
 	ObjectEvent,
 	Step)
 {
-	var ChooseNameView = Step.extend(
+	var ChooseNameStep = Step.extend(
 	{
 		tagName: "div",
 		finalized: false,
@@ -183,14 +185,14 @@ function(
 				{
 					if(data.success)
 					{
-						self.setSuccessInput();
+						GeneralHelper.setInputSuccess(self.selectors.ccgName);
 						ObjectEvent.changeObjAttr(self.reqFields, "ccgName", true, self.checkReqFields);
 					}
 
 					else
 					{
 						console.log(data.msg);
-						self.setFailInput();
+						GeneralHelper.setInputFail(self.selectors.ccgName);
 					}
 				})
 				.fail(function()
@@ -201,7 +203,7 @@ function(
 
 			else if(value.length == 0)
 			{
-				this.setDefaultInput();
+				GeneralHelper.setInputDefault(this.selectors.ccgName);
 				ObjectEvent.changeObjAttr(this.reqFields, "ccgName", false, this.checkReqFields);
 			}
 
@@ -209,29 +211,11 @@ function(
 			{
 				console.log("The name of your CCG must be at least <b>4</b> characters long, " +
 				"and no more than <b>20</b> characters long.");
-				this.setFailInput();
+				GeneralHelper.setInputFail(this.selectors.ccgName);
 				ObjectEvent.changeObjAttr(this.reqFields, "ccgName", false, this.checkReqFields);
 			}
-		},
-		setDefaultInput: function()
-		{
-			$(this.selectors.ccgName).addClass("chooseName-default-input");
-			$(this.selectors.ccgName).removeClass("chooseName-fail-input");
-			$(this.selectors.ccgName).removeClass("chooseName-success-input");
-		},
-		setFailInput: function()
-		{
-			$(this.selectors.ccgName).addClass("chooseName-fail-input");
-			$(this.selectors.ccgName).removeClass("chooseName-default-input");
-			$(this.selectors.ccgName).removeClass("chooseName-success-input");
-		},
-		setSuccessInput: function()
-		{
-			$(this.selectors.ccgName).addClass("chooseName-success-input");
-			$(this.selectors.ccgName).removeClass("chooseName-default-input");
-			$(this.selectors.ccgName).removeClass("chooseName-fail-input");
 		}
 	});
 
-	return ChooseNameView;
+	return ChooseNameStep;
 });

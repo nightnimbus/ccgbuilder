@@ -1,4 +1,4 @@
-define([], function()
+define(["underscore"], function(_)
 {
 	var StringHelper =
 	{
@@ -16,8 +16,8 @@ define([], function()
 		},
 		getResComponents: function(res)
 		{
-			var w = res.substr(0, res.indexOf('x'));
-			var h = res.substr(res.indexOf('x')+1);
+			var w = res.substr(0, path.lastIndexOf('x'));
+			var h = res.substr(path.lastIndexOf('x')+1);
 
 			return new Array(w, h);
 		},

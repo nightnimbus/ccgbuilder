@@ -29,7 +29,7 @@ define(["jquery"], function($)
 		showAlert: function(alertSelector, fadeIn, onFadeInComplete)
 		{
 			alertSelector = (typeof alertSelector !== "undefined" && alertSelector.length > 0) ? alertSelector : "";
-			fadeIn = (typeof fadeIn !== "integer") ? fadeIn : false;
+			fadeIn = (typeof fadeIn === "integer") ? fadeIn : false;
 			onFadeInComplete = (typeof onFadeInComplete === "function") ? onFadeInComplete : function(e){};
 
 			if(fadeIn != false)

@@ -2,7 +2,7 @@ define([], function()
 {
 	var Position =
 	{
-		NONE: 0,
+		DEFAULT: 0,
 		TOP_LEFT: 1,
 		TOP_MID: 2,
 		TOP_RIGHT: 3,

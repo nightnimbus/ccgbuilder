@@ -61,6 +61,11 @@ requirejs.config(
         "jcanvas":
         [
             "../../../js/vendor/plugins/jquery/jcanvas/js/jcanvas.min"
+        ],
+
+        "getImageData":
+        [
+            "../../../js/vendor/plugins/jquery/getImagedata/js/getImageData.min"
         ]
     },
 
@@ -111,6 +116,11 @@ requirejs.config(
         "jcanvas":
         {
             deps: ["jquery"]
+        },
+
+        "getImageData":
+        {
+            depts: ["jquery"]
         }
     }
 });

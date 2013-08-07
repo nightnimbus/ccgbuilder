@@ -5,10 +5,11 @@ define(
 		"managers/view.manager",
 		"genlib/globals.class",
 		"bb/views/step-buttons.view",
-		"bb/views/steps/choose-name.view",
-		"bb/views/steps/choose-template.view",
-		"bb/views/steps/template-components.view",
-		"bb/views/steps/finalize.view",
+		"bb/views/steps/choose-name.step",
+		"bb/views/steps/choose-template.step",
+		"bb/views/steps/choose-template-fallback.step",
+		"bb/views/steps/template-components.step",
+		"bb/views/steps/finalize.step",
 		"bb/views/subviews/components.subview",
 		"jqueryui",
 		"bootstrap"
@@ -19,10 +20,11 @@ function(
 	ViewManager,
 	Globals,
 	StepButtonsView,
-	ChooseNameView,
-	ChooseTemplateView,
-	TemplateComponentsView,
-	FinalizeView,
+	ChooseNameStep,
+	ChooseTemplateStep,
+	ChooseTemplateFallbackStep,
+	TemplateComponentsStep,
+	FinalizeStep,
 	ComponentsSubView)
 {
 	$(function()
@@ -40,17 +42,18 @@ function(
 		ViewManager.views.stepButtons.render();
 
 		// Steps
-		ViewManager.views.chooseName = new ChooseNameView();
+		ViewManager.views.chooseName = new ChooseNameStep();
 		StepManager.addStep(ViewManager.views.chooseName);
 		
-		ViewManager.views.chooseTemplate = new ChooseTemplateView();
+		ViewManager.views.chooseTemplate = new ChooseTemplateStep();
+		ViewManager.views.chooseTemplate.chooseTemplateFallback = new ChooseTemplateFallbackStep(ViewManager.views.chooseTemplate);
 		StepManager.addStep(ViewManager.views.chooseTemplate);
 
-		ViewManager.views.templateComponents = new TemplateComponentsView();
+		ViewManager.views.templateComponents = new TemplateComponentsStep();
 		ViewManager.views.templateComponents.componentsSubView = new ComponentsSubView();
 		StepManager.addStep(ViewManager.views.templateComponents);
 
-		ViewManager.views.finalize = new FinalizeView();
+		ViewManager.views.finalize = new FinalizeStep();
 		StepManager.addStep(ViewManager.views.finalize);
 
 

@@ -14,11 +14,13 @@ function($, Backbone)
 			selected: false,
 			editing: false,
 			deleting: false,
-			mousedownDisplacement: {x: 0, y: 0},
+			scaling: false,
 			x: 0,
 			y: 0,
 			width: 200,
 			height: 100,
+			minWidth: 200,
+			minHeight: 100,
 			layer: 3
 		}
 	});

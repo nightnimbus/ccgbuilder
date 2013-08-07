@@ -2,11 +2,16 @@ define(
 	[
 		"backbone",
 		"managers/view.manager",
-		"managers/step.manager"
+		"managers/step.manager",
+		"bb/views/steps/step.view"
 	],
-function(Backbone, ViewManager, StepManager)
+function(
+	Backbone,
+	ViewManager,
+	StepManager,
+	Step)
 {
-	var FinalizeView = Backbone.View.extend(
+	var FinalizeStep = Step.extend(
 	{
 		tagName: "div",
 
@@ -55,5 +60,5 @@ function(Backbone, ViewManager, StepManager)
 		}
 	});
 
-	return FinalizeView;
+	return FinalizeStep;
 });

@@ -20,7 +20,7 @@ function(
 	ObjectEvent,
 	Step)
 {
-	var TemplateComponentsView = Step.extend(
+	var TemplateComponentsStep = Step.extend(
 	{
 		tagName: "div",
 		finalized: false,
@@ -219,5 +219,5 @@ function(
 		}
 	});
 
-	return TemplateComponentsView;
+	return TemplateComponentsStep;
 });
