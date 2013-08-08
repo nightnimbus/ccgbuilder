@@ -63,9 +63,9 @@ requirejs.config(
             "../../../js/vendor/plugins/jquery/jcanvas/js/jcanvas.min"
         ],
 
-        "getImageData":
+        "uploadify":
         [
-            "../../../js/vendor/plugins/jquery/getImagedata/js/getImageData.min"
+            "../../../js/vendor/plugins/jquery/uploadify/js/jquery.uploadify.min"
         ]
     },
 
@@ -118,9 +118,9 @@ requirejs.config(
             deps: ["jquery"]
         },
 
-        "getImageData":
+        "uploadify":
         {
-            depts: ["jquery"]
+            deps: ["jquery"]
         }
     }
 });

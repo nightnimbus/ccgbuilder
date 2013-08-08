@@ -1,5 +1,5 @@
 <?php
 
-$ROOT = $_SERVER["DOCUMENT_ROOT"]."CCG Builder";
+$ROOT = $_SERVER["DOCUMENT_ROOT"]."ccgbuilder/";
 
 ?>

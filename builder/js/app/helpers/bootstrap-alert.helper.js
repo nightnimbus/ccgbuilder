@@ -2,6 +2,8 @@ define(["jquery"], function($)
 {
 	var BootstrapAlertHelper =
 	{
+		onShow: function() {},
+
 		initAlert: function(alertSelector, onClose)
 		{
 			alertSelector = (typeof alertSelector !== "undefined" && alertSelector.length > 0) ? alertSelector : "body";
@@ -36,6 +38,8 @@ define(["jquery"], function($)
 				$(alertSelector).fadeIn(fadeIn, onFadeInComplete);
 			else
 				$(alertSelector).show();
+
+			this.onShow();
 		},
 		hideAlert: function(alertSelector, fadeOut, onFadeOutComplete)
 		{

@@ -60,6 +60,8 @@ function(
 			this.selectors.templatePreview = "#templatePreview";
 			this.selectors.selectionTemplates = "#cardTemplateSelection > span";
 			this.selectors.templateLink = "#templateLink";
+
+			BootstrapAlertHelper.onShow = function() { $(".main-content-header").addClass("low-margin-bottom"); };
 		},
 		checkReqFields: function(context)
 		{
@@ -106,7 +108,7 @@ function(
 					'<div class="row">' +
 					    '<span class="span5">' +
 					        '<h4 class="text-center">' +
-					            'Drag and Drop a Template Background <strong class="required-star text-med">*</strong> ' +
+					            'Drag and Drop a Card Template <strong class="required-star text-med">*</strong> ' +
 					            '<a id="imgreqsTooltip" class="tooltipLink" href="#"' +
 					                'data-toggle="tooltip"' +
 					                'data-placement="right"' +
@@ -264,28 +266,22 @@ function(
 				{
 					var tmpImg = new Image();
 					tmpImg.src = e.target.result;
-					
+
 					tmpImg.onload = function(e)
 					{
-						var tmpImgAspectRatio = tmpImg.width / tmpImg.height;
-
-						// Check image against requirements.
-						if(
-						(file.type == "image/jpeg" ||
-						file.type == "image/png") &&
-						file.size < 500*1000 && // 500 KB
-						tmpImgAspectRatio == 3/4)
-						{
-							self.resizeImageToAllSizes(tmpImg, file.type);
+						if(self.checkAndResizeImage(tmpImg, file))
 							self.setPreviewBackground(self.cardTemplateData[self.cardTemplateSizes[0]]);
-						}
-
 						else
-						{
-							BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert, 200);
-							$(".main-content-header").addClass("low-margin-bottom");
-						}
-					};
+							BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert);
+
+						return false;
+					}
+
+					tmpImg.onerror = function(e)
+					{
+						BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert);
+						return false;
+					}
 				};
 
 				reader.readAsDataURL(file);
@@ -353,6 +349,26 @@ function(
 					this.cardTemplateData[sizeStr] = image.src;
 			}
 		},
+		checkAndResizeImage: function(image, file)
+		{
+			var imageAspectRatio = image.width / image.height;
+
+			// Check image against requirements.
+			if(
+			(file.type == "image/jpeg" ||
+			file.type == "image/png") &&
+			file.size <= 500*1000 && // 500 KB
+			imageAspectRatio == 3/4)
+			{
+				this.resizeImageToAllSizes(image, file.type);
+				return true;
+			}
+
+			else
+				BootstrapAlertHelper.showAlert(this.selectors.imgReqsAlert);
+
+			return false;
+		},
 		initFeatures: function(fallback)
 		{
 			fallback = (typeof fallback === "boolean") ? fallback : false;
@@ -378,14 +394,18 @@ function(
 				if(!fallback)
 					$(this.selectors.templatePreview).css("background", "url(assets/img/dragndrop.png) no-repeat");
 				else
-					$(this.selectors.templatePreview).css("background", "url(assets/img/dragndrop-fallback.png) no-repeat");
+					$(this.chooseTemplateFallback.selectors.templatePreviewFallback).css("background", "url(assets/img/dragndrop-fallback.png) no-repeat");
 
 				ObjectEvent.changeObjAttr(this.reqFields, "cardTemplate", false, this.checkReqFields);
 			}
 
 			else
 			{
-				$(this.selectors.templatePreview).css("background", "url(" + url + ") no-repeat");
+				if(!fallback)
+					$(this.selectors.templatePreview).css("background", "url(" + url + ") no-repeat");
+				else
+					$(this.chooseTemplateFallback.selectors.templatePreviewFallback).css("background", "url(" + url + ") no-repeat");
+
 				ObjectEvent.changeObjAttr(this.reqFields, "cardTemplate", true, this.checkReqFields);
 			}
 		}
