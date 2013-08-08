@@ -16,8 +16,8 @@ define(["underscore"], function(_)
 		},
 		getResComponents: function(res)
 		{
-			var w = res.substr(0, path.lastIndexOf('x'));
-			var h = res.substr(path.lastIndexOf('x')+1);
+			var w = res.substr(0, res.lastIndexOf('x'));
+			var h = res.substr(res.lastIndexOf('x')+1);
 
 			return new Array(w, h);
 		},

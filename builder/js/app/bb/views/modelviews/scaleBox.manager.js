@@ -127,11 +127,13 @@ function(
 			// Drag left.
 			if(displacedX < 0)
 			{
-				this.parentModel.set(
-				{
-					x: this.parentModel.get("x") - absDisplacedX,
-					width: this.parentModel.get("width") + absDisplacedX
-				});
+				// Calculate how much the X actually changed.
+				// It may not be displacedX since the X is bound to the canvas.
+				var xDifference = this.parentModel.get("x");
+				this.parentModel.set({x: this.parentModel.get("x") - absDisplacedX});
+				xDifference = xDifference - this.parentModel.get("x");
+
+				this.parentModel.set({width: this.parentModel.get("width") + xDifference});
 			}
 
 			// Drag right.
@@ -149,11 +151,13 @@ function(
 			// Drag up.
 			if(displacedY < 0)
 			{
-				this.parentModel.set(
-				{
-					y: this.parentModel.get("y") - absDisplacedY,
-					height: this.parentModel.get("height") + absDisplacedY
-				});
+				// Calculate how much the Y actually changed.
+				// It may not be displacedY since the Y is bound to the canvas.
+				var yDifference = this.parentModel.get("y");
+				this.parentModel.set({y: this.parentModel.get("y") - absDisplacedY});
+				yDifference = yDifference - this.parentModel.get("y");
+
+				this.parentModel.set({height: this.parentModel.get("height") + yDifference});
 			}
 
 			// Drag down.
@@ -176,11 +180,13 @@ function(
 			// Drag up.
 			if(displacedY < 0)
 			{
-				this.parentModel.set(
-				{
-					y: this.parentModel.get("y") - absDisplacedY,
-					height: this.parentModel.get("height") + absDisplacedY
-				});
+				// Calculate how much the Y actually changed.
+				// It may not be displacedY since the Y is bound to the canvas.
+				var yDifference = this.parentModel.get("y");
+				this.parentModel.set({y: this.parentModel.get("y") - absDisplacedY});
+				yDifference = yDifference - this.parentModel.get("y");
+
+				this.parentModel.set({height: this.parentModel.get("height") + yDifference});
 			}
 
 			// Drag down.
@@ -215,11 +221,13 @@ function(
 			// Drag up.
 			if(displacedY < 0)
 			{
-				this.parentModel.set(
-				{
-					y: this.parentModel.get("y") - absDisplacedY,
-					height: this.parentModel.get("height") + absDisplacedY
-				});
+				// Calculate how much the Y actually changed.
+				// It may not be displacedY since the Y is bound to the canvas.
+				var yDifference = this.parentModel.get("y");
+				this.parentModel.set({y: this.parentModel.get("y") - absDisplacedY});
+				yDifference = yDifference - this.parentModel.get("y");
+
+				this.parentModel.set({height: this.parentModel.get("height") + yDifference});
 			}
 
 			// Drag down.
@@ -242,11 +250,13 @@ function(
 			// Drag left.
 			if(displacedX < 0)
 			{
-				this.parentModel.set(
-				{
-					x: this.parentModel.get("x") - absDisplacedX,
-					width: this.parentModel.get("width") + absDisplacedX
-				});
+				// Calculate how much the X actually changed.
+				// It may not be displacedX since the X is bound to the canvas.
+				var xDifference = this.parentModel.get("x");
+				this.parentModel.set({x: this.parentModel.get("x") - absDisplacedX});
+				xDifference = xDifference - this.parentModel.get("x");
+
+				this.parentModel.set({width: this.parentModel.get("width") + xDifference});
 			}
 
 			// Drag right.
@@ -288,11 +298,13 @@ function(
 			// Drag left.
 			if(displacedX < 0)
 			{
-				this.parentModel.set(
-				{
-					x: this.parentModel.get("x") - absDisplacedX,
-					width: this.parentModel.get("width") + absDisplacedX
-				});
+				// Calculate how much the X actually changed.
+				// It may not be displacedX since the X is bound to the canvas.
+				var xDifference = this.parentModel.get("x");
+				this.parentModel.set({x: this.parentModel.get("x") - absDisplacedX});
+				xDifference = xDifference - this.parentModel.get("x");
+
+				this.parentModel.set({width: this.parentModel.get("width") + xDifference});
 			}
 
 			// Drag right.

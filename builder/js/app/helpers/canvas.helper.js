@@ -152,7 +152,7 @@ function(_)
 			context.fillStyle = fontColor;
 			context.fillText(text, x, y);
 		},
-		resizeImage: function(tmpImg, width, height, encoding)
+		resizeImage: function(image, width, height, encoding)
 		{
 			var data = null;
 			var context = this.canvas.getContext("2d");
@@ -162,7 +162,7 @@ function(_)
 	        this.canvas.width = width;
 	        this.canvas.height = height;
 
-	        context.drawImage(tmpImg, 0, 0, width, height);
+	        context.drawImage(image, 0, 0, width, height);
 
 	        data = this.canvas.toDataURL(encoding);
 	        this.clear();

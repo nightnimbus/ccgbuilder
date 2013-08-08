@@ -68,19 +68,19 @@ function(
 				self.onMouseDownCanvas(e);
 			});
 
-			$(this.canvasHelper.canvasSelector).on("mouseup", function(e)
-			{
-				self.onMouseUpCanvas(e);
-			});
-
-			$(this.canvasHelper.canvasSelector).on("mousemove", function(e)
-			{
-				self.onMouseMoveCanvas(e);
-			});
-
 			$(this.canvasHelper.canvasSelector).on("dblclick", function(e)
 			{
 				self.onDblClickCanvas(e);
+			});
+
+			$("body").on("mouseup", function(e)
+			{
+				self.onMouseUp(e);
+			});
+
+			$("body").on("mousemove", function(e)
+			{
+				self.onMouseMove(e);
 			});
 
 			$("body").on("keydown", function(e)
@@ -91,9 +91,9 @@ function(
 		detachEvents: function()
 		{
 			$.off("mousedown", this.canvasHelper.canvasSelector);
-			$.off("mouseup", this.canvasHelper.canvasSelector);
-			$.off("mousemove", this.canvasHelper.canvasSelector);
 			$.off("dblclick", this.canvasHelper.canvasSelector);
+			$.off("mouseup", "body");
+			$.off("mousemove", "body");
 			$.off("keydown", "body");
 		},
 		addNewComponent: function()
@@ -126,7 +126,7 @@ function(
 		{
 			this.isMouseDown = true;
 
-			if(this.mouseScaleBox)
+			if(this.mouseScaleBox && this.selectedComponent)
 				this.selectedComponent.model.set({scaling: true});
 
 			for(var i = 0; i < this.componentViewManager.count; i++)
@@ -154,7 +154,25 @@ function(
 
 			return false;
 		},
-		onMouseUpCanvas: function(e)
+		onDblClickCanvas: function(e)
+		{
+			for(var i = 0; i < this.componentViewManager.count; i++)
+			{
+				var component = this.componentViewManager.modelViewsArray[i];
+
+				if(MathHelper.pointWithinRect(
+					this.mouseCoords.x, component.model.get("x"),
+					this.mouseCoords.y, component.model.get("y"),
+					component.model.get("width"),
+					component.model.get("height")))
+				{
+					this.openEditComponentDialog(component);
+				}
+			}
+
+			return false;
+		},
+		onMouseUp: function(e)
 		{
 			this.isMouseDown = false;
 
@@ -181,7 +199,7 @@ function(
 
 			return false;
 		},
-		onMouseMoveCanvas: function(e)
+		onMouseMove: function(e)
 		{
 			var mouseCoords = this.canvasHelper.getMouseCoords(e);
 			this.mouseCoords = mouseCoords;
@@ -214,24 +232,6 @@ function(
 					mouseCoords.x, mouseCoords.y, this.mouseDisplacement);
 
 				ViewManager.views.templateComponents.renderCanvas();
-			}
-
-			return false;
-		},
-		onDblClickCanvas: function(e)
-		{
-			for(var i = 0; i < this.componentViewManager.count; i++)
-			{
-				var component = this.componentViewManager.modelViewsArray[i];
-
-				if(MathHelper.pointWithinRect(
-					this.mouseCoords.x, component.model.get("x"),
-					this.mouseCoords.y, component.model.get("y"),
-					component.model.get("width"),
-					component.model.get("height")))
-				{
-					this.openEditComponentDialog(component);
-				}
 			}
 
 			return false;

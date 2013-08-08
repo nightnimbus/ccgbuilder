@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"di",
+				"displacedX"
+			],
+			[
+				"dis",
+				"displacedY"
+			],
+			[
+				"new",
+				"newDimensions"
+			],
+			[
+				"scale",
+				"scaleBoxPosition"
+			],
+			[
+				"scalePo",
+				"scalePointX"
+			],
+			[
 				"get",
 				"getScaleBoxByPoint"
 			],
@@ -168,10 +188,6 @@
 				"tmpImgAspectRatio"
 			],
 			[
-				"dis",
-				"disableBackButton"
-			],
-			[
 				"background-c",
 				"background-color"
 			],
@@ -255,7 +271,7 @@
 			"file": "builder/js/app/bb/views/steps/choose-template.step.js",
 			"settings":
 			{
-				"buffer_size": 10126,
+				"buffer_size": 10160,
 				"line_ending": "Windows"
 			}
 		},
@@ -271,7 +287,7 @@
 			"file": "builder/js/app/bb/views/subviews/components.subview.js",
 			"settings":
 			{
-				"buffer_size": 7788,
+				"buffer_size": 8276,
 				"line_ending": "Windows"
 			}
 		},
@@ -279,7 +295,15 @@
 			"file": "builder/js/app/bb/views/modelviews/component.modelview.js",
 			"settings":
 			{
-				"buffer_size": 2999,
+				"buffer_size": 3702,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "builder/js/app/bb/models/component.model.js",
+			"settings":
+			{
+				"buffer_size": 371,
 				"line_ending": "Windows"
 			}
 		},
@@ -287,7 +311,7 @@
 			"file": "builder/js/app/bb/views/modelviews/scaleBox.manager.js",
 			"settings":
 			{
-				"buffer_size": 3978,
+				"buffer_size": 11276,
 				"line_ending": "Windows"
 			}
 		}
@@ -466,6 +490,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"scalePointY",
+			"scalePointX",
 			"indexOf",
 			"lastIndexOf",
 			"indexOf",
@@ -591,16 +617,16 @@
 			".nav > li .active",
 			".nav .active",
 			".nav.active",
-			".navbar.active",
-			".active",
-			"%;"
+			".navbar.active"
 		],
 		"highlight": true,
-		"in_selection": false,
+		"in_selection": true,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"displacedY",
+			"displacedX",
 			"this",
 			"GeneralHelper",
 			"input-fail",
@@ -663,7 +689,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -757,15 +783,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10126,
+						"buffer_size": 10160,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7580,
-								7580
+								1909,
+								1909
 							]
 						],
 						"settings":
@@ -774,7 +800,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4864.0,
+						"translation.y": 1093.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -802,7 +828,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2367.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -813,15 +839,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7788,
+						"buffer_size": 8276,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4388,
-								4388
+								4883,
+								4883
 							]
 						],
 						"settings":
@@ -830,7 +856,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2718.0,
+						"translation.y": 3056.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -841,15 +867,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2999,
+						"buffer_size": 3702,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								554,
-								554
+								2218,
+								2218
 							]
 						],
 						"settings":
@@ -858,26 +884,26 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 216.0,
+						"translation.y": 1080.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "builder/js/app/bb/views/modelviews/scaleBox.manager.js",
+					"file": "builder/js/app/bb/models/component.model.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3978,
+						"buffer_size": 371,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								472,
-								472
+								321,
+								321
 							]
 						],
 						"settings":
@@ -886,7 +912,35 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1404.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "builder/js/app/bb/views/modelviews/scaleBox.manager.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11276,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10547,
+								10547
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5627.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

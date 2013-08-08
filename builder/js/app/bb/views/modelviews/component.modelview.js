@@ -48,17 +48,21 @@ function(
 				var boundY = 0;
 
 
-				if(model.get("x") > (this.canvasHelper.canvas.width - model.get("width")))
-					boundX = this.canvasHelper.canvas.width - model.get("width");
+				if(model.get("x") > (this.canvasHelper.getRawCanvas().width - model.get("width")))
+					boundX = this.canvasHelper.getRawCanvas().width - model.get("width");
+
 				else if(model.get("x") < 0)
 					boundX = 0;
+
 				else
 					boundX = model.get("x");
 
-				if(model.get("y") > (this.canvasHelper.canvas.height - model.get("height")))
-					boundY = this.canvasHelper.canvas.height - model.get("height");
+				if(model.get("y") > (this.canvasHelper.getRawCanvas().height - model.get("height")))
+					boundY = this.canvasHelper.getRawCanvas().height - model.get("height");
+
 				else if(model.get("y") < 0)
 					boundY = 0;
+
 				else
 					boundY = model.get("y");
 
@@ -68,11 +72,26 @@ function(
 
 			this.listenTo(this.model, "change:width change:height", function(model)
 			{
+				var boundWidth = model.get("width");
+				var boundHeight = model.get("height");
+
 				if(model.get("width") <= model.get("minWidth"))
-					model.set({width: model.get("minWidth")});
+					boundWidth = model.get("minWidth");
+
+				else if(model.get("x") + model.get("width") >= this.canvasHelper.getRawCanvas().width)
+					boundWidth = this.canvasHelper.getRawCanvas().width - model.get("x");
 
 				if(model.get("height") <= model.get("minHeight"))
-					model.set({height: model.get("minHeight")});
+					boundHeight = model.get("minHeight");
+
+				else if(model.get("y") + model.get("height") >= this.canvasHelper.getRawCanvas().height)
+					boundHeight = this.canvasHelper.getRawCanvas().height - model.get("y");
+
+				model.set(
+				{
+					width: boundWidth,
+					height: boundHeight
+				});
 			});
 		},
 		translate: function(toX, toY, displacement)

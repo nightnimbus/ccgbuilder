@@ -50,7 +50,7 @@ function(
 
 		initialize: function()
 		{
-			this.canvasHelper = document.getElementById("hiddenCanvas");
+			this.canvasHelper = new CanvasHelper(document.getElementById("hiddenCanvas"));
 			this.cardTemplateSizes = new Array("150x200", "300x400");
 
 			this.reqFields.cardTemplate = false;
@@ -78,6 +78,7 @@ function(
 
 				if(
 					Modernizr.draganddrop &&
+					!Globals.IS_MOBILE_DEVICE &&
 					!Globals.isLtIEVersion(10))
 				{
 					html = '' +
@@ -275,7 +276,7 @@ function(
 						file.size < 500*1000 && // 500 KB
 						tmpImgAspectRatio == 3/4)
 						{
-							self.resizeImageToAllSizes(tmpImage, file.type);
+							self.resizeImageToAllSizes(tmpImg, file.type);
 							self.setPreviewBackground(self.cardTemplateData[self.cardTemplateSizes[0]]);
 						}
 
@@ -321,7 +322,7 @@ function(
 			url = (typeof url === "string") ? url : "";
 			
 			var prefix = url.substr(0, url.indexOf('_')+1);
-			var suffix = url.substr(url.indexOf('.'));
+			var suffix = url.substr(url.lastIndexOf('.'));
 
 			for(var i = 0; i < this.cardTemplateSizes.length; i++)
 			{
@@ -345,7 +346,7 @@ function(
 				if(image.width != size[0] || image.height != size[1])
 				{
 					this.cardTemplateData[sizeStr] = this.canvasHelper.resizeImage(
-					image, size[0], size[1], file.type);
+					image, size[0], size[1], type);
 				}
 
 				else
