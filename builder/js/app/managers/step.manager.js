@@ -50,6 +50,7 @@ function($, ASync)
 				{
 					self.steps[stepIndex].checkReqFields(self.steps[stepIndex].reqFields);
 					self.steps[stepIndex].$el.css("display", "block");
+					self.steps[stepIndex].visible = true;
 					self.steps[stepIndex].show();
 				});
 			}
@@ -60,6 +61,7 @@ function($, ASync)
 			{
 				this.steps[stepIndex].checkReqFields(this.steps[stepIndex].reqFields);
 				this.steps[stepIndex].$el.css("display", "none");
+				this.steps[stepIndex].visible = false;
 				this.steps[stepIndex].hide();
 			}
 		},

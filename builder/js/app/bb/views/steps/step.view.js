@@ -12,6 +12,7 @@ function(
 		tagName: "div",
 		finalized: false,
 		rendered: false,
+		visible: false,
 		reqFields: {},
 		selectors: {},
 		stepTitle: "Template Components",

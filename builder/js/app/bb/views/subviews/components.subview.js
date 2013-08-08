@@ -86,17 +86,22 @@ function(
 
 			$("body").on("mouseup", function(e)
 			{
-				self.onMouseUp(e);
+				if(ViewManager.views.templateComponents.visible)
+					self.onMouseUp(e);
+				else
+					self.mouseUpStepButtons = false;
 			});
 
 			$("body").on("mousemove", function(e)
 			{
-				self.onMouseMove(e);
+				if(ViewManager.views.templateComponents.visible)
+					self.onMouseMove(e);
 			});
 
 			$("body").on("keydown", function(e)
 			{
-				self.onKeyDown(e);
+				if(ViewManager.views.templateComponents.visible)
+					self.onKeyDown(e);
 			});
 		},
 		detachEvents: function()
