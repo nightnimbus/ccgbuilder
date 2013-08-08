@@ -9,12 +9,18 @@ function($, Backbone, StepManager)
 	var StepButtonsView = Backbone.View.extend(
 	{
 		el: "#step-buttons",
+		selectors: {},
 		events:
 		{
 			"click #backButton": "prev",
 			"click #nextButton": "next"
 		},
 
+		initialize: function()
+		{
+			this.selectors.backButton = "#backButton";
+			this.selectors.nextButton = "#nextButton";
+		},
 		render: function()
 		{
 			var html = '' +
@@ -38,9 +44,9 @@ function($, Backbone, StepManager)
 			}
 
 			if(StepManager.currentStep >= StepManager.steps.length-2)
-				$("#nextButton").text("Finish");
+				$(this.selectors.nextButton).text("Finish");
 			else
-				$("#nextButton").text("Next");
+				$(this.selectors.nextButton).text("Next");
 		},
 		prev: function()
 		{
@@ -58,19 +64,19 @@ function($, Backbone, StepManager)
 		},
 		enableBackButton: function()
 		{
-			$("#backButton").prop("disabled", false);
+			$(this.selectors.backButton).prop("disabled", false);
 		},
 		disableBackButton: function()
 		{
-			$("#backButton").prop("disabled", true);
+			$(this.selectors.backButton).prop("disabled", true);
 		},
 		enableNextButton: function()
 		{
-			$("#nextButton").prop("disabled", false);
+			$(this.selectors.nextButton).prop("disabled", false);
 		},
 		disableNextButton: function()
 		{
-			$("#nextButton").prop("disabled", true);
+			$(this.selectors.nextButton).prop("disabled", true);
 		},
 		enableButtons: function()
 		{

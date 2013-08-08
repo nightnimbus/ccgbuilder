@@ -34,6 +34,7 @@ function(
 		mouseCoords: {x: 0, y: 0},
 		selectedComponent: false,
 		isMouseDown: false,
+		mouseUpStepButtons: false,
 		mouseDownComponent: false,
 		mouseScaleBox: false,
 		mouseDisplacement:
@@ -73,6 +74,16 @@ function(
 				self.onDblClickCanvas(e);
 			});
 
+			$(ViewManager.views.stepButtons.selectors.backButton).on("mouseup", function(e)
+			{
+				self.mouseUpStepButtons = true;
+			});
+
+			$(ViewManager.views.stepButtons.selectors.nextButton).on("mouseup", function(e)
+			{
+				self.mouseUpStepButtons = true;
+			});
+
 			$("body").on("mouseup", function(e)
 			{
 				self.onMouseUp(e);
@@ -92,6 +103,8 @@ function(
 		{
 			$.off("mousedown", this.canvasHelper.canvasSelector);
 			$.off("dblclick", this.canvasHelper.canvasSelector);
+			$.off("mouseup", ViewManager.views.stepButtons.selectors.backButton);
+			$.off("mouseup", ViewManager.views.stepButtons.selectors.nextButton);
 			$.off("mouseup", "body");
 			$.off("mousemove", "body");
 			$.off("keydown", "body");
@@ -184,8 +197,11 @@ function(
 					this.selectComponent(this.mouseDownComponent);
 				}
 
-				else
+				else if(!this.mouseUpStepButtons)
 					this.deselectComponent(this.selectedComponent);
+
+				else
+					this.mouseUpStepButtons = false;
 			}
 
 			else if(this.selectedComponent)
