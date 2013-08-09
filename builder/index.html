@@ -29,11 +29,6 @@
 
         <!-- Plugin CSS -->
         <link rel="stylesheet" href="../js/vendor/plugins/jquery/socialMedia/css/socialMedia.css">
-        <link rel="stylesheet" href="../js/vendor/plugins/jquery/uploadify/css/uploadify.css">
-
-        <!-- [if lt IE 10]>
-            
-        <![endif]-->
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -74,18 +69,27 @@
                 <span class="span12 container-main-content">
                     <div class="container main-content text-center">
                         <div class="step-global"><strong class="required-star">*</strong> - indicates a required field.</div>
-                        <div id="step-content">
-                            <noscript>
-                                <div class="main-content-header" style="color: red;">
-                                    <h1>
-                                        Javascript must be enabled to use this app.
-                                        To enable javascript, go
-                                        <a href="http://www.enable-javascript.com/" target="_blank">here</a>.
-                                    </h1>
-                                </div>
-                            </noscript>
-                        </div>
-                        <div id="loading-templates" class="loading-big" style="margin-top: -350px;"></div>
+                        <div id="step-content"></div>
+                        <noscript>
+                            <div class="not-supported" style="color: red; margin-top: -50%;">
+                                <h1>
+                                    Javascript must be enabled to use this app.
+                                    To enable javascript, go
+                                    <a href="http://www.enable-javascript.com/" target="_blank">here</a>.
+                                </h1>
+                            </div>
+                        </noscript>
+
+                        <!--[if lt IE 8]>
+                            <div class="not-supported" style="width: 50%; margin: 0 auto; margin-top: -50%;">
+                                You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> 
+                                or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> in order to use this app.
+                            </div>
+                        <![endif]-->
+
+                        <!--[if gte IE 8]>
+                            <div id="loading-templates" class="loading-big" style="margin-top: -30%;"></div>
+                        <![endif]-->
                         <div id="step-buttons"></div>
                     </div>
                 </span>
@@ -127,7 +131,7 @@
             </div>
         </div>
 
-        <!-- Console Shim For <= IE8 -->
+        <!-- Console Polyfill For <= IE8 -->
         <script>
             if(typeof window.Console === "undefined")
             {
@@ -148,16 +152,19 @@
         
         <!-- Vendor Fallback JS -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-        <script>window.Modernizr || document.write('<script async src="../js/vendor/modernizr.min.js"><\/script>')</script>
+        <script>window.Modernizr || document.write('<script src="../js/vendor/modernizr.min.js"><\/script>')</script>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script async src="../js/vendor/jquery.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="../js/vendor/jquery.min.js"><\/script>')</script>
 
         <script>
-            // Not using RequireJS because I don't want to include these scripts if I don't need to.
-
-            if(!window.Modernizr.csstransitions)
-                document.write('<script src="../js/vendor/plugins/jquery/socialMedia/js/socialMedia.js"><\/script>');
+            window.Modernizr.load(
+            [
+                {
+                    test: window.Modernizr.csstransitions,
+                    nope: ["../js/vendor/plugins/jquery/socialMedia/js/socialMedia.js"]
+                }
+            ]);
         </script>
 
         <!-- Vendor Non-Fallback JS -->

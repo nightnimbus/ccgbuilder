@@ -2,7 +2,8 @@ define(
 	[
 		"jquery",
 		"underscore",
-		"genlib/class.class"
+		"genlib/class.class",
+		"jqueryui"
 	],
 function(
 	$,

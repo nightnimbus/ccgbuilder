@@ -12,7 +12,8 @@ define(
 		"genlib/objectevent.class",
 		"genlib/globals.class",
 		"bb/views/steps/step.view",
-		"bootstrap"
+		"bootstrap",
+		"modernizr.on"
 	],
 function(
 	$,
@@ -196,18 +197,17 @@ function(
 		{
 			var self = this;
 
+			// Have to use require and not Modernizr.load for fileupload
 			if(
 				Modernizr.draganddrop &&
 				window.FileReader &&
 				!Globals.IS_MOBILE_DEVICE)
 			{
 				var supportDataUri = false;
-
+				
 				Modernizr.on("datauri", function(result)
 				{
 					console.log(result);
-
-					// Have to use require and not Modernizr.load for fileupload
 					require(["fileupload", "iframe.transport"], function()
 					{
 						$(self.selectors.templateFile).fileupload(

@@ -1,9 +1,12 @@
 define(
 	[
 		"underscore",
+		"modernizr",
 		"genlib/class.class"
 	],
-function(_)
+function(
+	_,
+	Modernizr)
 {
 	var CanvasHelper = Class.extend(
 	{
@@ -20,6 +23,23 @@ function(_)
 
 			else
 				this.canvas = this.createCanvas();
+		},
+		testFlashCanvas: function()
+		{
+			var self = this;
+			
+			Modernizr.load(
+			[
+				{
+					test: Modernizr.canvas,
+					nope: ["../js/vendor/flashCanvas/bin/flashcanvas.min.js"],
+					complete: function()
+					{
+						if(typeof FlashCanvas !== "undefined")
+							FlashCanvas.initElement(self.canvas);
+					}
+				}
+			]);
 		},
 		createCanvas: function(width, height, parent)
 		{

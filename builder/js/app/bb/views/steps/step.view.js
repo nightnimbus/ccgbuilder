@@ -13,6 +13,7 @@ function(
 		finalized: false,
 		rendered: false,
 		visible: false,
+		loaded: false,
 		reqFields: {},
 		selectors: {},
 		stepTitle: "Template Components",
@@ -37,6 +38,10 @@ function(
 
 		},
 		remove: function()
+		{
+			
+		},
+		loadPolyfills: function()
 		{
 			
 		},

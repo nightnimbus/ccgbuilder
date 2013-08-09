@@ -34,7 +34,7 @@ define([], function()
 		        {
 		            return index - 1;
 		        },
-		        break: function(bCallback)
+		        breakLoop: function(bCallback)
 		        {
 		            done = true;
 
@@ -77,7 +77,7 @@ define([], function()
 		        {
 		            return index;
 		        },
-		        break: function(bCallback)
+		        breakLoop: function(bCallback)
 		        {
 		            done = true;
 

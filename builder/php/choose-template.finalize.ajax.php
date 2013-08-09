@@ -1,11 +1,11 @@
 <?php
 
-require_once("../../php/globals.php");
+require_once("../../php/libs/genlib/globals.class.php");
 require_once("../../php/pdo_connect.php");
 require_once("../../php/libs/ChromePHP/ChromePhp.php");
 
 $ret = array("success"=>true, "msg"=>"", "ccgRoot"=>"");
-$thisCcgRoot = $ROOT."/ccgs/";
+$thisCcgRoot = Globals::ROOT_DIR()."/ccgs/";
 
 // Defaults
 $templateSizes = ($_POST["templateSizes"]) ? $_POST["templateSizes"] : array();

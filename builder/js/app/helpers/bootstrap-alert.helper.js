@@ -3,6 +3,7 @@ define(["jquery"], function($)
 	var BootstrapAlertHelper =
 	{
 		onShow: function() {},
+		onHide: function() {},
 
 		initAlert: function(alertSelector, onClose)
 		{
@@ -35,11 +36,20 @@ define(["jquery"], function($)
 			onFadeInComplete = (typeof onFadeInComplete === "function") ? onFadeInComplete : function(e){};
 
 			if(fadeIn != false)
-				$(alertSelector).fadeIn(fadeIn, onFadeInComplete);
-			else
-				$(alertSelector).show();
+			{
+				var self = this;
 
-			this.onShow();
+				$(alertSelector).fadeIn(fadeIn, function(e)
+				{
+					onFadeInComplete(e);
+					self.onShow();
+				});
+			}
+			else
+			{
+				$(alertSelector).show();
+				this.onShow();
+			}
 		},
 		hideAlert: function(alertSelector, fadeOut, onFadeOutComplete)
 		{
@@ -48,9 +58,20 @@ define(["jquery"], function($)
 			onFadeOutComplete = (typeof onFadeOutComplete === "function") ? onFadeOutComplete : function(e){};
 
 			if(fadeOut != false)
-				$(alertSelector).fadeOut(fadeOut, onFadeOutComplete);
+			{
+				var self = this;
+
+				$(alertSelector).fadeOut(fadeOut, function(e)
+				{
+					onFadeOutComplete(e);
+					self.onHide();
+				});
+			}
 			else
+			{
 				$(alertSelector).hide();
+				this.onHide();
+			}
 		},
 		hideAllAlerts: function(containerSelector, fadeOut, onFadeOutComplete)
 		{

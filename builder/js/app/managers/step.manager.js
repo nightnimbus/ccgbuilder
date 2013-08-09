@@ -124,7 +124,7 @@ function($, ASync)
 					// as the finalized steps just to be on the safe side
 					self.steps[self.steps.length-1].deFinalize(loop.iteration());
 
-					loop.break(false);
+					loop.breakLoop(false);
 				});
 			},
 			function()

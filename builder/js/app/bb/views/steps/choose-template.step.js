@@ -8,10 +8,13 @@ define(
 		"helpers/canvas.helper",
 		"helpers/bootstrap-alert.helper",
 		"helpers/string.helper",
+		"helpers/modernizr.helper",
 		"genlib/objectevent.class",
 		"genlib/globals.class",
+		"genlib/filerequirements.class",
 		"bb/views/steps/step.view",
-		"bootstrap"
+		"bootstrap",
+		"fileupload"
 	],
 function(
 	$,
@@ -22,8 +25,10 @@ function(
 	CanvasHelper,
 	BootstrapAlertHelper,
 	StringHelper,
+	ModernizrHelper,
 	ObjectEvent,
 	Globals,
+	FileRequirements,
 	Step)
 {
 	var ChooseTemplateStep = Step.extend(
@@ -36,14 +41,10 @@ function(
 		stepTitle: "Choose a Template",
 		cardTemplatesizes: [],
 		cardTemplateData: {},
-		chooseTemplateFallback: null,
+		fileReqs: null,
 		ccgRoot: "",
 		events:
 		{
-			"dragenter #templatePreview": "onPreventDefault",
-			"dragover #templatePreview": "onPreventDefault",
-			"drop #templatePreview": "onDropTemplatePreview",
-			"ondragstart #cardTemplateSelection > span": "onDragStartSelection",
 			"mouseover #imgreqsTooltip": "onMouseOverImgReqsTooltip",
 			"mouseout #imgreqsTooltip": "onMouseOutImgReqsTooltip",
 		},
@@ -52,16 +53,24 @@ function(
 		{
 			this.canvasHelper = new CanvasHelper(document.getElementById("hiddenCanvas"));
 			this.cardTemplateSizes = new Array("150x200", "300x400");
+			this.fileReqs = new FileRequirements();
+			this.fileReqs.maxSize = 50*1000;
+			this.fileReqs.aspectRatio = 3/4;
+			this.fileReqs.types =
+			[
+				"image/jpeg",
+				"image/png"
+			];
 
 			this.reqFields.cardTemplate = false;
 
 			this.selectors.alertContainer = ".container-alerts";
 			this.selectors.imgReqsAlert = "#imgReqsAlert";
 			this.selectors.templatePreview = "#templatePreview";
-			this.selectors.selectionTemplates = "#cardTemplateSelection > span";
-			this.selectors.templateLink = "#templateLink";
+			this.selectors.templateFile = "#templateFile";
 
 			BootstrapAlertHelper.onShow = function() { $(".main-content-header").addClass("low-margin-bottom"); };
+			BootstrapAlertHelper.onHide = function() { $(".main-content-header").removeClass("low-margin-bottom"); };
 		},
 		checkReqFields: function(context)
 		{
@@ -76,97 +85,81 @@ function(
 		{
 			if(this.rendered == false)
 			{
-				var html = "";
+				// Link fileupload stylesheet here so that the unstyled button never shows.
+				var html = '<link rel="stylesheet" href="../js/vendor/plugins/jquery/fileUpload/css/jquery.fileupload-ui.css">' +
+				'<div class="main-content-header">' +
+				    '<div class="row">' +
+				        '<h1>Choose a Card Template</h1>' +
+				    '</div>' +
+				'</div>' +
 
-				if(
-					Modernizr.draganddrop &&
-					!Globals.IS_MOBILE_DEVICE &&
-					!Globals.isLtIEVersion(10))
-				{
-					html = '' +
-					'<div class="main-content-header">' +
-					    '<div class="row">' +
-					        '<h1>Choose a Card Template</h1>' +
-					    '</div>' +
-					'</div>' +
+				'<div class="row">' +
+				    '<div class="container-alerts">' +
+				        '<div id="imgReqsAlert" class="alert alert-error alert-block">' +
+				            '<button type="button" class="close">&times;</button>' +
+				            '<h4 class="alert-heading">That image is invalid!</h4><br/>' +
+				            '<b>The image requirements are:</b>' +
+				            '<ul>' +
+				                '<li>JPEG,PNG</li>' +
+				                '<li>< 500 KB</li>' +
+				                '<li>3:4 aspect ratio</li>' +
+				            '</ul>' +
+				        '</div>' +
+				    '</div>' +
+				'</div>' +
 
-					'<div class="row">' +
-					    '<div class="container-alerts">' +
-					        '<div id="imgReqsAlert" class="alert alert-error alert-block">' +
-					            '<button type="button" class="close">&times;</button>' +
-					            '<h4 class="alert-heading">That image is invalid!</h4><br/>' +
-					            '<b>The image requirements are:</b>' +
-					            '<ul>' +
-					                '<li>JPEG,PNG</li>' +
-					                '<li>< 500 KB</li>' +
-					                '<li>3:4 aspect ratio</li>' +
-					            '</ul>' +
-					        '</div>' +
-					    '</div>' +
-					'</div>' +
+				'<div class="row">' +
+				    '<span class="span5">' +
+				        '<h4 class="text-center">' +
+				            'Select a Card Template <strong class="required-star text-med">*</strong> ' +
+				            '<a id="imgreqsTooltip" class="tooltipLink" href="#"' +
+				                'data-toggle="tooltip"' +
+				                'data-placement="right"' +
+				                'data-html="true"' +
+				                'title="' +
+				                '<h4>Image Requirements:</h4>' +
+				                '<ul>' +
+				                    '<li>JPEG,PNG</li>' +
+				                    '<li>< 500 KB</li>' +
+				                    '<li>3:4 aspect ratio</li>' +
+				                '</ul>' +
+				                '">(?)' +
+				            '</a>' +
+				            ':' +
 
-					'<div class="row">' +
-					    '<span class="span5">' +
-					        '<h4 class="text-center">' +
-					            'Drag and Drop a Card Template <strong class="required-star text-med">*</strong> ' +
-					            '<a id="imgreqsTooltip" class="tooltipLink" href="#"' +
-					                'data-toggle="tooltip"' +
-					                'data-placement="right"' +
-					                'data-html="true"' +
-					                'title="' +
-					                '<h4>Image Requirements:</h4>' +
-					                '<ul>' +
-					                    '<li>JPEG,PNG</li>' +
-					                    '<li>< 500 KB</li>' +
-					                    '<li>3:4 aspect ratio</li>' +
-					                '</ul>' +
-					                '">(?)' +
-					            '</a>' +
-					            ':' +
+				        '</h4>' +
+				        '<span class="btn btn-success fileinput-button" style="margin-bottom: 8px;">' +
+			                '<span>Select Template</span>' +
+			                '<input type="file" id="templateFile" name="templateFile">' +
+			            '</span>' +
+				        '<div id="templatePreview" class="card-template-preview"></div>' +
+				    '</span>' +
 
-					        '</h4>' +
-					        '<div id="templatePreview" class="card-template-preview stretch-background"></div>' +
-					    '</span>' +
+				    '<span class="span2"><h2>OR</h2></span>' +
 
-					    '<span class="span2"><h2>OR</h2></span>' +
+				    '<span class="span5">' +
+				        '<h4 class="text-center">Click to Choose a Card Template:</h4>' +
+				        '<div id="cardTemplateSelectionFallback" class="card-template-selection text-left">' +
+				            '<span id="template01"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
+				            '<span id="template01"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
+				            '<span id="template01" class="no-margin-bottom"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
+				         	'<span id="template01" class="no-margin-bottom"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
+				        '</div>' +
+				    '</span>' +
+				'</div>';
 
-					    '<span class="span5">' +
-					        '<h4 class="text-center">Drag over a Card Template:</h4>' +
-					        '<div id="cardTemplateSelection" class="card-template-selection text-left">' +
-					            '<span id="template01"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
-					            '<span id="template01"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
-					            '<span id="template01" class="no-margin-bottom"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
-					         	'<span id="template01" class="no-margin-bottom"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
-					        '</div>' +
-					    '</span>' +
-					'</div>';
+				this.$el.html(html);
 
-					this.$el.html(html);
+				// This doesn't even append to the body...
+				// But it works if I have this here. Why? I have no fucking clue.
+				$("body").append(this.el);
 
-					// This doesn't even append to the body...
-					// But it works if I have this here. Why? I have no fucking clue.
-					$("body").append(this.el);
+				this.loadPolyfills();
+				this.initFeatures(false);
 
-					this.initFeatures(false);
-					onComplete();
+				onComplete();
 
-					this.rendered = true;
-				}
-
-				else
-				{
-					var self = this;
-
-					this.chooseTemplateFallback.render(function()
-					{
-						onComplete();
-						self.rendered = true;
-					},
-					function(msg)
-					{
-						onError(msg);
-					});
-				}
+				this.rendered = true;
 			}
 
 			else
@@ -176,15 +169,30 @@ function(
 		},
 		show: function()
 		{
-			this.chooseTemplateFallback.show();
+			
 		},
 		hide: function()
 		{
-			this.chooseTemplateFallback.hide();
+			
 		},
 		remove: function()
 		{
-			this.chooseTemplateFallback.remove();
+			
+		},
+		loadPolyfills: function()
+		{
+			var self = this;
+
+			if(!window.FileReader)
+			{
+				require(["iframe.transport"], function()
+				{
+					self.registerUploadButtons(false);
+				});
+			}
+
+			else
+				self.registerUploadButtons(true);
 		},
 		finalize: function(onSuccess, onError)
 		{
@@ -243,66 +251,6 @@ function(
 				onError("Ajax request failed.");
 			});
 		},
-		onDropTemplatePreview: function(e)
-		{
-			e = e.originalEvent || e;
-
-			e.preventDefault();
-			e.stopPropagation();
-
-			var self = this;
-			var templateUrl = (e.dataTransfer.getData("Text"))
-			? e.dataTransfer.getData("Text")
-			: (typeof e.target.src !== "undefined")
-			? e.target.src
-			: "";
-
-			if(templateUrl.length == 0)
-			{
-				var file = e.dataTransfer.files[0];
-				var reader = new FileReader();
-
-				reader.onload = function(e)
-				{
-					var tmpImg = new Image();
-					tmpImg.src = e.target.result;
-
-					tmpImg.onload = function(e)
-					{
-						if(self.checkAndResizeImage(tmpImg, file))
-							self.setPreviewBackground(self.cardTemplateData[self.cardTemplateSizes[0]]);
-						else
-							BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert);
-
-						return false;
-					}
-
-					tmpImg.onerror = function(e)
-					{
-						BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert);
-						return false;
-					}
-				};
-
-				reader.readAsDataURL(file);
-			}
-
-			else
-			{
-				// Checks to make sure your aren't dragging from anther tab in your browser.
-				if(templateUrl.indexOf(Globals.ROOT) != -1)
-				{
-					this.getAllUrlSizes(templateUrl);
-					this.setPreviewBackground(this.cardTemplateData[this.cardTemplateSizes[0]]);
-				}
-			}
-
-			return false;
-		},
-		onDragStartSelection: function(e)
-		{
-			e.dataTransfer.setData("Text", e.target.id);
-		},
 		onMouseOverImgReqsTooltip: function(e)
 		{
 			$(e.currentTarget).tooltip("show");
@@ -312,6 +260,38 @@ function(
 		{
 			$(e.currentTarget).tooltip("hide");
 			return false;
+		},
+		onUploadSuccess: function(data)
+		{
+			if(data.result.success)
+			{
+				var self = this;
+				var img = new Image();
+				img.src = data.result.imageData;
+
+				img.onload = function(e)
+				{
+					if(self.checkAndResizeImage(img, data.result.file))
+					{
+						self.setPreviewBackground(
+							self.cardTemplateData[self.cardTemplateSizes[0]], true);
+					}
+
+					else
+						BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert);
+					
+					return false;
+				}
+
+				img.onerror = function(e)
+				{
+					BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert);
+					return false;
+				}
+			}
+
+			else
+				BootstrapAlertHelper.showAlert(this.selectors.imgReqsAlert);
 		},
 		getAllUrlSizes: function(url)
 		{
@@ -354,11 +334,7 @@ function(
 			var imageAspectRatio = image.width / image.height;
 
 			// Check image against requirements.
-			if(
-			(file.type == "image/jpeg" ||
-			file.type == "image/png") &&
-			file.size <= 500*1000 && // 500 KB
-			imageAspectRatio == 3/4)
+			if(this.fileReqs.check(file.size, file.type, imageAspectRatio))
 			{
 				this.resizeImageToAllSizes(image, file.type);
 				return true;
@@ -369,43 +345,49 @@ function(
 
 			return false;
 		},
-		initFeatures: function(fallback)
+		initFeatures: function()
 		{
-			fallback = (typeof fallback === "boolean") ? fallback : false;
-
-			if(!fallback)
-				$(this.selectors.selectionTemplates).prop("draggable", "true");
-
 			$(".alert").alert();
 			BootstrapAlertHelper.initAllAlerts(this.selectors.alertContainer, function(alertSelector)
 			{
-				BootstrapAlertHelper.hideAlert(alertSelector, 200, function()
-				{
-					$(".main-content-header").removeClass("low-margin-bottom");
-				});
+				BootstrapAlertHelper.hideAlert(alertSelector, 200);
 			});
 		},
-		setPreviewBackground: function(url, fallback)
+		registerUploadButtons: function(supportFileReader)
 		{
-			fallback = (typeof fallback === "boolean") ? fallback : false;
+			var self = this;
+			var previousTemplatePath = $(self.selectors.templatePreview).css("background-image");
 
+			$(this.selectors.templateFile).fileupload(
+			{
+				url: "php/choose-template-uploader.ajax.php",
+				dataType: "json",
+				formData:
+				{
+					supportFileReader: supportFileReader,
+					fileReqs: JSON.stringify(self.fileReqs)
+				},
+				done: function(e, data)
+				{
+					self.onUploadSuccess(data);
+				},
+				fail: function(e, data)
+				{
+					console.error(data.jqXHR.responseText);
+				}
+			});
+		},
+		setPreviewBackground: function(url)
+		{
 			if(url == null)
 			{
-				if(!fallback)
-					$(this.selectors.templatePreview).css("background", "url(assets/img/dragndrop.png) no-repeat");
-				else
-					$(this.chooseTemplateFallback.selectors.templatePreviewFallback).css("background", "url(assets/img/dragndrop-fallback.png) no-repeat");
-
+				$(this.selectors.templatePreview).css("background", "url(assets/img/template-preview.png) no-repeat");
 				ObjectEvent.changeObjAttr(this.reqFields, "cardTemplate", false, this.checkReqFields);
 			}
 
 			else
 			{
-				if(!fallback)
-					$(this.selectors.templatePreview).css("background", "url(" + url + ") no-repeat");
-				else
-					$(this.chooseTemplateFallback.selectors.templatePreviewFallback).css("background", "url(" + url + ") no-repeat");
-
+				$(this.selectors.templatePreview).css("background", "url(" + url + ") no-repeat");
 				ObjectEvent.changeObjAttr(this.reqFields, "cardTemplate", true, this.checkReqFields);
 			}
 		}

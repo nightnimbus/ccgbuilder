@@ -106,7 +106,6 @@ function(
 				var canvasSelector = this.selectors.canvas.split("#")[1];
 				this.canvasHelper = new CanvasHelper(document.getElementById(canvasSelector));
 				this.componentsSubView.canvasHelper = this.canvasHelper;
-				this.componentsSubView.attachEvents();
 
 				onComplete();
 				this.rendered = true;
@@ -136,6 +135,14 @@ function(
 		show: function()
 		{
 			this.initTemplatePreview();
+
+			if(!this.loaded)
+			{
+				this.loadPolyfills();
+				this.componentsSubView.attachEvents();
+
+				this.loaded = true;
+			}
 		},
 		hide: function()
 		{
@@ -143,7 +150,12 @@ function(
 		},
 		remove: function()
 		{
-			this.componentsSubView.detachEvents();
+			if(this.loaded)
+				this.componentsSubView.detachEvents();
+		},
+		loadPolyfills: function()
+		{
+			this.canvasHelper.testFlashCanvas();
 		},
 		finalize: function(onSuccess, onError)
 		{

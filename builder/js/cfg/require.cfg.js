@@ -41,8 +41,7 @@ requirejs.config(
 
         "modernizr":
         [
-            "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min",
-            "../../../js/vendor/modernizr.min"
+            "../../../js/vendor/modernizr.custom.min"
         ],
 
         // Plugin Paths
@@ -63,9 +62,25 @@ requirejs.config(
             "../../../js/vendor/plugins/jquery/jcanvas/js/jcanvas.min"
         ],
 
-        "uploadify":
+        "flashcanvas":
         [
-            "../../../js/vendor/plugins/jquery/uploadify/js/jquery.uploadify.min"
+            "../../../js/vendor/flashCanvas/bin/flashcanvas.min"
+        ],
+
+        "fileupload":
+        [
+            "../../../js/vendor/plugins/jquery/fileUpload/js/jquery.fileupload.min"
+        ],
+
+        // Required for fileUpload plugin to work
+        "jquery.ui.widget":
+        [
+            "../../../js/vendor/plugins/jquery/fileUpload/js/vendor/jquery.ui.widget.min"
+        ],
+
+        "iframe.transport":
+        [
+            "../../../js/vendor/plugins/jquery/fileUpload/js/jquery.iframe-transport.min"
         ]
     },
 
@@ -114,11 +129,6 @@ requirejs.config(
         },
 
         "jcanvas":
-        {
-            deps: ["jquery"]
-        },
-
-        "uploadify":
         {
             deps: ["jquery"]
         }

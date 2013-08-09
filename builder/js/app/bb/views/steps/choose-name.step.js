@@ -48,7 +48,6 @@ function(
 		{
 			if(this.rendered == false)
 			{
-				var self = this;
 				var html = '' +
 				'<div class="main-content-header">' +
 				    '<div class="row">' +
@@ -62,7 +61,7 @@ function(
 				    '</span>' +
 				'</div>';
 
-				self.$el.html(html);
+				this.$el.html(html);
 				onComplete();
 
 				this.rendered = true;
