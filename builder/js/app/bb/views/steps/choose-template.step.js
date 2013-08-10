@@ -68,6 +68,7 @@ function(
 			this.selectors.imgReqsAlert = "#imgReqsAlert";
 			this.selectors.templatePreview = "#templatePreview";
 			this.selectors.templateFile = "#templateFile";
+			this.selectors.dragAndDropHint = ".container-drag-and-drop-hint";
 
 			BootstrapAlertHelper.onShow = function() { $(".main-content-header").addClass("low-margin-bottom"); };
 			BootstrapAlertHelper.onHide = function() { $(".main-content-header").removeClass("low-margin-bottom"); };
@@ -128,6 +129,9 @@ function(
 				            ':' +
 
 				        '</h4>' +
+				        '<div class="container-drag-and-drop-hint" style="display: none;">' +
+			            	'You can also <b>drag and drop</b> a template.' +
+			            '</div>' +
 				        '<span class="btn btn-success fileinput-button" style="margin-bottom: 8px;">' +
 			                '<span>Select Template</span>' +
 			                '<input type="file" id="templateFile" name="templateFile">' +
@@ -398,6 +402,8 @@ function(
 
 			if(Modernizr.draganddrop && !Globals.isLtIEVersion(10))
 			{
+				$(this.selectors.dragAndDropHint).show();
+
 				$(document).on("drop dragover", function(e)
 				{
 					self.onPreventDefault(e);
