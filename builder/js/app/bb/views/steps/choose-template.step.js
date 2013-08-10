@@ -130,9 +130,9 @@ function(
 
 				        '</h4>' +
 				        '<div class="container-drag-and-drop-hint" style="display: none;">' +
-			            	'You can also <b>drag and drop</b> a template.' +
+			            	'You can also <b>drag and drop</b> a template from your desktop.' +
 			            '</div>' +
-				        '<span class="btn btn-success fileinput-button" style="margin-bottom: 8px;">' +
+				        '<span class="btn btn-large btn-success fileinput-button" style="margin-bottom: 8px;">' +
 			                '<span>Select Template</span>' +
 			                '<input type="file" id="templateFile" name="templateFile">' +
 			            '</span>' +

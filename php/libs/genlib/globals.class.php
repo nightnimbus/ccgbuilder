@@ -8,8 +8,8 @@ class Globals
 
 	public function initialize()
 	{
-		self::$BASE_URL = "192.168.1.4/ccgbuilder/";
-		//self::$BASE_URL = "localhost/ccgbuilder/";
+		self::$BASE_URL = "localhost/ccgbuilder/";
+		//self::$BASE_URL = "192.168.1.4/ccgbuilder/";
 
 		self::$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."ccgbuilder/";
 		self::$TMP_DIR = self::$ROOT_DIR."tmp/";
