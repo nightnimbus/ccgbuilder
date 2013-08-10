@@ -30,7 +30,7 @@ function(
 				this.canvasHelper = options.canvasHelper;
 
 			this.scaleBoxManager = new ScaleBoxManager(this.canvasHelper.getRawCanvas(), this.model);
-			this.scaleBoxManager.initLayout(8, 8, "yellow",
+			this.scaleBoxManager.initLayout(6, 6, "yellow",
 			[
 				Position.TOP_LEFT,
 				Position.TOP_MID,
@@ -129,7 +129,7 @@ function(
 					width: this.model.get("width"),
 					height: this.model.get("height"),
 					fillStyle: fillColor,
-					strokeWidth: 2,
+					strokeWidth: 1,
 					strokeStyle: "#FFF",
 					fromCenter: false
 				});
@@ -150,17 +150,17 @@ function(
 
 
 			// NAME
-			var fontSize = 12;
+			var fontSize = 10;
 
 			if(this.model.get("name").length > 15)
-				fontSize = 9;
+				fontSize = 8;
 
 			var nameHeight = this.canvasHelper.getTextHeight(fontSize);
 
 			fontSize = fontSize.toString() + "pt";
 
 			this.canvasHelper.drawText(
-				"12pt Consolas",
+				fontSize + " Consolas",
 				"white",
 				this.model.get("name"),
 				this.model.get("x") + this.model.get("width") / 2,

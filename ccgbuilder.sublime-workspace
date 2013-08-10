@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"drop",
+				"dropzone-hilite"
+			],
+			[
+				"templ",
+				"templatePreview"
+			],
+			[
+				"dra",
+				"draganddrop"
+			],
+			[
+				"aspe",
+				"aspectRatioCheck"
+			],
+			[
+				"aspect",
+				"aspectRatio"
+			],
+			[
+				"aspec",
+				"aspectRatio"
+			],
+			[
+				"aspectRa",
+				"aspectRatioCheck"
+			],
+			[
+				"prei",
+				"previousTemplatePath"
+			],
+			[
+				"load",
+				"loadPolyfills"
+			],
+			[
+				"Mo",
+				"ModernizrHelper"
+			],
+			[
+				"onU",
+				"onUploadSuccess"
+			],
+			[
+				"cardTe",
+				"cardTemplateSelectionFallback"
+			],
+			[
 				"absD",
 				"absDisplacedY"
 			],
@@ -144,10 +192,6 @@
 				"onClickComponent"
 			],
 			[
-				"cardTe",
-				"cardTemplateData"
-			],
-			[
 				"cardTemplate",
 				"cardTemplateSizes"
 			],
@@ -259,7 +303,15 @@
 			"file": "builder/index.html",
 			"settings":
 			{
-				"buffer_size": 8539,
+				"buffer_size": 9123,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "builder/js/cfg/require.cfg.js",
+			"settings":
+			{
+				"buffer_size": 2983,
 				"line_ending": "Windows"
 			}
 		},
@@ -267,7 +319,15 @@
 			"file": "builder/css/main.css",
 			"settings":
 			{
-				"buffer_size": 2638,
+				"buffer_size": 2566,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/libs/helper.lib.css",
+			"settings":
+			{
+				"buffer_size": 2328,
 				"line_ending": "Windows"
 			}
 		},
@@ -275,7 +335,7 @@
 			"file": "builder/js/app/main.js",
 			"settings":
 			{
-				"buffer_size": 1971,
+				"buffer_size": 1809,
 				"line_ending": "Windows"
 			}
 		},
@@ -283,15 +343,15 @@
 			"file": "builder/js/app/bb/views/steps/choose-template.step.js",
 			"settings":
 			{
-				"buffer_size": 10175,
+				"buffer_size": 11229,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "builder/js/app/genlib/globals.class.js",
+			"file": "builder/js/app/bb/views/modelviews/component.modelview.js",
 			"settings":
 			{
-				"buffer_size": 502,
+				"buffer_size": 4233,
 				"line_ending": "Windows"
 			}
 		},
@@ -299,7 +359,15 @@
 			"file": "builder/js/app/bb/views/steps/template-components.step.js",
 			"settings":
 			{
-				"buffer_size": 4779,
+				"buffer_size": 4958,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "builder/js/app/bb/views/steps/step.view.js",
+			"settings":
+			{
+				"buffer_size": 1517,
 				"line_ending": "Windows"
 			}
 		},
@@ -307,15 +375,7 @@
 			"file": "builder/js/app/managers/step.manager.js",
 			"settings":
 			{
-				"buffer_size": 4153,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "builder/js/app/bb/views/subviews/components.subview.js",
-			"settings":
-			{
-				"buffer_size": 8899,
+				"buffer_size": 4157,
 				"line_ending": "Windows"
 			}
 		}
@@ -349,43 +409,92 @@
 	},
 	"file_history":
 	[
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/step.view.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/subviews/components.subview.js",
+		"/C/wamp/www/ccgbuilder/tmp/.htaccess",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-template-uploader.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-template-fallback.step.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/filerequirements.class.js",
+		"/C/wamp/www/ccgbuilder/php/libs/genlib/resizeimage.class.php",
+		"/C/wamp/www/ccgbuilder/php/libs/helpers/string.helper.php",
+		"/C/wamp/www/ccgbuilder/php/libs/genlib/globals.class.php",
+		"/C/wamp/www/ccgbuilder/builder/index.html",
+		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/filerequirements.struct.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/modernizr.helper.js",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-template.finalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/bootstrap-alert.helper.js",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-name.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-template.definalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/php/libs/genlib/filedir.class.php",
+		"/C/wamp/www/ccgbuilder/php/globals.php",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-template-uploader.fallback.ajax.php",
+		"/C/wamp/www/ccgbuilder/js/vendor/modernizr/modernizr.custom.min.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/modernizr/polyfills/modernizr.on.min.js",
+		"/C/wamp/www/test/index.html",
+		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/dialog.class.js",
+		"/C/wamp/www/ccgbuilder/builder/js/cfg/require.cfg.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/jquery.fileupload.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/deleteComponentYesNo.dialog.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/vendor/jquery.ui.widget.js",
+		"/C/wamp/www/ccgbuilder/js/globals.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/globals.class.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/editComponent.dialog.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/finalize.step.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/canvas.helper.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/models/component.model.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/scaleBox.manager.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/component.modelview.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/scaleBox.manager.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/scaleBox.class.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-name.step.js",
+		"/C/wamp/www/ccgbuilder/index.html",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/jquery.fileupload.all.min.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/jquery.fileupload.min.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/jquery.iframe-transport.min.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/vendor/jquery.ui.widget.min.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/socialMedia/js/socialMedia.min.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/jquery.iframe-transport.js",
+		"/C/wamp/www/test/uploader.php",
+		"/C/wamp/www/test/js/vendor/plugins/jquery/fileUpload/basic.html",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/step.view.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/async.class.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/uploadify/css/uploadify.css",
+		"/C/wamp/www/ccgbuilder/js/vendor/flashCanvas/bin/flashcanvas.min.js",
+		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.997/flashcanvas.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/basic-plus.html",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/jqueryUpload/basic.html",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/main.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/jqueryUpload/test/test.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/uploadify/js/jquery.uploadify.min.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/uploadify/js/jquery.uploadify.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/uploadify/php/uploadify.php",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-template-upload-form.fallback.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-name.finalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-name.definalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/css/libs/helper.lib.css",
+		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.480/uploadify.css",
+		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.747/index.php",
+		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.424/uploadify.php",
+		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.090/index.php",
+		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.692/uploadify.php",
+		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.193/check-exists.php",
+		"/C/wamp/www/ccgbuilder/builder/js/app/hbs/step-chooseTemplate-fallback.hbs",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/models/component.model.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/step-buttons.view.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/math.helper.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/string.helper.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/scaleBox.class.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/globals.class.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-template-fallback.step.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/managers/view.manager.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/managers/step.manager.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/managers/modelview.manager.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/managers/hbs.manager.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/array.helper.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/bootstrap-alert.helper.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/base64.class.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-name.step.js",
-		"/C/wamp/www/ccgbuilder/css/libs/helper.lib.css",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-template.step.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/hbs/step-chooseTemplate-fallback.hbs",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/fallbackStep.step.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/editComponent.dialog.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/dialog.class.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/deleteComponentYesNo.dialog.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/general.helper.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/objectevent.class.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/class.class.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/template-components.step.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/subviews/components.subview.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/finalize.step.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/async.class.js",
 		"/C/wamp/www/ccgbuilder/builder/php/choose-template.fallback-check.ajax.php",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/fileapi.helper.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/getImageData/js/getImageData.min.js",
-		"/C/wamp/www/ccgbuilder/builder/js/cfg/require.cfg.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/keys.enum.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/position.enum.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/input.helper.js",
@@ -397,10 +506,8 @@
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/componentScaleBox.manager.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/componentScaleBox.class.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/bootstrap-alert.js",
-		"/C/wamp/www/ccgbuilder/index.html",
 		"/C/Stuff/Programming/Web/libs/initializr/index.html",
 		"/C/wamp/www/ccgbuilder/css/main.css",
-		"/C/wamp/www/ccgbuilder/builder/index.html",
 		"/C/wamp/www/ccgbuilder/css/bootstrap-responsive.css",
 		"/C/wamp/www/ccgbuilder/css/bootstrap.css",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/dialog.class.js",
@@ -429,54 +536,7 @@
 		"/C/wamp/www/CCG Builder/builder/js/app/bb/views/steps/template-components.view.js",
 		"/C/wamp/www/CCG Builder/builder/js/app/main.js",
 		"/C/wamp/www/CCG Builder/builder/index.html",
-		"/C/wamp/www/CCG Builder/builder/css/main.css",
-		"/C/wamp/www/CCG Builder/builder/js/app/bb/views/steps/choose-template.view.js",
-		"/C/wamp/www/CCG Builder/builder/php/choose-template.finalize.ajax.php",
-		"/C/wamp/www/CCG Builder/builder/js/app/hbs/step-chooseTemplate.hbs",
-		"/C/wamp/www/CCG Builder/builder/js/app/hbs/step-templateComponents.hbs",
-		"/C/wamp/www/CCG Builder/builder/php/choose-template.definalize.ajax.php",
-		"/C/wamp/www/CCG Builder/builder/js/app/helpers/fileapi.helper.js",
-		"/C/Program Files (x86)/Sublime Text 3/Data/Packages/Default/Preferences.sublime-settings",
-		"/C/wamp/www/CCG Builder/builder/js/app/helpers/string.helper.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/managers/step.manager.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/hbs/step-chooseName.hbs",
-		"/C/wamp/www/CCG Builder/builder/js/app/boilerplates/js/step.boilerplate.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/bb/views/steps/choose-name.view.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/bb/views/step-buttons.view.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/boilerplates/hbs/step.hbs",
-		"/C/wamp/www/CCG Builder/builder/js/app/boilerplates/step.boilerplate.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/bb/views/steps/assign-template-components.view.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/bb/views/steps/finalize.view.js",
-		"/C/wamp/www/CCG Builder/builder/php/choose-name.definalize.ajax.php",
-		"/C/wamp/www/CCG Builder/builder/js/app/genlib/async.class.js",
-		"/C/wamp/www/CCG Builder/builder/php/choose-name.finalize.ajax.php",
-		"/C/wamp/www/CCG Builder/php/libs/genlib/filedir.class.php",
-		"/C/Users/Derek/AppData/Local/Temp/recursive_directory_delete_comments.php",
-		"/C/wamp/www/CCG Builder/builder/php/choose-name.ajax.php",
-		"/C/wamp/www/CCG Builder/css/bootstrap.css",
-		"/C/wamp/www/CCG Builder/css/bootstrap.min.css",
-		"/C/wamp/www/CCG Builder/builder/js/app/genlib/objectevent.class.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/managers/hbs.manager.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/cfg/require.cfg.js",
-		"/C/wamp/www/CCG Builder/builder/js/app.js",
-		"/C/wamp/www/CCG Builder/js/vendor/plugins/jquery/flashCanvas/bin/canvas2png.js",
-		"/C/wamp/www/CCG Builder/js/vendor/plugins/jquery/flashCanvas/bin/flashcanvas.js",
-		"/C/wamp/www/CCG Builder/builder/js/app/helpers/bootstrap-alert.helper.js",
-		"/C/wamp/www/CCG Builder/index.html",
-		"/C/wamp/www/CCG Builder/js/general.js",
-		"/C/wamp/www/CCG Builder/js/vendor/plugins/jquery/socialMedia/css/socialMedia.css",
-		"/C/wamp/www/CCG Builder/builder/js/app/hbs/step-chooseTemplate-fallback.hbs",
-		"/C/wamp/www/CCG Builder/css/libs/helper.lib.css",
-		"/C/wamp/www/CCG Builder/builder/js/app/genlib/globals.class.js",
-		"/C/wamp/www/CCG Builder/php/libs/genlib/resizeimage.class.php",
-		"/C/wamp/www/CCG Builder/builder/php/choose-template-fallback.ajax.php",
-		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.272/upload.js",
-		"/C/wamp/www/CCG Builder/php/libs/genlib/resize-image.class.php",
-		"/C/wamp/www/CCG Builder/php/libs/genlib/resize.class.php",
-		"/C/wamp/www/CCG Builder/js/vendor/plugins/jquery/FileUpload/js/main.js",
-		"/C/wamp/www/CCG Builder/js/vendor/plugins/jquery/FlashCanvas/bin/proxy.php",
-		"/C/wamp/www/CCG Builder/js/vendor/plugins/jquery/FlashCanvas/bin/save.php",
-		"/C/wamp/www/CCG Builder/builder/js/app/genlib/base64.class.js"
+		"/C/wamp/www/CCG Builder/builder/css/main.css"
 	],
 	"find":
 	{
@@ -494,6 +554,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"$ROOT",
+			"+",
+			"destroy",
 			"\");\n",
 			"scalePointY",
 			"scalePointX",
@@ -618,17 +681,15 @@
 			".navbar-inner",
 			".navbar",
 			".navbar-inner",
-			".navbar .nav>.active>a",
-			".nav > li .active",
-			".nav .active",
-			".nav.active"
+			".navbar .nav>.active>a"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"",
 			"displacedY",
 			"displacedX",
 			"this",
@@ -693,7 +754,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -702,15 +763,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8539,
+						"buffer_size": 9123,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1690,
-								1690
+								9102,
+								9102
 							]
 						],
 						"settings":
@@ -720,26 +781,55 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 909.0,
+						"translation.y": 936.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "builder/css/main.css",
+					"file": "builder/js/cfg/require.cfg.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2638,
+						"buffer_size": 2983,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1423,
-								1423
+								2206,
+								2206
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 743.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "builder/css/main.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2566,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								133,
+								133
 							]
 						],
 						"settings":
@@ -754,20 +844,48 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "builder/js/app/main.js",
+					"buffer": 3,
+					"file": "css/libs/helper.lib.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1971,
+						"buffer_size": 2328,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1340,
-								1340
+								902,
+								902
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 905.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "builder/js/app/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1809,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								609,
+								609
 							]
 						],
 						"settings":
@@ -782,20 +900,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 5,
 					"file": "builder/js/app/bb/views/steps/choose-template.step.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10175,
+						"buffer_size": 11229,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8913,
-								8913
+								10944,
+								10944
 							]
 						],
 						"settings":
@@ -804,26 +922,82 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3596.0,
+						"translation.y": 7016.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "builder/js/app/genlib/globals.class.js",
+					"buffer": 6,
+					"file": "builder/js/app/bb/views/modelviews/component.modelview.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 502,
+						"buffer_size": 4233,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								120,
-								120
+								3263,
+								3263
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2412.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "builder/js/app/bb/views/steps/template-components.step.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4958,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3666,
+								3666
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1697.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "builder/js/app/bb/views/steps/step.view.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1517,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								218,
+								218
 							]
 						],
 						"settings":
@@ -838,48 +1012,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "builder/js/app/bb/views/steps/template-components.step.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4779,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3432,
-								3432
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2016.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
+					"buffer": 9,
 					"file": "builder/js/app/managers/step.manager.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4153,
+						"buffer_size": 4157,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1377,
-								1377
+								2787,
+								2787
 							]
 						],
 						"settings":
@@ -888,35 +1034,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 360.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "builder/js/app/bb/views/subviews/components.subview.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8899,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2110,
-								2110
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1265.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

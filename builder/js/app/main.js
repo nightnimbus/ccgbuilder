@@ -30,8 +30,14 @@ function(
 
 		Globals.initialize();
 
+		// Hide Loading Gif
+		$("#loading-templates").hide();
+
+
 		if(!Globals.isLtIEVersion(8))
 		{
+			$("#loading-templates").show();
+
 			// Bootstrap and JQuery UI both define $.fn.button, so we always want to use JQuery UI's $.fn.button.
 			// Bootstrap always loads after JQuery UI, so this will always work.
 			if($.fn.button.noConflict)

@@ -54,7 +54,7 @@ function(
 			this.canvasHelper = new CanvasHelper(document.getElementById("hiddenCanvas"));
 			this.cardTemplateSizes = new Array("150x200", "300x400");
 			this.fileReqs = new FileRequirements();
-			this.fileReqs.maxSize = 50*1000;
+			this.fileReqs.maxSize = 500*1000;
 			this.fileReqs.aspectRatio = 3/4;
 			this.fileReqs.types =
 			[
@@ -132,7 +132,7 @@ function(
 			                '<span>Select Template</span>' +
 			                '<input type="file" id="templateFile" name="templateFile">' +
 			            '</span>' +
-				        '<div id="templatePreview" class="card-template-preview"></div>' +
+				        '<div id="templatePreview" class="card-template-preview above-lights-off"></div>' +
 				    '</span>' +
 
 				    '<span class="span2"><h2>OR</h2></span>' +
@@ -154,6 +154,7 @@ function(
 				// But it works if I have this here. Why? I have no fucking clue.
 				$("body").append(this.el);
 
+				this.attachEvents();
 				this.loadPolyfills();
 				this.initFeatures(false);
 
@@ -177,7 +178,7 @@ function(
 		},
 		remove: function()
 		{
-			
+			this.detachEvents();
 		},
 		loadPolyfills: function()
 		{
@@ -356,12 +357,12 @@ function(
 		registerUploadButtons: function(supportFileReader)
 		{
 			var self = this;
-			var previousTemplatePath = $(self.selectors.templatePreview).css("background-image");
 
 			$(this.selectors.templateFile).fileupload(
 			{
 				url: "php/choose-template-uploader.ajax.php",
 				dataType: "json",
+				dropZone: $(self.selectors.templatePreview),
 				formData:
 				{
 					supportFileReader: supportFileReader,
@@ -389,6 +390,50 @@ function(
 			{
 				$(this.selectors.templatePreview).css("background", "url(" + url + ") no-repeat");
 				ObjectEvent.changeObjAttr(this.reqFields, "cardTemplate", true, this.checkReqFields);
+			}
+		},
+		attachEvents: function()
+		{
+			var self = this;
+
+			if(Modernizr.draganddrop && !Globals.isLtIEVersion(10))
+			{
+				$(document).on("drop dragover", function(e)
+				{
+					self.onPreventDefault(e);
+				});
+
+				$(document).on("dragenter", function(e)
+				{
+					$("#lights-off").show();
+					$(self.selectors.templatePreview).addClass("dropzone-hilite above-lights-off");
+				});
+
+				$(this.selectors.templatePreview).on("drop", function(e)
+				{
+					$("#lights-off").hide();
+					$(self.selectors.templatePreview).removeClass("dropzone-hilite above-lights-off");
+				});
+
+				$(this.selectors.templatePreview).on("dragover", function(e)
+				{
+					$(self.selectors.templatePreview).addClass("dropzone-hilite above-lights-off");
+				});
+
+				$("#lights-off").on("drop dragleave", function(e)
+				{
+					$("#lights-off").hide();
+					$(self.selectors.templatePreview).removeClass("dropzone-hilite above-lights-off");
+				});
+			}
+		},
+		detachEvents: function()
+		{
+			if(Modernizr.draganddrop && !Globals.isLtIEVersion(10))
+			{
+				$(document).off("drop dragover dragenter");
+				$(this.selectors.templatePreview).off("drop dragover");
+				$("#lights-off").off("drop dragleave");
 			}
 		}
 	});

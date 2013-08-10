@@ -1,10 +1,11 @@
 .card-template-preview
 {
-	border: 1px solid black;
+	position: relative;
+	border: 2px dashed rgb(0, 0, 0);
 	width: 150px;
 	height: 200px;
 	margin: 0 auto;
-	background-image: url(../assets/img/template-preview.png);
+	background: url(../assets/img/template-preview.png);
 }
 
 .card-template-preview-large
@@ -94,6 +95,12 @@ input.chooseName
 {
 	width: 90%;
 	margin: 0 auto;
+}
+
+.dropzone-hilite
+{
+	border-color: rgb(0, 0, 255);
+	/*background: rgb(100, 100, 255);*/
 }
 
 #step-content
