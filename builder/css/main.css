@@ -1,3 +1,19 @@
+.container-card-template-previews
+{
+	width: 480px;
+	height: 260px;
+	margin: 0 auto;
+}
+
+.container-card-template-preview
+{
+	display: block;
+	float: left;
+	margin-top: 10px;
+	margin-right: 8px;
+	margin-left: 8px;
+}
+
 .card-template-preview
 {
 	position: relative;
@@ -5,7 +21,13 @@
 	width: 150px;
 	height: 200px;
 	margin: 0 auto;
-	background: url(../assets/img/template-preview.png);
+	font-size: 20px;
+	text-align: center;
+}
+
+.card-template-preview > div
+{
+	margin-top: 80px;
 }
 
 .card-template-preview-large
@@ -99,8 +121,7 @@ input.chooseName
 
 .dropzone-hilite
 {
-	border-color: rgb(0, 0, 255);
-	/*background: rgb(100, 100, 255);*/
+	border: 3px dashed rgb(0, 0, 255);
 }
 
 .container-drag-and-drop-hint
@@ -181,6 +202,13 @@ input.chooseName
 {
 	color: red;
 	font-size: 15px;
+}
+
+#container-templateSwitchButton
+{
+	display: inline-block;
+	float: left;
+	margin-top: 118px;
 }
 
 @media (max-width: 1024px) {

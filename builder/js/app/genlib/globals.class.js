@@ -2,8 +2,8 @@ define([], function()
 {
 	var Globals =
 	{
-		ROOT: "localhost/ccgbuilder/",
-		//ROOT: "192.168.1.4/ccgbuilder/",
+		//ROOT: "localhost/ccgbuilder/",
+		ROOT: "192.168.1.4/ccgbuilder/",
 		USERAGENT: "",
 		IS_MOBILE_DEVICE: false,
 

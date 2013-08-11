@@ -124,7 +124,7 @@ function(
 
 			$(this.selectors.canvas).drawImage(
 			{
-				source: ViewManager.views.chooseTemplate.cardTemplateData["300x400"],
+				source: ViewManager.views.chooseTemplate.cardTemplateDataFront["300x400"],
 				fromCenter: false,
 				load: function()
 				{
@@ -221,7 +221,7 @@ function(
 		},
 		initTemplatePreview: function()
 		{
-			var data = ViewManager.views.chooseTemplate.cardTemplateData["300x400"];
+			var data = ViewManager.views.chooseTemplate.cardTemplateDataFront["300x400"];
 
 			if(typeof data !== "undefined" && this.lastBgData != data)
 			{

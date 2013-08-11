@@ -39,8 +39,9 @@ function(
 		reqFields: {},
 		selectors: {},
 		stepTitle: "Choose a Template",
-		cardTemplatesizes: [],
-		cardTemplateData: {},
+		cardTemplateSizes: [],
+		cardTemplateDataBack: {},
+		cardTemplateDataFront: {},
 		fileReqs: null,
 		ccgRoot: "",
 		events:
@@ -66,8 +67,13 @@ function(
 
 			this.selectors.alertContainer = ".container-alerts";
 			this.selectors.imgReqsAlert = "#imgReqsAlert";
-			this.selectors.templatePreview = "#templatePreview";
-			this.selectors.templateFile = "#templateFile";
+			this.selectors.templatePreviewBack = "#templatePreviewBack";
+			this.selectors.templatePreviewFront = "#templatePreviewFront";
+			this.selectors.templatePreviews = ".container-card-template-previews .card-template-preview";
+			this.selectors.containerTemplatePreviews = ".container-card-template-previews";
+			this.selectors.templateSwitchButton = "#templateSwitchButton";
+			this.selectors.templateFileBack = "#templateFileBack";
+			this.selectors.templateFileFront = "#templateFileFront";
 			this.selectors.dragAndDropHint = ".container-drag-and-drop-hint";
 
 			BootstrapAlertHelper.onShow = function() { $(".main-content-header").addClass("low-margin-bottom"); };
@@ -112,7 +118,7 @@ function(
 				'<div class="row">' +
 				    '<span class="span5">' +
 				        '<h4 class="text-center">' +
-				            'Select a Card Template <strong class="required-star text-med">*</strong> ' +
+				            'Select Your Card Templates <strong class="required-star text-med">*</strong> ' +
 				            '<a id="imgreqsTooltip" class="tooltipLink" href="#"' +
 				                'data-toggle="tooltip"' +
 				                'data-placement="right"' +
@@ -130,13 +136,36 @@ function(
 
 				        '</h4>' +
 				        '<div class="container-drag-and-drop-hint" style="display: none;">' +
-			            	'You can also <b>drag and drop</b> a template from your desktop.' +
+			            	'You can also <b>drag and drop</b> templates from your desktop.' +
 			            '</div>' +
-				        '<span class="btn btn-large btn-success fileinput-button" style="margin-bottom: 8px;">' +
-			                '<span>Select Template</span>' +
-			                '<input type="file" id="templateFile" name="templateFile">' +
-			            '</span>' +
-				        '<div id="templatePreview" class="card-template-preview above-lights-off"></div>' +
+
+			            '<div class="container-card-template-previews">' +
+				            '<div class="container-card-template-preview" style="margin-left: 13%;">' +
+						        '<span class="btn btn-success fileinput-button" style="margin-bottom: 8px;">' +
+					                '<span>Select Template</span>' +
+					                '<input type="file" id="templateFileBack" name="templateFile">' +
+					            '</span>' +
+						        '<div id="templatePreviewBack" class="card-template-preview above-lights-off">' +
+						        	'<div class="non-selectable"></div>' +
+						        '</div>' +
+					        '</div>' +
+
+					        '<div id="container-templateSwitchButton">' +
+						        '<button id="templateSwitchButton" class="btn btn-large btn-primary">' +
+						        	'<span class="glyphicon glyphicon-refresh"></span>' +
+						       ' </button>' +
+						    '</div>' +
+
+					        '<div class="container-card-template-preview">' +
+						        '<span class="btn btn-success fileinput-button" style="margin-bottom: 8px;">' +
+					                '<span>Select Template</span>' +
+					                '<input type="file" id="templateFileFront" name="templateFile">' +
+					            '</span>' +
+						        '<div id="templatePreviewFront" class="card-template-preview above-lights-off">' +
+						        	'<div class="non-selectable"></div>' +
+						        '</div>' +
+						    '</div>' +
+					    '</div>' +
 				    '</span>' +
 
 				    '<span class="span2"><h2>OR</h2></span>' +
@@ -266,7 +295,7 @@ function(
 			$(e.currentTarget).tooltip("hide");
 			return false;
 		},
-		onUploadSuccess: function(data)
+		onUploadSuccess: function(data, preview)
 		{
 			if(data.result.success)
 			{
@@ -276,11 +305,8 @@ function(
 
 				img.onload = function(e)
 				{
-					if(self.checkAndResizeImage(img, data.result.file))
-					{
-						self.setPreviewBackground(
-							self.cardTemplateData[self.cardTemplateSizes[0]], true);
-					}
+					if(self.checkAndResizeImage(img, data.result.file, preview))
+						self.setPreviewBackground(preview);
 
 					else
 						BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert);
@@ -313,10 +339,9 @@ function(
 				this.cardTemplateData[sizeStr] = url;
 			}
 		},
-		resizeImageToAllSizes: function(image, type)
+		resizeImageToAllSizes: function(image, type, preview)
 		{
-			// Clear the cardTemplateData array.
-			this.cardTemplateData.length = 0;
+			var templateData = {};
 
 			for(var i = 0; i < this.cardTemplateSizes.length; i++)
 			{
@@ -326,22 +351,27 @@ function(
 				// Don't resize if image's native resolution is the same as the target resolution.
 				if(image.width != size[0] || image.height != size[1])
 				{
-					this.cardTemplateData[sizeStr] = this.canvasHelper.resizeImage(
+					templateData[sizeStr] = this.canvasHelper.resizeImage(
 					image, size[0], size[1], type);
 				}
 
 				else
-					this.cardTemplateData[sizeStr] = image.src;
+					templateData[sizeStr] = image.src;
 			}
+
+			if(preview == this.selectors.templatePreviewBack)
+				this.cardTemplateDataBack = templateData;
+			else
+				this.cardTemplateDataFront = templateData;
 		},
-		checkAndResizeImage: function(image, file)
+		checkAndResizeImage: function(image, file, preview)
 		{
 			var imageAspectRatio = image.width / image.height;
 
 			// Check image against requirements.
 			if(this.fileReqs.check(file.size, file.type, imageAspectRatio))
 			{
-				this.resizeImageToAllSizes(image, file.type);
+				this.resizeImageToAllSizes(image, file.type, preview);
 				return true;
 			}
 
@@ -352,6 +382,9 @@ function(
 		},
 		initFeatures: function()
 		{
+			this.defaultPreview(this.selectors.templatePreviewBack);
+			this.defaultPreview(this.selectors.templatePreviewFront);
+
 			$(".alert").alert();
 			BootstrapAlertHelper.initAllAlerts(this.selectors.alertContainer, function(alertSelector)
 			{
@@ -362,11 +395,11 @@ function(
 		{
 			var self = this;
 
-			$(this.selectors.templateFile).fileupload(
+			$(this.selectors.templateFileBack).fileupload(
 			{
 				url: "php/choose-template-uploader.ajax.php",
 				dataType: "json",
-				dropZone: $(self.selectors.templatePreview),
+				dropZone: $(self.selectors.templatePreviewBack),
 				formData:
 				{
 					supportFileReader: supportFileReader,
@@ -374,7 +407,27 @@ function(
 				},
 				done: function(e, data)
 				{
-					self.onUploadSuccess(data);
+					self.onUploadSuccess(data, self.selectors.templatePreviewBack);
+				},
+				fail: function(e, data)
+				{
+					console.error(data.jqXHR.responseText);
+				}
+			});
+
+			$(this.selectors.templateFileFront).fileupload(
+			{
+				url: "php/choose-template-uploader.ajax.php",
+				dataType: "json",
+				dropZone: $(self.selectors.templatePreviewFront),
+				formData:
+				{
+					supportFileReader: supportFileReader,
+					fileReqs: JSON.stringify(self.fileReqs)
+				},
+				done: function(e, data)
+				{
+					self.onUploadSuccess(data, self.selectors.templatePreviewFront);
 				},
 				fail: function(e, data)
 				{
@@ -382,19 +435,42 @@ function(
 				}
 			});
 		},
-		setPreviewBackground: function(url)
+		setPreviewBackground: function(preview, blank)
 		{
-			if(url == null)
+			blank = (typeof blank === "boolean") ? blank : false;
+
+			if(blank)
 			{
-				$(this.selectors.templatePreview).css("background", "url(assets/img/template-preview.png) no-repeat");
+				this.defaultPreview(preview);
 				ObjectEvent.changeObjAttr(this.reqFields, "cardTemplate", false, this.checkReqFields);
 			}
 
 			else
 			{
-				$(this.selectors.templatePreview).css("background", "url(" + url + ") no-repeat");
-				ObjectEvent.changeObjAttr(this.reqFields, "cardTemplate", true, this.checkReqFields);
+				var url = "";
+
+				if(preview == this.selectors.templatePreviewBack)
+					url = this.cardTemplateDataBack[this.cardTemplateSizes[0]];
+				else
+					url = this.cardTemplateDataFront[this.cardTemplateSizes[0]];
+
+				$(preview + " > div").text("");
+				$(preview).css("background", "url(" + url + ") no-repeat");
+
+				if(
+					typeof this.cardTemplateDataFront[this.cardTemplateSizes[0]] !== "undefined" &&
+					typeof this.cardTemplateDataBack[this.cardTemplateSizes[0]] !== "undefined")
+				{
+					ObjectEvent.changeObjAttr(this.reqFields, "cardTemplate", true, this.checkReqFields);
+				}
 			}
+		},
+		defaultPreview: function(preview)
+		{
+			$(preview).css("background", "none");
+
+			var text = (preview == this.selectors.templatePreviewBack) ? "Back" : "Front";
+			$(preview + " > div").text(text);
 		},
 		attachEvents: function()
 		{
@@ -411,25 +487,62 @@ function(
 
 				$(document).on("dragenter", function(e)
 				{
+					// Don't trigger this event if we are hovering over any of the children of containerTemplatePreviews.
+					if(
+						$(e.target).hasClass("non-selectable") ||
+						$(e.target).hasClass("card-template-preview") ||
+						$(e.target).hasClass("container-card-template-previews"))
+					{
+						return;
+					}
+
 					$("#lights-off").show();
-					$(self.selectors.templatePreview).addClass("dropzone-hilite above-lights-off");
+					$(self.selectors.templatePreviewBack).addClass("dropzone-hilite");
+					$(self.selectors.templatePreviewFront).addClass("dropzone-hilite");
 				});
 
-				$(this.selectors.templatePreview).on("drop", function(e)
+
+				$(this.selectors.containerTemplatePreviews).on("dragover", function(e)
 				{
 					$("#lights-off").hide();
-					$(self.selectors.templatePreview).removeClass("dropzone-hilite above-lights-off");
+					$(self.selectors.templatePreviewBack).addClass("dropzone-hilite");
+					$(self.selectors.templatePreviewFront).addClass("dropzone-hilite");
 				});
 
-				$(this.selectors.templatePreview).on("dragover", function(e)
+				$(this.selectors.containerTemplatePreviews).on("drop", function(e)
 				{
-					$(self.selectors.templatePreview).addClass("dropzone-hilite above-lights-off");
+					$("#lights-off").hide();
+					$(self.selectors.templatePreviewBack).removeClass("dropzone-hilite");
+					$(self.selectors.templatePreviewFront).removeClass("dropzone-hilite");
 				});
 
 				$("#lights-off").on("drop dragleave", function(e)
 				{
 					$("#lights-off").hide();
-					$(self.selectors.templatePreview).removeClass("dropzone-hilite above-lights-off");
+					$(self.selectors.templatePreviewBack).removeClass("dropzone-hilite");
+					$(self.selectors.templatePreviewFront).removeClass("dropzone-hilite");
+				});
+
+
+				$(this.selectors.templateSwitchButton).on("click", function(e)
+				{
+					if(
+						typeof self.cardTemplateDataBack[self.cardTemplateSizes[0]] !== "undefined" &&
+						typeof self.cardTemplateDataFront[self.cardTemplateSizes[0]] !== "undefined")
+					{
+						for(var i = 0; i < self.cardTemplateSizes.length; i++)
+						{
+							var attr = self.cardTemplateSizes[i];
+							var cacheBack = self.cardTemplateDataBack[attr];
+							var cacheFront = self.cardTemplateDataFront[attr];
+
+							self.cardTemplateDataBack[attr] = cacheFront;
+							self.cardTemplateDataFront[attr] = cacheBack;
+						}
+
+						self.setPreviewBackground(self.selectors.templatePreviewBack);
+						self.setPreviewBackground(self.selectors.templatePreviewFront);
+					}
 				});
 			}
 		},
@@ -438,8 +551,9 @@ function(
 			if(Modernizr.draganddrop && !Globals.isLtIEVersion(10))
 			{
 				$(document).off("drop dragover dragenter");
-				$(this.selectors.templatePreview).off("drop dragover");
+				$(this.selectors.containerTemplatePreviews).off("drop dragover");
 				$("#lights-off").off("drop dragleave");
+				$(this.selectors.templateSwitchButton).off("click");
 			}
 		}
 	});

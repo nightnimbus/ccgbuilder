@@ -153,7 +153,7 @@ function(
 		onInputCcgName: function(e)
 		{
 			if(e.currentTarget.value.length == 0)
-				this.setDefaultInput();
+				GeneralHelper.setInputDefault();
 
 			this.handleErrorChecking();
 		},
