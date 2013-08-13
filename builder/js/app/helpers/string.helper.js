@@ -1,4 +1,4 @@
-define(["underscore"], function(_)
+define([], function()
 {
 	var StringHelper =
 	{
@@ -24,6 +24,28 @@ define(["underscore"], function(_)
 		replaceRange: function(str, vertex1, vertex2, replaceStr)
 		{
 			return str.substr(0, vertex1) + replaceStr + str.substr(vertex2);
+		},
+		getDataFromCSSUrl: function(background)
+		{
+			var data = background.split("url(");
+			data = data[1];
+			data = data.split(")");
+			data = data[0];
+			
+			return data;
+		},
+		getImageUriComponents: function(uri)
+		{
+			var data = uri.substr(uri.indexOf(',')+1);
+			var type = uri.substr(uri.indexOf(':')+1, (uri.indexOf(';')-1) - uri.indexOf(':'));
+
+			var components =
+			{
+				data: data,
+				type: type
+			};
+
+			return components;
 		}
 	};
 

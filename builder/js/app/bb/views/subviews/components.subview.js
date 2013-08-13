@@ -51,16 +51,13 @@ function(
 		initialize: function(options)
 		{
 			this.componentViewManager = new ModelViewManager();
+
+			this.editComponentDialog = new EditComponentDialog("#editComponentDialog");
+			this.deleteComponentYesNoDialog = new DeleteComponentYesNoDialog("#deleteComponentDialog");
 		},
 		attachEvents: function()
 		{
 			var self = this;
-
-			this.editComponentDialog = new EditComponentDialog("#editComponentDialog");
-			this.deleteComponentYesNoDialog = new DeleteComponentYesNoDialog("#deleteComponentDialog");
-
-			this.editComponentDialog.initialize(this.componentViewManager);
-			this.deleteComponentYesNoDialog.initialize(this.componentViewManager);
 
 			// Have to register my own events because
 			// backbone won't work with subview events for some reason.
@@ -106,13 +103,10 @@ function(
 		},
 		detachEvents: function()
 		{
-			$.off("mousedown", this.canvasHelper.canvasSelector);
-			$.off("dblclick", this.canvasHelper.canvasSelector);
-			$.off("mouseup", ViewManager.views.stepButtons.selectors.backButton);
-			$.off("mouseup", ViewManager.views.stepButtons.selectors.nextButton);
-			$.off("mouseup", "body");
-			$.off("mousemove", "body");
-			$.off("keydown", "body");
+			$(this.canvasHelper.canvasSelector).off("mousedown dblclick");
+			$(ViewManager.views.stepButtons.selectors.backButton).off("mouseup");
+			$(ViewManager.views.stepButtons.selectors.nextButton).off("mouseup");
+			$("body").off("mouseup mousemove keydown");
 		},
 		addNewComponent: function()
 		{

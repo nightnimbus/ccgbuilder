@@ -13,6 +13,8 @@ define(
 		"genlib/globals.class",
 		"genlib/filerequirements.class",
 		"bb/views/steps/step.view",
+		"other/dialogs/chooseTemplate.dialog",
+		"other/dialogs/sortType.enum",
 		"bootstrap",
 		"fileupload"
 	],
@@ -29,7 +31,9 @@ function(
 	ObjectEvent,
 	Globals,
 	FileRequirements,
-	Step)
+	Step,
+	ChooseTemplateDialog,
+	SortType)
 {
 	var ChooseTemplateStep = Step.extend(
 	{
@@ -44,6 +48,7 @@ function(
 		cardTemplateDataFront: {},
 		fileReqs: null,
 		ccgRoot: "",
+		chooseTemplateDialog: null,
 		events:
 		{
 			"mouseover #imgreqsTooltip": "onMouseOverImgReqsTooltip",
@@ -54,6 +59,7 @@ function(
 		{
 			this.canvasHelper = new CanvasHelper(document.getElementById("hiddenCanvas"));
 			this.cardTemplateSizes = new Array("150x200", "300x400");
+			this.chooseTemplateDialog = new ChooseTemplateDialog("#chooseTemplateDialog");
 			this.fileReqs = new FileRequirements();
 			this.fileReqs.maxSize = 500*1000;
 			this.fileReqs.aspectRatio = 3/4;
@@ -72,6 +78,7 @@ function(
 			this.selectors.templatePreviews = ".container-card-template-previews .card-template-preview";
 			this.selectors.containerTemplatePreviews = ".container-card-template-previews";
 			this.selectors.templateSwitchButton = "#templateSwitchButton";
+			this.selectors.selectPreBuiltButton = "#selectPreBuiltButton";
 			this.selectors.templateFileBack = "#templateFileBack";
 			this.selectors.templateFileFront = "#templateFileFront";
 			this.selectors.dragAndDropHint = ".container-drag-and-drop-hint";
@@ -171,14 +178,27 @@ function(
 				    '<span class="span2"><h2>OR</h2></span>' +
 
 				    '<span class="span5">' +
-				        '<h4 class="text-center">Click to Choose a Card Template:</h4>' +
-				        '<div id="cardTemplateSelectionFallback" class="card-template-selection text-left">' +
-				            '<span id="template01"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
-				            '<span id="template01"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
-				            '<span id="template01" class="no-margin-bottom"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
-				         	'<span id="template01" class="no-margin-bottom"><img src="../assets/img/card-templates/template01_150x200.jpg"></span>' +
-				        '</div>' +
+				        '<button id="selectPreBuiltButton" class="btn btn-fucking-huge" style="margin-top: 100px; width: 350px; height: 150px;">' +
+				        	'Select a Pre-Built Template' +
+				        '</button>' +
 				    '</span>' +
+				'</div>' +
+				'<div id="chooseTemplateDialog" title="Choose a Pre-Built Template">' +
+					'<div class="container-sortLinks text-center">' +
+						'<b>Sort By:</b>' +
+						'<a href="#" id="sortFrontLink" class="sort-link">Front</a>' +
+						'<a href="#" id="sortBackLink" class="sort-link">Back</a>' +
+					'</div>' +
+					'<div class="container-preBuiltTemplates">' +
+						'<div id="sortFront" style="display: none;">' +
+							'<div class="prebuilt-template front-template template01-front-150-200"></div>' +
+							'<div class="prebuilt-template front-template template01-front-150-200"></div>' +
+						'</div>' +
+						'<div id="sortBack" style="display: none;">' +
+							'<div class="prebuilt-template back-template template01-back-150-200"></div>' +
+							'<div class="prebuilt-template back-template template01-back-150-200"></div>' +
+						'</div>' +
+					'</div>' +
 				'</div>';
 
 				this.$el.html(html);
@@ -187,9 +207,12 @@ function(
 				// But it works if I have this here. Why? I have no fucking clue.
 				$("body").append(this.el);
 
-				this.attachEvents();
 				this.loadPolyfills();
 				this.initFeatures(false);
+
+				this.attachEvents();
+
+				this.chooseTemplateDialog.initialize();
 
 				onComplete();
 
@@ -203,11 +226,13 @@ function(
 		},
 		show: function()
 		{
-			
+			if(this.rendered)
+				this.attachEvents();
 		},
 		hide: function()
 		{
-			
+			if(this.rendered)
+				this.detachEvents();
 		},
 		remove: function()
 		{
@@ -364,6 +389,23 @@ function(
 			else
 				this.cardTemplateDataFront = templateData;
 		},
+		resizePreBuiltTemplateToAllSizes: function(data, type, sortType)
+		{
+			var self = this;
+			var img = new Image();
+			img.src = data;
+
+			img.onload = function(e)
+			{
+				var preview =
+				(sortType == SortType.Back)
+				? self.selectors.templatePreviewBack
+				: self.selectors.templatePreviewFront;
+
+				self.resizeImageToAllSizes(img, type, preview);
+				self.setPreviewBackground(preview);
+			}
+		},
 		checkAndResizeImage: function(image, file, preview)
 		{
 			var imageAspectRatio = image.width / image.height;
@@ -472,13 +514,59 @@ function(
 			var text = (preview == this.selectors.templatePreviewBack) ? "Back" : "Front";
 			$(preview + " > div").text(text);
 		},
+		enableDragNDropStyles: function()
+		{
+			$("#lights-off").show();
+			$(this.selectors.templatePreviewBack).addClass("dropzone-hilite");
+			$(this.selectors.templatePreviewFront).addClass("dropzone-hilite");
+		},
+		disableDragNDropStyles: function()
+		{
+			$("#lights-off").hide();
+			$(this.selectors.templatePreviewBack).removeClass("dropzone-hilite");
+			$(this.selectors.templatePreviewFront).removeClass("dropzone-hilite");
+		},
 		attachEvents: function()
 		{
 			var self = this;
 
+			$(this.selectors.templateSwitchButton).on("click", function(e)
+			{
+				if(
+					typeof self.cardTemplateDataBack[self.cardTemplateSizes[0]] !== "undefined" &&
+					typeof self.cardTemplateDataFront[self.cardTemplateSizes[0]] !== "undefined")
+				{
+					for(var i = 0; i < self.cardTemplateSizes.length; i++)
+					{
+						var attr = self.cardTemplateSizes[i];
+						var cacheBack = self.cardTemplateDataBack[attr];
+						var cacheFront = self.cardTemplateDataFront[attr];
+
+						self.cardTemplateDataBack[attr] = cacheFront;
+						self.cardTemplateDataFront[attr] = cacheBack;
+					}
+
+					self.setPreviewBackground(self.selectors.templatePreviewBack);
+					self.setPreviewBackground(self.selectors.templatePreviewFront);
+				}
+			});
+
+			$(this.selectors.selectPreBuiltButton).on("click", function(e)
+			{
+				self.chooseTemplateDialog.getDialog().dialog("open");
+			});
+
+
 			if(Modernizr.draganddrop && !Globals.isLtIEVersion(10))
 			{
 				$(this.selectors.dragAndDropHint).show();
+
+				$(document).on("mouseup", function(e)
+				{
+					$("#lights-off").hide();
+					$(self.selectors.templatePreviewBack).removeClass("dropzone-hilite");
+					$(self.selectors.templatePreviewFront).removeClass("dropzone-hilite");
+				});
 
 				$(document).on("drop dragover", function(e)
 				{
@@ -496,9 +584,7 @@ function(
 						return;
 					}
 
-					$("#lights-off").show();
-					$(self.selectors.templatePreviewBack).addClass("dropzone-hilite");
-					$(self.selectors.templatePreviewFront).addClass("dropzone-hilite");
+					self.enableDragNDropStyles();
 				});
 
 
@@ -511,49 +597,25 @@ function(
 
 				$(this.selectors.containerTemplatePreviews).on("drop", function(e)
 				{
-					$("#lights-off").hide();
-					$(self.selectors.templatePreviewBack).removeClass("dropzone-hilite");
-					$(self.selectors.templatePreviewFront).removeClass("dropzone-hilite");
+					self.disableDragNDropStyles();
 				});
 
 				$("#lights-off").on("drop dragleave", function(e)
 				{
-					$("#lights-off").hide();
-					$(self.selectors.templatePreviewBack).removeClass("dropzone-hilite");
-					$(self.selectors.templatePreviewFront).removeClass("dropzone-hilite");
-				});
-
-
-				$(this.selectors.templateSwitchButton).on("click", function(e)
-				{
-					if(
-						typeof self.cardTemplateDataBack[self.cardTemplateSizes[0]] !== "undefined" &&
-						typeof self.cardTemplateDataFront[self.cardTemplateSizes[0]] !== "undefined")
-					{
-						for(var i = 0; i < self.cardTemplateSizes.length; i++)
-						{
-							var attr = self.cardTemplateSizes[i];
-							var cacheBack = self.cardTemplateDataBack[attr];
-							var cacheFront = self.cardTemplateDataFront[attr];
-
-							self.cardTemplateDataBack[attr] = cacheFront;
-							self.cardTemplateDataFront[attr] = cacheBack;
-						}
-
-						self.setPreviewBackground(self.selectors.templatePreviewBack);
-						self.setPreviewBackground(self.selectors.templatePreviewFront);
-					}
+					self.disableDragNDropStyles();
 				});
 			}
 		},
 		detachEvents: function()
 		{
+			$(this.selectors.templateSwitchButton).off("click");
+			$(this.selectors.selectPreBuiltButton).off("click");
+
 			if(Modernizr.draganddrop && !Globals.isLtIEVersion(10))
 			{
-				$(document).off("drop dragover dragenter");
+				$(document).off("mouseup drop dragover dragenter");
 				$(this.selectors.containerTemplatePreviews).off("drop dragover");
 				$("#lights-off").off("drop dragleave");
-				$(this.selectors.templateSwitchButton).off("click");
 			}
 		}
 	});

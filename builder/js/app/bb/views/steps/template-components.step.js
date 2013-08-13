@@ -107,6 +107,11 @@ function(
 				this.canvasHelper = new CanvasHelper(document.getElementById(canvasSelector));
 				this.componentsSubView.canvasHelper = this.canvasHelper;
 
+				this.componentsSubView.attachEvents();
+
+				this.componentsSubView.editComponentDialog.initialize(this.componentsSubView.componentViewManager);
+				this.componentsSubView.deleteComponentYesNoDialog.initialize(this.componentsSubView.componentViewManager);
+
 				onComplete();
 				this.rendered = true;
 			}
@@ -136,17 +141,19 @@ function(
 		{
 			this.initTemplatePreview();
 
+			if(this.rendered)
+				this.componentsSubView.attachEvents();
+
 			if(!this.loaded)
 			{
 				this.loadPolyfills();
-				this.componentsSubView.attachEvents();
-
 				this.loaded = true;
 			}
 		},
 		hide: function()
 		{
-
+			if(this.rendered)
+				this.componentsSubView.detachEvents();
 		},
 		remove: function()
 		{
