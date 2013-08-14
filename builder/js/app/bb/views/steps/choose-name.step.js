@@ -1,19 +1,23 @@
 define([
 	"jquery",
 	"backbone",
+	"modernizr",
 	"managers/hbs.manager",
 	"managers/view.manager",
 	"helpers/general.helper",
 	"genlib/objectevent.class",
+	"genlib/globals.class",
 	"bb/views/steps/step.view"
 	],
 function(
 	$,
 	Backbone,
+	Modernizr,
 	HbsManager,
 	ViewManager,
 	GeneralHelper,
 	ObjectEvent,
+	Globals,
 	Step)
 {
 	var ChooseNameStep = Step.extend(
@@ -26,7 +30,8 @@ function(
 		stepTitle: "Choose a Name",
 		events:
 		{
-			"input #ccgName": "onInputCcgName"
+			"input #ccgName": "onInputCcgName",
+			"textchange #ccgName": "onInputCcgName"
 		},
 
 		initialize: function()
@@ -62,8 +67,9 @@ function(
 				'</div>';
 
 				this.$el.html(html);
-				onComplete();
+				this.loadPolyfills();
 
+				onComplete();
 				this.rendered = true;
 			}
 
@@ -83,6 +89,26 @@ function(
 		remove: function()
 		{
 
+		},
+		loadPolyfills: function()
+		{
+			Modernizr.load(
+			[
+				{
+					test: Modernizr.input.placeholder,
+					nope:
+					[
+						"../js/vendor/plugins/jquery/polyfills/placeholder/placeholder.min.js"
+					]
+				},
+				{
+					test: !Globals.isLtIEVersion(10),
+					nope:
+					[
+						"../js/vendor/plugins/jquery/polyfills/onInput/jquery.splendid.textchange.min.js"
+					]
+				}
+			]);
 		},
 		finalize: function(onSuccess, onError)
 		{

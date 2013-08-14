@@ -30,14 +30,13 @@
 
         <!-- Plugin CSS -->
         <link rel="stylesheet" href="../js/vendor/plugins/jquery/socialMedia/css/socialMedia.css">
+
+        <!-- Cannot load this through ajax so need to have it here. -->
+        <!--[if lt IE 9]>
+            <script src="../js/vendor/plugins/jquery/polyfills/flashcanvas/bin/flashcanvas.js"></script>
+        <![endif]-->
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
         <div class="container-fluid">
             <div class="container-header">
                 <div class="row-fluid">
@@ -81,7 +80,7 @@
                             </div>
                         </noscript>
 
-                        <!--[if lt IE 8]>
+                        <!--[if lt IE 9]>
                             <div class="not-supported" style="width: 50%; margin: 0 auto; margin-top: -50%;">
                                 You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> 
                                 or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> in order to use this app.
@@ -173,6 +172,15 @@
 
         <!-- Custom JS -->
         <script src="../js/general.js"></script>
+        
+        <!--[if lt IE 9]>
+            <script>
+                $(document).ready(function()
+                {
+                    $("#loading-templates").hide();
+                });
+            </script>
+        <![endif]-->
 
         <!-- RequireJS -->
         <script data-main="js/app.js" src="js/require.min.js"></script>
@@ -187,7 +195,6 @@
         <div style="display: none;">
             <canvas id="hiddenCanvas"></canvas>
         </div>
-
         <div id="lights-off"></div>
     </body>
 </html>

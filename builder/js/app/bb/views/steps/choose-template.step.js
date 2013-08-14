@@ -66,6 +66,7 @@ function(
 			this.fileReqs.types =
 			[
 				"image/jpeg",
+				"image/pjpeg", // For <= IE 8.
 				"image/png"
 			];
 
@@ -326,7 +327,6 @@ function(
 			{
 				var self = this;
 				var img = new Image();
-				img.src = data.result.imageData;
 
 				img.onload = function(e)
 				{
@@ -335,15 +335,17 @@ function(
 
 					else
 						BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert);
-					
-					return false;
+
+					// Prevent IE 6 memory leak.
+					img = null;
 				}
 
 				img.onerror = function(e)
 				{
 					BootstrapAlertHelper.showAlert(self.selectors.imgReqsAlert);
-					return false;
 				}
+
+				img.src = data.result.imageData;
 			}
 
 			else
@@ -364,7 +366,7 @@ function(
 				this.cardTemplateData[sizeStr] = url;
 			}
 		},
-		resizeImageToAllSizes: function(image, type, preview)
+		resizeImageToAllSizes: function(image, type, preview, ctx)
 		{
 			var templateData = {};
 
@@ -377,11 +379,17 @@ function(
 				if(image.width != size[0] || image.height != size[1])
 				{
 					templateData[sizeStr] = this.canvasHelper.resizeImage(
-					image, size[0], size[1], type);
+					image, size[0], size[1], type, ctx);
 				}
 
 				else
-					templateData[sizeStr] = image.src;
+				{
+					// Can't read image.src in IE 8.
+					if(this.canvasHelper.isFlashCanvasEnabled())
+						templateData[sizeStr] = $(image).attr("src");
+					else
+						templateData[sizeStr] = image.src;
+				}
 			}
 
 			if(preview == this.selectors.templatePreviewBack)
@@ -392,23 +400,31 @@ function(
 		resizePreBuiltTemplateToAllSizes: function(data, type, sortType)
 		{
 			var self = this;
+
+			var preview =
+			(sortType == SortType.Back)
+			? this.selectors.templatePreviewBack
+			: this.selectors.templatePreviewFront;
+
 			var img = new Image();
-			img.src = data;
-
-			img.onload = function(e)
+			img.onload = function()
 			{
-				var preview =
-				(sortType == SortType.Back)
-				? self.selectors.templatePreviewBack
-				: self.selectors.templatePreviewFront;
-
 				self.resizeImageToAllSizes(img, type, preview);
 				self.setPreviewBackground(preview);
-			}
+
+				// Prevent IE 6 memory leak.
+				img = null;
+			};
+
+			img.src = data;
 		},
 		checkAndResizeImage: function(image, file, preview)
 		{
 			var imageAspectRatio = image.width / image.height;
+
+			// This renders black pixels, but at least it renders something.
+			// canvas.toDataUrl() changes image/pjpeg to image/png, which won't work in IE 8.
+			//file.type = "image/jpeg";
 
 			// Check image against requirements.
 			if(this.fileReqs.check(file.size, file.type, imageAspectRatio))

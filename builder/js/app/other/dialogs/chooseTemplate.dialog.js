@@ -89,7 +89,7 @@ function(
 
 				$(this).addClass("prebuilt-template-selected");
 
-				var data = StringHelper.getDataFromCSSUrl($(this).css("background"));
+				var data = StringHelper.getDataFromCSSUrl($(this).css("background-image"));
 				var components = StringHelper.getImageUriComponents(data);
 
 				ViewManager.views.chooseTemplate.resizePreBuiltTemplateToAllSizes(data, components.type, self.sortType);

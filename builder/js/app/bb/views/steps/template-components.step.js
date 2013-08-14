@@ -112,6 +112,8 @@ function(
 				this.componentsSubView.editComponentDialog.initialize(this.componentsSubView.componentViewManager);
 				this.componentsSubView.deleteComponentYesNoDialog.initialize(this.componentsSubView.componentViewManager);
 
+				this.loadPolyfills();
+
 				onComplete();
 				this.rendered = true;
 			}
@@ -126,10 +128,10 @@ function(
 			var self = this;
 
 			this.canvasHelper.clear();
-
-			$(this.selectors.canvas).drawImage(
+			this.canvasHelper.getCanvas().drawImage(
 			{
 				source: ViewManager.views.chooseTemplate.cardTemplateDataFront["300x400"],
+				width: 300, height: 400,
 				fromCenter: false,
 				load: function()
 				{
@@ -162,7 +164,7 @@ function(
 		},
 		loadPolyfills: function()
 		{
-			this.canvasHelper.testFlashCanvas();
+			
 		},
 		finalize: function(onSuccess, onError)
 		{
@@ -232,7 +234,7 @@ function(
 
 			if(typeof data !== "undefined" && this.lastBgData != data)
 			{
-				this.renderCanvas(data);
+				this.renderCanvas();
 				this.lastBgData = data;
 			}
 		}

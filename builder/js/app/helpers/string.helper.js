@@ -1,4 +1,8 @@
-define([], function()
+define(
+	[
+		"genlib/globals.class"
+	],
+function(Globals)
 {
 	var StringHelper =
 	{
@@ -27,10 +31,17 @@ define([], function()
 		},
 		getDataFromCSSUrl: function(background)
 		{
+			// Must have for <= IE 9
+			background = background.replace("\"", "");
+
 			var data = background.split("url(");
 			data = data[1];
 			data = data.split(")");
-			data = data[0];
+
+			if(Globals.isLtIEVersion(10))
+				data = data[0].substr(0, data[0].length - 1);
+			else
+				data = data[0];
 			
 			return data;
 		},

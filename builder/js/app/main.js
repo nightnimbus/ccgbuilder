@@ -1,8 +1,17 @@
+$(function()
+{
+	// Hide the canvas quickly.
+	// Cannot have the canvas in a display: none;
+	// within the DOM from the get-go with FlashCanvas.
+	//$("#hiddenCanvas").hide();
+});
+
 define(
 	[
 		"jquery",
 		"managers/step.manager",
 		"managers/view.manager",
+		"helpers/canvas.helper",
 		"genlib/globals.class",
 		"bb/views/step-buttons.view",
 		"bb/views/steps/choose-name.step",
@@ -16,6 +25,7 @@ function(
 	$,
 	StepManager,
 	ViewManager,
+	CanvasHelper,
 	Globals,
 	StepButtonsView,
 	ChooseNameStep,
@@ -30,14 +40,8 @@ function(
 
 		Globals.initialize();
 
-		// Hide Loading Gif
-		$("#loading-templates").hide();
-
-
-		if(!Globals.isLtIEVersion(8))
+		if(!Globals.isLtIEVersion(9))
 		{
-			$("#loading-templates").show();
-
 			// Bootstrap and JQuery UI both define $.fn.button, so we always want to use JQuery UI's $.fn.button.
 			// Bootstrap always loads after JQuery UI, so this will always work.
 			if($.fn.button.noConflict)
@@ -66,11 +70,17 @@ function(
 
 
 			StepManager.start("#step-content");
-		}
+			loadGeneralPolyfills();
 
-		// Hide Loading Gif
-		$("#loading-templates").hide();
+			// Hide Loading Gif
+			$("#loading-templates").hide();
+		}
 
 		console.log("App initialized!");
 	});
 });
+
+function loadGeneralPolyfills()
+{
+
+}

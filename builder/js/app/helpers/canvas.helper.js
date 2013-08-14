@@ -2,7 +2,8 @@ define(
 	[
 		"underscore",
 		"modernizr",
-		"genlib/class.class"
+		"genlib/class.class",
+		"jcanvas"
 	],
 function(
 	_,
@@ -22,24 +23,18 @@ function(
 			}
 
 			else
-				this.canvas = this.createCanvas();
+				this.canvas = this.createCanvas(width, height);
+
+			this.initFlashCanvas(this.canvas);
 		},
-		testFlashCanvas: function()
+		initFlashCanvas: function(canvas)
 		{
-			var self = this;
-			
-			Modernizr.load(
-			[
-				{
-					test: Modernizr.canvas,
-					nope: ["../js/vendor/flashCanvas/bin/flashcanvas.min.js"],
-					complete: function()
-					{
-						if(typeof FlashCanvas !== "undefined")
-							FlashCanvas.initElement(self.canvas);
-					}
-				}
-			]);
+			if(this.isFlashCanvasEnabled())
+				FlashCanvas.initElement(this.canvas);
+		},
+		isFlashCanvasEnabled: function()
+		{
+			return (typeof FlashCanvas !== "undefined");
 		},
 		createCanvas: function(width, height, parent)
 		{
@@ -99,10 +94,18 @@ function(
 
 			return components;
 		},
-		clear: function()
+		clear: function(color)
 		{
 			var context = this.canvas.getContext("2d");
-			context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+			if(typeof color !== "undefined")
+			{
+				context.fillStyle = color;
+				context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+			}
+
+			else
+				context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		},
 		drawImage: function(src, x, y, width, height)
 		{
@@ -172,10 +175,10 @@ function(
 			context.fillStyle = fontColor;
 			context.fillText(text, x, y);
 		},
-		resizeImage: function(image, width, height, encoding)
+		resizeImage: function(image, width, height, encoding, ctx)
 		{
 			var data = null;
-			var context = this.canvas.getContext("2d");
+			var context = (typeof context === "undefined") ? this.canvas.getContext("2d") : ctx;
 			var cachedWidth = this.canvas.width;
 			var cachedHeight = this.canvas.height;
 
@@ -183,7 +186,6 @@ function(
 	        this.canvas.height = height;
 
 	        context.drawImage(image, 0, 0, width, height);
-
 	        data = this.canvas.toDataURL(encoding);
 	        this.clear();
 

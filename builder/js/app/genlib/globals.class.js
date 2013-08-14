@@ -12,6 +12,16 @@ define([], function()
 			this.USERAGENT = navigator.userAgent.toLowerCase();
 			this.IS_MOBILE_DEVICE = (/android|webos|iphone|ipad|ipod|blackberry/i.test(this.USERAGENT));
 		},
+		isIEVersion: function(version)
+		{
+			var classStrAboveVersion = ".lt-ie" + (version+1).toString();
+			var classStrBelowVersion = ".lt-ie" + version.toString();
+
+			if($("html").is(classStrAboveVersion) && !$("html").is(classStrBelowVersion))
+				return true;
+			else
+				return false;
+		},
 		isLtIEVersion: function(version)
 		{
 			var classStr = ".lt-ie" + version.toString();
