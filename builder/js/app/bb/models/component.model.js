@@ -21,7 +21,7 @@ function($, Backbone)
 			height: 100,
 			minWidth: 200,
 			minHeight: 100,
-			layer: 3
+			layer: 0
 		}
 	});
 

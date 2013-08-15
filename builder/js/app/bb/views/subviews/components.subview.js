@@ -30,7 +30,8 @@ function(
 	{
 		componentViewManager: null,
 		canvasHelper: null,
-		maxComponents: 10,
+		maxComponents: 8,
+		backgroundLayer: 7,
 		mouseCoords: {x: 0, y: 0},
 		selectedComponent: false,
 		isMouseDown: false,
@@ -108,12 +109,24 @@ function(
 			$(ViewManager.views.stepButtons.selectors.nextButton).off("mouseup");
 			$("body").off("mouseup mousemove keydown");
 		},
+		render: function()
+		{
+			this.componentViewManager.renderAll();
+		},
 		addNewComponent: function()
 		{
 			if(this.componentViewManager.count < this.maxComponents)
 			{
 				var self = this;
 				var name = "Component" + (this.componentViewManager.count + 1).toString();
+				var layer = this.maxComponents;
+
+				if(this.componentViewManager.count > 0)
+				{
+					layer = parseInt(this.componentViewManager.modelViewsArray[this.componentViewManager.count-1].model.get("layer")) + 1;
+					if(layer == this.backgroundLayer)
+						layer = this.backgroundLayer + 1;
+				}
 
 				this.componentViewManager.add(
 					new ComponentModelView(
@@ -126,13 +139,29 @@ function(
 							width: self.canvasHelper.canvas.width / 2,
 							minWidth: 30,
 							height: 30,
-							minHeight: 30
+							minHeight: 30,
+							layer: layer
 						})
 					})
 				);
 
 				this.componentViewManager.modelViewsArray[this.componentViewManager.count-1].render();
 			}
+		},
+		isLayer: function(layer)
+		{
+			var isLayer = false;
+
+			for(var i = 0; i < this.componentViewManager.count; i++)
+			{
+				if(layer == this.componentViewManager.modelViewsArray[i].model.get("layer"))
+				{
+					isLayer = true;
+					break;
+				}
+			}
+
+			return isLayer;
 		},
 		onMouseDownCanvas: function(e)
 		{
@@ -258,7 +287,7 @@ function(
 				// If e.which is any one of the arrow keys
 				if(e.which >= 37 && e.which <= 40)
 				{
-					var step = 2;
+					var step = 1;
 
 					e.preventDefault();
 
@@ -334,10 +363,6 @@ function(
 
 			this.editComponentDialog.component = component;
 			this.editComponentDialog.getDialog().dialog("open");
-		},
-		render: function()
-		{
-			this.componentViewManager.renderAll(null);
 		}
 	});
 

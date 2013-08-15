@@ -38,15 +38,9 @@ function(
 				this.count--;
 			}
 		},
-		renderAll: function(parent, orderBy, orderLowToHigh)
+		renderAll: function(parent)
 		{
 			parent = (typeof parent !== "undefined") ? parent : null;
-			orderBy = (typeof orderBy !== "undefined") ? orderBy : null;
-			orderLowToHigh = (typeof orderLowToHigh !== "undefined") ? orderLowToHigh : true;
-
-
-			var orderedModelViews = ArrayHelper.sortByKey(this.modelViewsArray, "zIndex");
-
 
 			for(var i = 0; i < this.modelViewsArray.length; i++)
 			{

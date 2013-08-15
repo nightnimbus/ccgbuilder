@@ -95,13 +95,6 @@ function(
 			Modernizr.load(
 			[
 				{
-					test: Modernizr.input.placeholder,
-					nope:
-					[
-						"../js/vendor/plugins/jquery/polyfills/placeholder/placeholder.min.js"
-					]
-				},
-				{
 					test: !Globals.isLtIEVersion(10),
 					nope:
 					[

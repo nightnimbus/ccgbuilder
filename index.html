@@ -143,12 +143,17 @@
         <!-- Plugins -->
         <script src="js/vendor/plugins/jquery/hoverIntent/js/hoverIntent.min.js"></script>
         
+        <!-- Polyfills -->
         <script>
             window.Modernizr.load(
             [
                 {
                     test: window.Modernizr.csstransitions,
                     nope: ["../js/vendor/plugins/jquery/socialMedia/js/socialMedia.js"]
+                },
+                {
+                    test: window.Modernizr.input.placeholder,
+                    nope: ["../js/vendor/plugins/jquery/polyfills/placeholder/placeholder.min.js"]
                 }
             ]);
         </script>

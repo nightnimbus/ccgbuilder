@@ -76,6 +76,7 @@ function(
 				'</div>' +
 				'<div id="editComponentDialog" title="Edit Component">' +
 					'<form>' +
+						'<div class="container-dialog-messages"></div>' +
 					 	'<fieldset>' +
 						    '<label for="name">Name</label>' +
 						    '<input type="text" name="name" maxlength="20" class="text ui-widget-content ui-corner-all" />' +
@@ -126,8 +127,6 @@ function(
 		renderCanvas: function()
 		{
 			var self = this;
-
-			this.canvasHelper.clear();
 			this.canvasHelper.getCanvas().drawImage(
 			{
 				source: ViewManager.views.chooseTemplate.cardTemplateDataFront["300x400"],

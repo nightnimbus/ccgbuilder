@@ -114,11 +114,19 @@ function(
 		{
 			// RECT
 			var fillColor = "";
+			var opacity = 1;
+			var bBehindBackground =
+			(this.model.get("layer") < ViewManager.views.templateComponents.componentsSubView.backgroundLayer)
+			? true
+			: false;
 
 			if(this.model.get("type") == "text")
 				fillColor = "#F00000";
 			else if(this.model.get("type") == "image")
 				fillColor = "#0A6800";
+
+			if(bBehindBackground)
+				opacity = 0.7;
 
 			if(this.model.get("selected"))
 			{
@@ -131,7 +139,8 @@ function(
 					fillStyle: fillColor,
 					strokeWidth: 1,
 					strokeStyle: "#FFF",
-					fromCenter: false
+					fromCenter: false,
+					opacity: opacity
 				});
 			}
 
@@ -144,12 +153,12 @@ function(
 					width: this.model.get("width"),
 					height: this.model.get("height"),
 					fillStyle: fillColor,
-					fromCenter: false
+					fromCenter: false,
+					opacity: opacity
 				});
 			}
 
 
-			// NAME
 			var fontSize = 10;
 
 			if(this.model.get("name").length > 15)
@@ -157,14 +166,28 @@ function(
 
 			var nameHeight = this.canvasHelper.getTextHeight(fontSize);
 
-			fontSize = fontSize.toString() + "pt";
-
+			// NAME TEXT
 			this.canvasHelper.drawText(
-				fontSize + " Consolas",
+				fontSize + "pt Consolas",
 				"white",
 				this.model.get("name"),
 				this.model.get("x") + this.model.get("width") / 2,
 				this.model.get("y") + this.model.get("height") / 2,
+				"center",
+				true);
+
+
+			fontSize = 8;
+			var layerWidth = this.canvasHelper.getTextWidth(this.model.get("layer").toString());
+			var layerHeight = this.canvasHelper.getTextHeight(fontSize);
+
+			// LAYER TEXT
+			this.canvasHelper.drawText(
+				fontSize + "pt Consolas",
+				"white",
+				this.model.get("layer").toString(),
+				(this.model.get("x") + this.model.get("width")) - layerWidth,
+				this.model.get("y") + layerHeight - 4,
 				"center",
 				true);
 
