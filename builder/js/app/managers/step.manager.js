@@ -10,6 +10,7 @@ function($, ASync)
 		steps: [],
 		currentStep: 0,
 		stepContentSelector: "",
+		stepGlobalSelector: "",
 		preRendered: false,
 
 		addStep: function(step)
@@ -17,9 +18,10 @@ function($, ASync)
 			if(typeof step !== "undefined")
 				this.steps.push(step);
 		},
-		start: function(stepContentEl)
+		start: function(stepGlobalEl, stepContentEl)
 		{
 			this.stepContentSelector = stepContentEl;
+			this.stepGlobalSelector = stepGlobalEl;
 			this.showStep(0);
 		},
 		next: function()
@@ -48,6 +50,12 @@ function($, ASync)
 
 				this.renderStep(stepIndex, function()
 				{
+					if(self.steps[stepIndex].requiredIndicator)
+					{
+						$(self.stepContentSelector).css("height", "80%");
+						$(self.stepGlobalSelector).fadeIn(300);
+					}
+
 					self.steps[stepIndex].checkReqFields(self.steps[stepIndex].reqFields);
 					self.steps[stepIndex].$el.css("display", "block");
 					self.steps[stepIndex].visible = true;
@@ -59,6 +67,9 @@ function($, ASync)
 		{
 			if(stepIndex >= 0 && stepIndex < this.steps.length && this.steps[stepIndex].rendered)
 			{
+				$(this.stepGlobalSelector).hide();
+				$(this.stepContentSelector).css("height", "90%");
+
 				this.steps[stepIndex].checkReqFields(this.steps[stepIndex].reqFields);
 				this.steps[stepIndex].$el.css("display", "none");
 				this.steps[stepIndex].visible = false;

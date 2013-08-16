@@ -153,15 +153,11 @@ function(
 				this.loadPolyfills();
 				this.loaded = true;
 			}
-
-			$("#step-content").css("height", "90%");
 		},
 		hide: function()
 		{
 			if(this.rendered)
 				this.componentsSubView.detachEvents();
-
-			$("#step-content").css("height", "80%");
 		},
 		remove: function()
 		{
