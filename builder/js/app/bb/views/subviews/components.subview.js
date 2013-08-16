@@ -4,6 +4,7 @@ define(
 		"backbone",
 		"genlib/position.enum",
 		"genlib/keys.enum",
+		"genlib/globals.class",
 		"managers/view.manager",
 		"managers/modelview.manager",
 		"helpers/math.helper",
@@ -17,6 +18,7 @@ function(
 	Backbone,
 	Position,
 	Keys,
+	Globals,
 	ViewManager,
 	ModelViewManager,
 	MathHelper,
@@ -245,22 +247,22 @@ function(
 		},
 		onMouseMove: function(e)
 		{
-			var mouseCoords = this.canvasHelper.getMouseCoords(e);
-			this.mouseCoords = mouseCoords;
+			if(!Globals.IS_MOBILE_DEVICE)
+				this.mouseCoords = this.canvasHelper.getMouseCoords(e);
 
 			if(this.selectedComponent)
 			{
 				if(!this.selectedComponent.model.get("scaling"))
 				{
 					this.mouseScaleBox = this.selectedComponent.scaleBoxManager.getScaleBoxByPoint(
-						mouseCoords.x, mouseCoords.y);
+						this.mouseCoords.x, this.mouseCoords.y);
 
 					this.selectedComponent.scaleBoxManager.updateCursor(this.mouseScaleBox);
 				}
 
 				else
 				{
-					this.selectedComponent.scaleBoxManager.scaleParent(mouseCoords.x, mouseCoords.y, this.mouseScaleBox.position);
+					this.selectedComponent.scaleBoxManager.scaleParent(this.mouseCoords.x, this.mouseCoords.y, this.mouseScaleBox.position);
 					ViewManager.views.templateComponents.renderCanvas();
 				}
 			}
@@ -273,7 +275,7 @@ function(
 				this.selectComponent(this.mouseDownComponent);
 
 				this.selectedComponent.translate(
-					mouseCoords.x, mouseCoords.y, this.mouseDisplacement);
+					this.mouseCoords.x, this.mouseCoords.y, this.mouseDisplacement);
 
 				ViewManager.views.templateComponents.renderCanvas();
 			}

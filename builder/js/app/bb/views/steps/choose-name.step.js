@@ -25,6 +25,7 @@ function(
 		tagName: "div",
 		finalized: false,
 		rendered: false,
+		requiredIndicator: false,
 		reqFields: {},
 		selectors: {},
 		stepTitle: "Choose a Name",
@@ -56,7 +57,7 @@ function(
 				var html = '' +
 				'<div class="main-content-header">' +
 				    '<div class="row">' +
-				        '<h1>Name Your CCG</h1>' +
+				        '<h2>Name Your CCG</h2>' +
 				    '</div>' +
 				'</div>' +
 

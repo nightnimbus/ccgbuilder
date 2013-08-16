@@ -64,11 +64,6 @@
 	margin-bottom: 0px;
 }
 
-.card-template-container
-{
-
-}
-
 .container-addComponent
 {
 	margin-bottom: 10px;
@@ -82,26 +77,22 @@
 input.chooseName
 {
 	margin: 0 auto;
-	margin-top: 12%;
-	font-size: 36px;
+	margin-top: 15.5%;
+	font-size: 30px;
 	line-height: 40px;
-	width: 80%;
+	width: 50%;
 	height: 50px;
 }
 
 .main-content
 {
 	padding-top: 0px;
-	height: 750px;
+	height: 650px;
 }
 
-.step-global
+.main-content-header
 {
-    background-color: yellow;
-    border-bottom: 1px solid black;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 .subinfo
@@ -126,13 +117,14 @@ input.chooseName
 
 .container-drag-and-drop-hint
 {
-	width: 50%;
+	width: 43.5%;
 	margin: 0 auto;
-	margin-bottom: 7px;
+	margin-top: 16px;
+	margin-bottom: 12px;
 	padding: 5px;
 	color: white;
 	border: 2px solid black;
-	font-size: 16px;
+	font-size: 14px;
 	background-color: rgb(128, 128, 128);
 }
 
@@ -177,6 +169,13 @@ input.chooseName
 .container-preBuiltTemplates .template
 {
 	border: 1px solid black;
+}
+
+.builder-tip
+{
+	margin: 0 auto;
+	width: 80%;
+	color: orange;
 }
 
 
@@ -229,16 +228,17 @@ input.chooseName
 #step-content
 {
 	width: 100%;
-
-	/*
-	+ 750px (main-content height)
-	- 80px (step-buttons height)
-	- 20px (main-content padding-bottom)
-	- 20px (main-content margin-bottom)
-	- 10px (just some padding) */
-	height: 620px;
-
+	height: 80%;
 	overflow: auto;
+}
+
+#step-global
+{
+    background-color: yellow;
+    border-bottom: 1px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 #step-buttons
@@ -301,10 +301,70 @@ input.chooseName
 	margin-top: 118px;
 }
 
+#container-imgreqsDropdown
+{
+	width: 43%;
+	background-color: yellow;
+	border: 1px solid black;
+	padding: 10px;
+	margin-top: 10px;
+	margin-left: 26.1%;
+	background-color: yellow;
+}
+
+#container-imgreqsDropdown > a
+{
+	font-size: 15px;
+}
+
+#imgreqsDropdownContent
+{
+	width: 43%;
+	background-color: yellow;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 10px;
+	margin-left: 26.1%;
+}
+
+#imgreqsDropdownContent > ul
+{
+	margin-bottom: 5px;
+}
+
+#imgreqsDropdownContent > ul > li
+{
+	font-size: 12px;
+	line-height: 1.4em;
+}
+
+#selectPreBuiltButton
+{
+	width: 80%;
+	height: 100px;
+	font-size: 23px;
+	margin-top: 25%;
+}
+
+#addComponentBtn
+{
+	width: 15%;
+	height: 10%;
+	font-size: 23px;
+}
+
 @media (max-width: 1024px) {
 	.main-content
 	{
 		margin-top: 0px;
 		margin-bottom: 0px;
+	}
+}
+
+@media (max-width: 767px) {
+	#selectPreBuiltButton
+	{
+		margin-top: 0%;
 	}
 }

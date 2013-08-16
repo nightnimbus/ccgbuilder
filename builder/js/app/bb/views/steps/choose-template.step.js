@@ -40,6 +40,7 @@ function(
 		tagName: "div",
 		finalized: false,
 		rendered: false,
+		requiredIndicator: true,
 		reqFields: {},
 		selectors: {},
 		stepTitle: "Choose a Template",
@@ -51,8 +52,7 @@ function(
 		chooseTemplateDialog: null,
 		events:
 		{
-			"mouseover #imgreqsTooltip": "onMouseOverImgReqsTooltip",
-			"mouseout #imgreqsTooltip": "onMouseOutImgReqsTooltip",
+			"click #imgreqsDropdown": "onClickImgReqs"
 		},
 
 		initialize: function()
@@ -83,6 +83,7 @@ function(
 			this.selectors.templateFileBack = "#templateFileBack";
 			this.selectors.templateFileFront = "#templateFileFront";
 			this.selectors.dragAndDropHint = ".container-drag-and-drop-hint";
+			this.selectors.imgreqsDropdownContent = "#imgreqsDropdownContent";
 
 			BootstrapAlertHelper.onShow = function() { $(".main-content-header").addClass("low-margin-bottom"); };
 			BootstrapAlertHelper.onHide = function() { $(".main-content-header").removeClass("low-margin-bottom"); };
@@ -104,7 +105,7 @@ function(
 				var html = '<link rel="stylesheet" href="../js/vendor/plugins/jquery/fileUpload/css/jquery.fileupload-ui.css">' +
 				'<div class="main-content-header">' +
 				    '<div class="row">' +
-				        '<h1>Choose a Card Template</h1>' +
+				        '<h2>Choose a Card Template</h2>' +
 				    '</div>' +
 				'</div>' +
 
@@ -126,25 +127,17 @@ function(
 				'<div class="row">' +
 				    '<span class="span5">' +
 				        '<h4 class="text-center">' +
-				            'Select Your Card Templates <strong class="required-star text-med">*</strong> ' +
-				            '<a id="imgreqsTooltip" class="tooltipLink" href="#"' +
-				                'data-toggle="tooltip"' +
-				                'data-placement="right"' +
-				                'data-html="true"' +
-				                'title="' +
-				                '<h4>Image Requirements:</h4>' +
-				                '<ul>' +
-				                    '<li>JPEG,PNG</li>' +
-				                    '<li>< 500 KB</li>' +
-				                    '<li>3:4 aspect ratio</li>' +
-				                '</ul>' +
-				                '">(?)' +
-				            '</a>' +
-				            ':' +
-
+				            'Select Your Card Templates <strong class="required-star text-med">*</strong>:' +
 				        '</h4>' +
-				        '<div class="container-drag-and-drop-hint" style="display: none;">' +
-			            	'You can also <b>drag and drop</b> templates from your desktop.' +
+				        '<div id="container-imgreqsDropdown">' +
+				        	'<a id="imgreqsDropdown" href="#">Image Requirements</a>' +
+				        '</div>' +
+				        '<div id="imgreqsDropdownContent" style="display: none;">' +
+			                '<ul>' +
+			                    '<li>JPEG,PNG</li>' +
+			                    '<li>< 500 KB</li>' +
+			                    '<li>3:4 aspect ratio</li>' +
+			                '</ul>' +
 			            '</div>' +
 
 			            '<div class="container-card-template-previews">' +
@@ -174,12 +167,16 @@ function(
 						        '</div>' +
 						    '</div>' +
 					    '</div>' +
+
+					    '<div class="tip builder-tip" style="margin-top: 5px;">' +
+			            	'Tip: You can also <i>drag and drop</i> templates from your desktop.' +
+			            '</div>' +
 				    '</span>' +
 
-				    '<span class="span2"><h2>OR</h2></span>' +
+				    '<span class="span2"><h3>OR</h3></span>' +
 
 				    '<span class="span5">' +
-				        '<button id="selectPreBuiltButton" class="btn btn-fucking-huge" style="margin-top: 100px; width: 350px; height: 150px;">' +
+				        '<button id="selectPreBuiltButton" class="btn">' +
 				        	'Select a Pre-Built Template' +
 				        '</button>' +
 				    '</span>' +
@@ -350,6 +347,15 @@ function(
 
 			else
 				BootstrapAlertHelper.showAlert(this.selectors.imgReqsAlert);
+		},
+		onClickImgReqs: function(e)
+		{
+			this.onPreventDefault(e);
+
+			if($(this.selectors.imgreqsDropdownContent).css("display") == "none")
+				$(this.selectors.imgreqsDropdownContent).slideDown(300);
+			else
+				$(this.selectors.imgreqsDropdownContent).slideUp(300);
 		},
 		getAllUrlSizes: function(url)
 		{

@@ -6,6 +6,7 @@ define(
 		"managers/step.manager",
 		"managers/view.manager",
 		"helpers/canvas.helper",
+		"genlib/globals.class",
 		"genlib/objectevent.class",
 		"bb/views/steps/step.view",
 		"jcanvas"
@@ -17,6 +18,7 @@ function(
 	StepManager,
 	ViewManager,
 	CanvasHelper,
+	Globals,
 	ObjectEvent,
 	Step)
 {
@@ -25,6 +27,7 @@ function(
 		tagName: "div",
 		finalized: false,
 		rendered: false,
+		requiredIndicator: false,
 		reqFields: {},
 		selectors: {},
 		stepTitle: "Template Components",
@@ -59,14 +62,14 @@ function(
 				var html = '' +
 				'<div class="main-content-header">' +
 				    '<div class="row">' +
-				        '<h1>Assign Template Components</h1>' +
+				        '<h2>Assign Template Components</h2>' +
 				    '</div>' +
 				'</div>' +
 
 				'<div class="row">' +
 				    '<span class="span12">' +
 				    	'<div class="container-addComponent">' +
-				    		'<button id="addComponentBtn" class="btn btn-large">Add Component</button>' +
+				    		'<button id="addComponentBtn" class="btn">Add Component</button>' +
 				    	'</div>' +
 				    	
 				    	'<div>' +
@@ -135,7 +138,7 @@ function(
 				load: function()
 				{
 					self.componentsSubView.render();
-				}
+ 				}
 			});
 		},
 		show: function()
@@ -150,11 +153,15 @@ function(
 				this.loadPolyfills();
 				this.loaded = true;
 			}
+
+			$("#step-content").css("height", "90%");
 		},
 		hide: function()
 		{
 			if(this.rendered)
 				this.componentsSubView.detachEvents();
+
+			$("#step-content").css("height", "80%");
 		},
 		remove: function()
 		{
