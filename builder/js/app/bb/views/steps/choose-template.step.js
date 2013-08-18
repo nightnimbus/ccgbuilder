@@ -40,15 +40,15 @@ function(
 		tagName: "div",
 		finalized: false,
 		rendered: false,
-		requiredIndicator: true,
+		requiredIndicator: false,
 		reqFields: {},
 		selectors: {},
-		stepTitle: "Choose a Template",
+		finalizeId: "chooseTemplateFinalize",
+		title: "Choose a Template",
 		cardTemplateSizes: [],
 		cardTemplateDataBack: {},
 		cardTemplateDataFront: {},
 		fileReqs: null,
-		ccgRoot: "",
 		chooseTemplateDialog: null,
 		events:
 		{
@@ -127,7 +127,7 @@ function(
 				'<div class="row">' +
 				    '<span class="span5">' +
 				        '<h4 class="text-center">' +
-				            'Select Your Card Templates <strong class="required-star text-med">*</strong>:' +
+				            'Select Your Card Templates:' +
 				        '</h4>' +
 				        '<div id="container-imgreqsDropdown">' +
 				        	'<a id="imgreqsDropdown" href="#">Image Requirements</a>' +
@@ -250,63 +250,6 @@ function(
 
 			else
 				self.registerUploadButtons(true);
-		},
-		finalize: function(onSuccess, onError)
-		{
-			var self = this;
-
-			$.ajax(
-			{
-				url: "php/choose-template.finalize.ajax.php",
-				method: "POST",
-				dataType: "json",
-				timeout: 5000,
-				data:
-				{
-					templateSizes: self.cardTemplateSizes,
-					templateImages: self.cardTemplateData
-				}
-			})
-			.done(function(data)
-			{
-				self.ccgRoot = data.ccgRoot;
-
-				if(data.success)
-				{
-					self.finalized = true;
-					onSuccess();
-				}
-
-				else
-					onError(data.msg);
-			})
-			.fail(function()
-			{
-				onError("Ajax request failed.");
-			});
-		},
-		deFinalize: function(onSuccess, onError)
-		{
-			var self = this;
-			
-			$.ajax(
-			{
-				url: "php/choose-template.definalize.ajax.php",
-				method: "POST",
-				timeout: 5000,
-				data:
-				{
-					ccgRoot: self.ccgRoot
-				}
-			})
-			.done(function()
-			{
-				onSuccess();
-			})
-			.fail(function()
-			{
-				onError("Ajax request failed.");
-			});
 		},
 		onMouseOverImgReqsTooltip: function(e)
 		{

@@ -5,6 +5,7 @@ define(
 		"genlib/position.enum",
 		"genlib/keys.enum",
 		"genlib/globals.class",
+		"genlib/objectevent.class",
 		"managers/view.manager",
 		"managers/modelview.manager",
 		"helpers/math.helper",
@@ -19,6 +20,7 @@ function(
 	Position,
 	Keys,
 	Globals,
+	ObjectEvent,
 	ViewManager,
 	ModelViewManager,
 	MathHelper,
@@ -148,6 +150,14 @@ function(
 				);
 
 				this.componentViewManager.modelViewsArray[this.componentViewManager.count-1].render();
+
+				if(this.componentViewManager.count > 0)
+				{
+					ObjectEvent.changeObjAttr(
+						ViewManager.views.templateComponents.reqFields,
+						"hasComponents", true,
+						ViewManager.views.templateComponents.checkReqFields);
+				}
 			}
 		},
 		isLayer: function(layer)

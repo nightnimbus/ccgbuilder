@@ -16,7 +16,8 @@ function(
 		loaded: false,
 		reqFields: {},
 		selectors: {},
-		stepTitle: "Template Components",
+		finalizeId: "stepFinalize",
+		title: "Step",
 
 		checkReqFields: function(context)
 		{

@@ -5,20 +5,17 @@ define([], function()
 		setInputDefault: function(selector)
 		{
 			$(selector).addClass("input-default");
-			$(selector).removeClass("input-success");
-			$(selector).removeClass("input-fail");
+			$(selector).removeClass("input-success input-fail");
 		},
 		setInputSuccess: function(selector)
 		{
-			$(selector).removeClass("input-default");
 			$(selector).addClass("input-success");
-			$(selector).removeClass("input-fail");
+			$(selector).removeClass("input-default input-fail");
 		},
 		setInputFail: function(selector)
 		{
-			$(selector).removeClass("input-default");
-			$(selector).removeClass("input-success");
 			$(selector).addClass("input-fail");
+			$(selector).removeClass("input-default input-success");
 		}
 	}
 

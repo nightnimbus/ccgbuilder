@@ -126,7 +126,7 @@ function(
 				fillColor = "#0A6800";
 
 			if(bBehindBackground)
-				opacity = 0.7;
+				opacity = 0.6;
 
 			if(this.model.get("selected"))
 			{

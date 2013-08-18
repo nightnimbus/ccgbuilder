@@ -9,6 +9,7 @@ define(
 		"genlib/globals.class",
 		"genlib/objectevent.class",
 		"bb/views/steps/step.view",
+		"bb/models/component-type.enum",
 		"jcanvas"
 	],
 function(
@@ -20,7 +21,8 @@ function(
 	CanvasHelper,
 	Globals,
 	ObjectEvent,
-	Step)
+	Step,
+	ComponentType)
 {
 	var TemplateComponentsStep = Step.extend(
 	{
@@ -30,7 +32,8 @@ function(
 		requiredIndicator: false,
 		reqFields: {},
 		selectors: {},
-		stepTitle: "Template Components",
+		finalizeId: "templateComponentsFinalize",
+		title: "Template Components",
 		lastBgData: "",
 		canvasHelper: null,
 		componentsSubView: null,
@@ -167,54 +170,6 @@ function(
 		loadPolyfills: function()
 		{
 			
-		},
-		finalize: function(onSuccess, onError)
-		{
-			var self = this;
-
-			/*$.ajax(
-			{
-				url: "php/step.finalize.ajax.php",
-				method: "POST",
-				dataType: "json",
-				timeout: 5000,
-				data:
-				{
-					
-				}
-			})
-			.done(function(data)
-			{
-				onSuccess();
-			})
-			.fail(function()
-			{
-				onError("Ajax request failed.");
-			});*/
-		},
-		deFinalize: function()
-		{
-			var self = this;
-
-			/*$.ajax(
-			{
-				url: "php/step.definalize.ajax.php",
-				method: "POST",
-				dataType: "json",
-				timeout: 5000,
-				data:
-				{
-					
-				}
-			})
-			.done(function(data)
-			{
-				onSuccess();
-			})
-			.fail(function()
-			{
-				onError("Ajax request failed.");
-			});*/
 		},
 		onPreventDefault: function(e)
 		{

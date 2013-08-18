@@ -1,10 +1,12 @@
 define(
 	[
 		"managers/view.manager",
+		"genlib/objectevent.class",
 		"other/dialogs/dialog.class"
 	],
 function(
 	ViewManager,
+	ObjectEvent,
 	Dialog)
 {
 	var DeleteComponentYesNoDialog = Dialog.extend(
@@ -27,7 +29,17 @@ function(
 					"Yes": function()
 					{
 						if(typeof self.component !== "undefined" && self.component != null)
+						{
 							componentViewManager.remove(self.component.model.cid);
+
+							if(componentViewManager.count == 0)
+							{
+								ObjectEvent.changeObjAttr(
+									ViewManager.views.templateComponents.reqFields,
+									"hasComponents", false,
+									ViewManager.views.templateComponents.checkReqFields);
+							}
+						}
 
 						$(this).dialog("close");
 					},

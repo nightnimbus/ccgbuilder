@@ -26,9 +26,11 @@ function(
 		finalized: false,
 		rendered: false,
 		requiredIndicator: false,
+		defaultValidatorString: "",
 		reqFields: {},
 		selectors: {},
-		stepTitle: "Choose a Name",
+		finalizeId: "chooseNameFinalize",
+		title: "Choose a Name",
 		events:
 		{
 			"input #ccgName": "onInputCcgName",
@@ -37,9 +39,12 @@ function(
 
 		initialize: function()
 		{
+			this.defaultValidatorString = "Please type your new CCG's name.";
+
 			this.reqFields.ccgName = false;
 
 			this.selectors.ccgName = "#ccgName";
+			this.selectors.ccgNameValidator = "#ccgNameValidator";
 		},
 		checkReqFields: function(context)
 		{
@@ -63,7 +68,13 @@ function(
 
 				'<div class="row">' +
 				    '<span class="span12">' +
-				        '<input id="ccgName" class="chooseName text-center" type="text" placeholder="Choose a Name...">' +
+				    	'<div style="margin-top: 12%;">' +
+					    	'<div id="ccgNameValidator" class="validator validator-default" style="margin-bottom: 20px;">' +
+					    		this.defaultValidatorString +
+					    	'</div>' +
+
+					    	'<input id="ccgName" class="chooseName text-center" type="text" placeholder="Choose a Name...">' +
+				    	'</div>' +
 				    '</span>' +
 				'</div>';
 
@@ -104,63 +115,6 @@ function(
 				}
 			]);
 		},
-		finalize: function(onSuccess, onError)
-		{
-			var self = this;
-
-			$.ajax(
-			{
-				url: "php/choose-name.finalize.ajax.php",
-				method: "POST",
-				dataType: "json",
-				timeout: 5000,
-				data:
-				{
-					ccgName: $(self.selectors.ccgName).val()
-				}
-			})
-			.done(function(data)
-			{
-				if(data.success)
-				{
-					self.finalized = true;
-					onSuccess();
-				}
-
-				else
-					onError(data.msg);
-			})
-			.fail(function()
-			{
-				onError("Ajax request failed.");
-			});
-		},
-		deFinalize: function(onSuccess, onError)
-		{
-			if(this.finalized)
-			{
-				var self = this;
-
-				$.ajax(
-				{
-					url: "php/choose-name.definalize.ajax.php",
-					method: "POST",
-					timeout: 5000,
-					data:
-					{
-						ccgName: $(self.selectors.ccgName).val()
-					}
-				})
-				.done(function()
-				{
-					onSuccess();
-				})
-				.fail(function()
-				{
-					onError("Ajax request failed.");
-				});
-			}
-		},
 		onPreventDefault: function(e)
 		{
 			e = e.originalEvent || e;
@@ -173,7 +127,7 @@ function(
 		onInputCcgName: function(e)
 		{
 			if(e.currentTarget.value.length == 0)
-				GeneralHelper.setInputDefault();
+				this.setValidationDefault(this.defaultValidatorString);
 
 			this.handleErrorChecking();
 		},
@@ -204,35 +158,54 @@ function(
 				{
 					if(data.success)
 					{
-						GeneralHelper.setInputSuccess(self.selectors.ccgName);
+						self.setValidationSuccess("Hurray! Your name is valid and not in use!!!11 ;) <3");
 						ObjectEvent.changeObjAttr(self.reqFields, "ccgName", true, self.checkReqFields);
 					}
 
 					else
 					{
-						console.log(data.msg);
-						GeneralHelper.setInputFail(self.selectors.ccgName);
+						self.setValidationFail(data.msg);
 					}
 				})
 				.fail(function()
 				{
-					console.log("Oops! We can't check if your name is valid at this time. The database may be down. Please try again later. Sorry!");
+					self.setValidationFail("Oops! We can't check if your name is valid at this time. The database may be down. Please try again later. Sorry!");
 				});
 			}
 
 			else if(value.length == 0)
-			{
-				GeneralHelper.setInputDefault(this.selectors.ccgName);
 				ObjectEvent.changeObjAttr(this.reqFields, "ccgName", false, this.checkReqFields);
-			}
 
 			else
 			{
-				console.log("The name of your CCG must be at least <b>4</b> characters long, " +
+				self.setValidationFail("The name must be at least <b>4</b> characters long, " +
 				"and no more than <b>20</b> characters long.");
-				GeneralHelper.setInputFail(this.selectors.ccgName);
 				ObjectEvent.changeObjAttr(this.reqFields, "ccgName", false, this.checkReqFields);
 			}
+		},
+		setValidationDefault: function(msg)
+		{
+			$(this.selectors.ccgNameValidator).addClass("validator-default");
+			$(this.selectors.ccgNameValidator).removeClass("validator-success validator-fail");
+			$(this.selectors.ccgNameValidator).html(msg);
+
+			GeneralHelper.setInputDefault(this.selectors.ccgName);
+		},
+		setValidationSuccess: function(msg)
+		{
+			$(this.selectors.ccgNameValidator).addClass("validator-success");
+			$(this.selectors.ccgNameValidator).removeClass("validator-default validator-fail");
+			$(this.selectors.ccgNameValidator).html(msg);
+
+			GeneralHelper.setInputSuccess(this.selectors.ccgName);
+		},
+		setValidationFail: function(msg)
+		{
+			$(this.selectors.ccgNameValidator).addClass("validator-fail");
+			$(this.selectors.ccgNameValidator).removeClass("validator-default validator-success");
+			$(this.selectors.ccgNameValidator).html(msg);
+
+			GeneralHelper.setInputFail(this.selectors.ccgName);
 		}
 	});
 

@@ -124,12 +124,12 @@ function($, ASync)
 
 				step.finalize(function()
 				{
-					onFinalizedStep(step.stepTitle);
+					onFinalizedStep(step);
 					loop.next();
 				},
 				function(msg)
 				{
-					onError(step.stepTitle, msg);
+					onError(step, msg);
 
 					// Definalizing the step that failed as well
 					// as the finalized steps just to be on the safe side

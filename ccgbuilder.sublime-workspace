@@ -4,6 +4,78 @@
 		"selected_items":
 		[
 			[
+				"ccgN",
+				"ccgNameValidator"
+			],
+			[
+				"setVali",
+				"setValidationDefault"
+			],
+			[
+				"setValidati",
+				"setValidationSuccess"
+			],
+			[
+				"comp",
+				"componentsArray"
+			],
+			[
+				"compo",
+				"componentsSubView"
+			],
+			[
+				"cardTe",
+				"cardTemplateDataFront"
+			],
+			[
+				"com",
+				"componentViewManager"
+			],
+			[
+				"step",
+				"stepContentSelector"
+			],
+			[
+				"stepG",
+				"stepGlobalSelector"
+			],
+			[
+				"imgreqsD",
+				"imgreqsDropdownContent"
+			],
+			[
+				"imgreqs",
+				"imgreqsDropdownContent"
+			],
+			[
+				"ste",
+				"stepContentSelector"
+			],
+			[
+				"stepGl",
+				"stepGlobalSelector"
+			],
+			[
+				"stepGlob",
+				"stepGlobalSelector"
+			],
+			[
+				"stepGlo",
+				"stepGlobalEl"
+			],
+			[
+				"lay",
+				"layerInput"
+			],
+			[
+				"is",
+				"isFlashCanvasEnabled"
+			],
+			[
+				"canvas",
+				"canvasHelper"
+			],
+			[
 				"cardTemplateda",
 				"cardTemplateDataBack"
 			],
@@ -42,10 +114,6 @@
 			[
 				"cardTempl",
 				"cardTemplateDataFront"
-			],
-			[
-				"cardTe",
-				"cardTemplateSizes"
 			],
 			[
 				"drop",
@@ -140,10 +208,6 @@
 				"selectedComponent"
 			],
 			[
-				"com",
-				"componentViewManager"
-			],
-			[
 				"scaleBox",
 				"scaleBoxManager"
 			],
@@ -213,10 +277,6 @@
 			],
 			[
 				"compone",
-				"componentViewManager"
-			],
-			[
-				"compo",
 				"componentViewManager"
 			],
 			[
@@ -335,7 +395,7 @@
 			"file": "builder/index.html",
 			"settings":
 			{
-				"buffer_size": 8672,
+				"buffer_size": 9369,
 				"line_ending": "Windows"
 			}
 		},
@@ -343,15 +403,7 @@
 			"file": "builder/js/app/main.js",
 			"settings":
 			{
-				"buffer_size": 2328,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "builder/css/main.css",
-			"settings":
-			{
-				"buffer_size": 45736,
+				"buffer_size": 3040,
 				"line_ending": "Windows"
 			}
 		},
@@ -359,23 +411,39 @@
 			"file": "css/libs/helper.lib.css",
 			"settings":
 			{
-				"buffer_size": 2749,
+				"buffer_size": 3269,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "builder/js/app/bb/views/steps/template-components.step.js",
+			"file": "builder/css/main.css",
 			"settings":
 			{
-				"buffer_size": 5339,
+				"buffer_size": 21383,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "builder/js/app/bb/views/subviews/components.subview.js",
+			"file": "builder/js/app/bb/views/steps/finalize.step.js",
 			"settings":
 			{
-				"buffer_size": 8668,
+				"buffer_size": 1001,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "builder/js/app/bb/views/steps/choose-name.step.js",
+			"settings":
+			{
+				"buffer_size": 5847,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "builder/js/app/helpers/general.helper.js",
+			"settings":
+			{
+				"buffer_size": 509,
 				"line_ending": "Windows"
 			}
 		},
@@ -383,55 +451,23 @@
 			"file": "builder/js/app/bb/views/steps/choose-template.step.js",
 			"settings":
 			{
-				"buffer_size": 17847,
+				"buffer_size": 18139,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "builder/js/app/helpers/canvas.helper.js",
+			"file": "builder/js/app/bb/views/steps/template-components.step.js",
 			"settings":
 			{
-				"buffer_size": 5561,
+				"buffer_size": 6312,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "builder/js/app/other/dialogs/chooseTemplate.dialog.js",
+			"file": "builder/js/app/bb/models/component.model.js",
 			"settings":
 			{
-				"buffer_size": 2629,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "builder/js/app/helpers/string.helper.js",
-			"settings":
-			{
-				"buffer_size": 1469,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "builder/js/app/other/dialogs/editComponent.dialog.js",
-			"settings":
-			{
-				"buffer_size": 1499,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "builder/js/app/other/dialogs/dialog.class.js",
-			"settings":
-			{
-				"buffer_size": 346,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "builder/php/choose-template-uploader.ajax.php",
-			"settings":
-			{
-				"buffer_size": 1286,
+				"buffer_size": 371,
 				"line_ending": "Windows"
 			}
 		}
@@ -465,14 +501,49 @@
 	},
 	"file_history":
 	[
+		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/general.helper.js",
+		"/C/wamp/www/test/main.css",
+		"/C/wamp/www/test/main.js",
+		"/C/wamp/www/test/index.html",
+		"/C/wamp/www/ccgbuilder/builder/php/template-components.finalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/php/template-components.definalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/js/app/managers/step.manager.js",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-name.definalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-template.definalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/models/component-type.enum.js",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-template.finalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-name.finalize.ajax.php",
+		"/C/wamp/www/ccgbuilder/timer/index.html",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/subviews/components.subview.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/component.modelview.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/models/component.model.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/editComponent.dialog.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/canvas.helper.js",
+		"/C/wamp/www/test/main.scss",
+		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/deleteComponentYesNo.dialog.js",
+		"/C/wamp/www/ccgbuilder/css/bootstrap-responsive.css",
+		"/C/wamp/www/ccgbuilder/css/main.css",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/step.view.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-name.step.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/step-buttons.view.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/managers/modelview.manager.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/chooseTemplate.dialog.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/array.helper.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/dialog.class.js",
+		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/string.helper.js",
+		"/C/wamp/www/ccgbuilder/index.html",
+		"/C/wamp/www/ccgbuilder/builder/php/choose-template-uploader.ajax.php",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/flashcanvas/bin/proxy.php",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/flashcanvas/bin/save.php",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/flashcanvas/bin/canvas2png.js",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/flashcanvas/bin/FlashCanvas.as",
+		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/flashcanvas/bin/flashcanvas.min.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/excanvas/excanvas.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/excanvas/examples/example1.html",
 		"/C/wamp/www/ccgbuilder/js/vendor/flashCanvas/bin/flashcanvas.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-name.step.js",
 		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.025/flashcanvas.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/flashCanvas/bin/flashcanvas.min.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/main.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/general.helper.js",
 		"/C/wamp/www/ccgbuilder/builder/php/choose-name.ajax.php",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/globals.class.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/onInput/jquery.splendid.textchange.min.js",
@@ -487,15 +558,10 @@
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/placeholder/placeholder_polyfill.jquery.min.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/polyfills/placeholder_polyfill.jquery.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/sortType.enum.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/editComponent.dialog.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/deleteComponentYesNo.dialog.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/template-components.step.js",
-		"/C/wamp/www/ccgbuilder/timer/index.html",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/step-buttons.view.js",
 		"/C/wamp/www/ccgbuilder/css/bootstrap-glyphicons.css",
 		"/C/wamp/www/ccgbuilder/php/pdo_connect.php",
 		"/C/wamp/www/.htaccess",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/step.view.js",
 		"/C/wamp/www/ccgbuilder/builder/css/main.css",
 		"/C/wamp/www/ccgbuilder/css/libs/helper.lib.css",
 		"/C/wamp/www/teach night how to walk/index.html",
@@ -505,10 +571,6 @@
 		"/C/wamp/www/ccgbuilder/php/libs/genlib/globals.class.php",
 		"/C/wamp/www/ccgbuilder/builder/index.html",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-template.step.js",
-		"/C/wamp/www/ccgbuilder/builder/php/choose-template-uploader.ajax.php",
-		"/C/wamp/www/ccgbuilder/builder/js/app/managers/step.manager.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/component.modelview.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/subviews/components.subview.js",
 		"/C/wamp/www/ccgbuilder/tmp/.htaccess",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-template-fallback.step.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/filerequirements.class.js",
@@ -516,24 +578,18 @@
 		"/C/wamp/www/ccgbuilder/php/libs/helpers/string.helper.php",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/filerequirements.struct.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/modernizr.helper.js",
-		"/C/wamp/www/ccgbuilder/builder/php/choose-template.finalize.ajax.php",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/bootstrap-alert.helper.js",
-		"/C/wamp/www/ccgbuilder/builder/php/choose-template.definalize.ajax.php",
 		"/C/wamp/www/ccgbuilder/php/libs/genlib/filedir.class.php",
 		"/C/wamp/www/ccgbuilder/php/globals.php",
 		"/C/wamp/www/ccgbuilder/builder/php/choose-template-uploader.fallback.ajax.php",
 		"/C/wamp/www/ccgbuilder/js/vendor/modernizr/modernizr.custom.min.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/modernizr/polyfills/modernizr.on.min.js",
-		"/C/wamp/www/test/index.html",
-		"/C/wamp/www/ccgbuilder/builder/js/app/other/dialogs/dialog.class.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/jquery.fileupload.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/vendor/jquery.ui.widget.js",
 		"/C/wamp/www/ccgbuilder/js/globals.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/finalize.step.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/canvas.helper.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/scaleBox.manager.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/scaleBox.class.js",
-		"/C/wamp/www/ccgbuilder/index.html",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/jquery.fileupload.all.min.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/jquery.fileupload.min.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/fileUpload/js/jquery.iframe-transport.min.js",
@@ -553,8 +609,6 @@
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/uploadify/js/jquery.uploadify.js",
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/uploadify/php/uploadify.php",
 		"/C/wamp/www/ccgbuilder/builder/php/choose-template-upload-form.fallback.ajax.php",
-		"/C/wamp/www/ccgbuilder/builder/php/choose-name.finalize.ajax.php",
-		"/C/wamp/www/ccgbuilder/builder/php/choose-name.definalize.ajax.php",
 		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.480/uploadify.css",
 		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.747/index.php",
 		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.424/uploadify.php",
@@ -562,13 +616,9 @@
 		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.692/uploadify.php",
 		"/C/Users/Derek/AppData/Local/Temp/Rar$DIa0.193/check-exists.php",
 		"/C/wamp/www/ccgbuilder/builder/js/app/hbs/step-chooseTemplate-fallback.hbs",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/models/component.model.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/math.helper.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/string.helper.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/managers/view.manager.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/managers/modelview.manager.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/managers/hbs.manager.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/array.helper.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/base64.class.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/fallbackStep.step.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/objectevent.class.js",
@@ -578,25 +628,11 @@
 		"/C/wamp/www/ccgbuilder/js/vendor/plugins/jquery/getImageData/js/getImageData.min.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/keys.enum.js",
 		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/position.enum.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/input.helper.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/template-components.view.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-template.view.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/steps/choose-name.view.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/direction.enum.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/direction.class.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/componentScaleBox.manager.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/bb/views/modelviews/componentScaleBox.class.js",
-		"/C/wamp/www/ccgbuilder/js/vendor/bootstrap-alert.js",
-		"/C/Stuff/Programming/Web/libs/initializr/index.html",
-		"/C/wamp/www/ccgbuilder/css/main.css",
-		"/C/wamp/www/ccgbuilder/css/bootstrap-responsive.css",
-		"/C/wamp/www/ccgbuilder/css/bootstrap.css",
-		"/C/wamp/www/ccgbuilder/builder/js/app/genlib/dialog.class.js",
-		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/math.helper"
+		"/C/wamp/www/ccgbuilder/builder/js/app/helpers/input.helper.js"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -610,6 +646,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"        \n",
+			"@media",
+			"mouseCoords",
+			">';\n",
 			"../",
 			"../assets/fonts",
 			"../fonts",
@@ -733,11 +773,7 @@
 			".nav ",
 			">\n",
 			".navbar-inner",
-			".navbar",
-			".container",
-			"@media",
-			".span3",
-			"@media"
+			".navbar"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -745,6 +781,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"this.mouseCoords",
 			"../assets/fonts",
 			"self",
 			"",
@@ -812,7 +849,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -821,15 +858,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8672,
+						"buffer_size": 9369,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4244,
-								4244
+								7786,
+								7786
 							]
 						],
 						"settings":
@@ -839,7 +876,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1233.0,
+						"translation.y": 468.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -850,15 +887,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2328,
+						"buffer_size": 3040,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2312,
-								2312
+								1593,
+								1593
 							]
 						],
 						"settings":
@@ -867,26 +904,26 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 929.0,
+						"translation.y": 635.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "builder/css/main.css",
+					"file": "css/libs/helper.lib.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 45736,
+						"buffer_size": 3269,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18899,
-								18899
+								3218,
+								3218
 							]
 						],
 						"settings":
@@ -895,26 +932,26 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3181.0,
+						"translation.y": 2729.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "css/libs/helper.lib.css",
+					"file": "builder/css/main.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2749,
+						"buffer_size": 21383,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1108,
-								1108
+								1014,
+								1014
 							]
 						],
 						"settings":
@@ -923,26 +960,26 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1422.0,
+						"translation.y": 972.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "builder/js/app/bb/views/steps/template-components.step.js",
+					"file": "builder/js/app/bb/views/steps/finalize.step.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5339,
+						"buffer_size": 1001,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3552,
-								3552
+								612,
+								612
 							]
 						],
 						"settings":
@@ -951,26 +988,26 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2147.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "builder/js/app/bb/views/subviews/components.subview.js",
+					"file": "builder/js/app/bb/views/steps/choose-name.step.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8668,
+						"buffer_size": 5847,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1207,
-								1207
+								1528,
+								1528
 							]
 						],
 						"settings":
@@ -979,26 +1016,26 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 608.0,
+						"translation.y": 788.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "builder/js/app/bb/views/steps/choose-template.step.js",
+					"file": "builder/js/app/helpers/general.helper.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 17847,
+						"buffer_size": 509,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11613,
-								11613
+								415,
+								415
 							]
 						],
 						"settings":
@@ -1007,26 +1044,26 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6791.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "builder/js/app/helpers/canvas.helper.js",
+					"file": "builder/js/app/bb/views/steps/choose-template.step.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5561,
+						"buffer_size": 18139,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								430,
-								430
+								8415,
+								8415
 							]
 						],
 						"settings":
@@ -1035,142 +1072,59 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 23.0,
+						"translation.y": 4375.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "builder/js/app/other/dialogs/chooseTemplate.dialog.js",
+					"file": "builder/js/app/bb/views/steps/template-components.step.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2629,
+						"buffer_size": 6312,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2198,
-								2198
+								5641,
+								5641
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1026.0,
+						"translation.y": 3537.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 9,
-					"file": "builder/js/app/helpers/string.helper.js",
+					"file": "builder/js/app/bb/models/component.model.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1469,
+						"buffer_size": 371,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1147,
-								1147
+								63,
+								63
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 108.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "builder/js/app/other/dialogs/editComponent.dialog.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1499,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "builder/js/app/other/dialogs/dialog.class.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 346,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								219,
-								219
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "builder/php/choose-template-uploader.ajax.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1286,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								361,
-								361
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
