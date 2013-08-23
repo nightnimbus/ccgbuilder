@@ -9,17 +9,18 @@ $(function()
 define(
 	[
 		"jquery",
-		"managers/step.manager",
-		"managers/view.manager",
-		"helpers/canvas.helper",
-		"genlib/globals.class",
+		"classes/managers/step.manager",
+		"shared/classes/managers/view.manager",
+		"shared/classes/helpers/canvas.helper",
+		"shared/classes/globals.class",
 		"bb/views/step-buttons.view",
 		"bb/views/steps/choose-name.step",
 		"bb/views/steps/choose-template.step",
 		"bb/views/steps/template-components.step",
 		"bb/views/steps/finalize.step",
 		"bb/views/subviews/components.subview",
-		"bootstrap"
+		"bootstrap",
+		"jqueryui"
 	],
 function(
 	$,

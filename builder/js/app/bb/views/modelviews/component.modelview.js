@@ -1,10 +1,10 @@
 define(
 	[
 		"backbone",
-		"genlib/position.enum",
-		"managers/hbs.manager",
-		"managers/view.manager",
-		"bb/views/modelviews/scaleBox.manager",
+		"shared/enums/position.enum",
+		"shared/classes/managers/hbs.manager",
+		"shared/classes/managers/view.manager",
+		"classes/managers/scaleBox.manager",
 		"jcanvas"
 	],
 function(

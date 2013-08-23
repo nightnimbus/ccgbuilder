@@ -2,14 +2,14 @@ define(
 	[
 		"jquery",
 		"backbone",
-		"managers/hbs.manager",
-		"managers/step.manager",
-		"managers/view.manager",
-		"helpers/canvas.helper",
-		"genlib/globals.class",
-		"genlib/objectevent.class",
+		"shared/classes/managers/hbs.manager",
+		"classes/managers/step.manager",
+		"shared/classes/managers/view.manager",
+		"shared/classes/helpers/canvas.helper",
+		"shared/classes/globals.class",
+		"shared/classes/objectevent.class",
 		"bb/views/steps/step.view",
-		"bb/models/component-type.enum",
+		"enums/component-type.enum",
 		"jcanvas"
 	],
 function(

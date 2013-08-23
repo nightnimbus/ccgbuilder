@@ -4,19 +4,20 @@ define(
 		"underscore",
 		"backbone",
 		"modernizr",
-		"managers/view.manager",
-		"helpers/canvas.helper",
-		"helpers/bootstrap-alert.helper",
-		"helpers/string.helper",
-		"helpers/modernizr.helper",
-		"genlib/objectevent.class",
-		"genlib/globals.class",
-		"genlib/filerequirements.class",
+		"shared/classes/managers/view.manager",
+		"shared/classes/helpers/canvas.helper",
+		"shared/classes/helpers/bootstrap-alert.helper",
+		"shared/classes/helpers/string.helper",
+		"shared/classes/helpers/modernizr.helper",
+		"shared/classes/objectevent.class",
+		"shared/classes/globals.class",
+		"shared/classes/filerequirements.class",
 		"bb/views/steps/step.view",
-		"other/dialogs/chooseTemplate.dialog",
-		"other/dialogs/sortType.enum",
+		"classes/dialogs/chooseTemplate.dialog",
+		"enums/sortType.enum",
 		"bootstrap",
-		"fileupload"
+		"fileupload",
+		"jqueryui"
 	],
 function(
 	$,
@@ -415,6 +416,9 @@ function(
 				done: function(e, data)
 				{
 					self.onUploadSuccess(data, self.selectors.templatePreviewBack);
+					
+					if($(".back-template").hasClass("prebuilt-template-selected"))
+						$(".back-template").removeClass("prebuilt-template-selected");
 				},
 				fail: function(e, data)
 				{
@@ -435,6 +439,9 @@ function(
 				done: function(e, data)
 				{
 					self.onUploadSuccess(data, self.selectors.templatePreviewFront);
+
+					if($(".front-template").hasClass("prebuilt-template-selected"))
+						$(".front-template").removeClass("prebuilt-template-selected");
 				},
 				fail: function(e, data)
 				{

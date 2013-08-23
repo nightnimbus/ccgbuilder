@@ -1,0 +1,19 @@
+$standardMargin: 8px;
+
+.component-container
+{
+	display: block;
+	font-size: 14px;
+	margin-bottom: $standardMargin;
+}
+
+.component-label
+{
+	display: inline-block;
+	margin-right: $standardMargin;
+}
+
+.component-control
+{
+	
+}

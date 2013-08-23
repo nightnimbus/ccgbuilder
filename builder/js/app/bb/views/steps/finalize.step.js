@@ -2,10 +2,10 @@ define(
 	[
 		"jquery",
 		"backbone",
-		"managers/view.manager",
-		"managers/step.manager",
+		"shared/classes/managers/view.manager",
+		"classes/managers/step.manager",
 		"bb/views/steps/step.view",
-		"bb/models/component-type.enum",
+		"enums/component-type.enum",
 	],
 function(
 	$,

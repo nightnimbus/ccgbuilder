@@ -1,7 +1,7 @@
 define(
 	[
 	"backbone",
-	"managers/view.manager"
+	"shared/classes/managers/view.manager"
 	],
 function(
 	Backbone,

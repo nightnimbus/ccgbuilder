@@ -3,6 +3,8 @@
 require_once("../../php/pdo_connect.php");
 require_once("../../php/libs/ChromePHP/ChromePhp.php");
 require_once("../../php/libs/genlib/globals.class.php");
+require_once("../../php/libs/helpers/string.helper.php");
+require_once("../../php/libs/helpers/rand.helper.php");
 
 $ret = array("success"=>true);
 
@@ -12,7 +14,7 @@ $chooseTemplateFinalized = false;
 $templateComponentsFinalized = false;
 
 $ccgid = 0;
-$thisCcgRoot = Globals::ROOT_DIR()."ccgs/";
+$thisPublicId = "";
 
 if(strlen($db_exceptionMsg) == 0)
 {
@@ -77,6 +79,8 @@ echo json_encode($ret);
 
 
 
+
+
 /**************************************/
 /**************************************/
 /*         FINALIZE FUNCTIONS         */
@@ -109,25 +113,30 @@ function finalizeChooseTemplate()
 {
 	global $db;
 	global $ret;
+	global $ccgid;
 	global $chooseTemplateFinalized;
-	global $thisCcgRoot;
+	global $thisPublicId;
 
-	$ccgNumHandle = $db->query("SELECT id FROM ccgs ORDER BY id DESC LIMIT 1");
-	$row = $ccgNumHandle->fetch();
-	$ccgNumHandle->closeCursor();
+	RandHelper::seed_rand();
+	$publicIdCheck = $db->prepare("SELECT COUNT(id) FROM ccgs WHERE public_id=?");
 
-	if($row != false)
+	for($i = 0; $i < 3; $i++)
 	{
-		$thisCcgRoot .= ($row["id"] + 1).uniqid();
+		$thisPublicId = StringHelper::getRandomString(8, 12);
+		$publicIdCheck->execute(array($thisPublicId));
 
-		$update = $db->query("UPDATE ccgs SET base_path='$thisCcgRoot' WHERE id='$row[id]'");
+		if($publicIdCheck->rowCount() == 1)
+			break;
+	}
+
+	if(strlen($thisPublicId) > 0)
+	{
+		$update = $db->query("UPDATE ccgs SET public_id='$thisPublicId' WHERE id='$ccgid'");
 
 		if($update->rowCount() == 0)
 			$ret["success"] = false;
 
 		$update->closeCursor();
-
-
 
 		$templateSizes = ($_POST["templateSizes"]) ? $_POST["templateSizes"] : array();
 		$templateDataBack = ($_POST["templateDataBack"]) ? $_POST["templateDataBack"] : array();
@@ -135,7 +144,7 @@ function finalizeChooseTemplate()
 
 		$templateImages = array();
 		$firstSize = $templateSizes[0];
-		$fileDir = $thisCcgRoot."/templates/";
+		$fileDir = Globals::ROOT_DIR()."assets/ccgs/".$thisPublicId."/templates/";
 		$fileSuffix = ".jpg";
 
 
@@ -170,13 +179,13 @@ function finalizeChooseTemplate()
 				break;
 			}
 		}
-
-		if($ret["success"])
-			$chooseTemplateFinalized = true;
 	}
 
 	else
 		$ret["success"] = false;
+
+	if($ret["success"])
+		$chooseTemplateFinalized = true;
 }
 
 function finalizeTemplateComponents()
@@ -262,9 +271,9 @@ function definalizeChooseName()
 function definalizeChooseTemplate()
 {
 	global $chooseTemplateFinalized;
-	global $thisCcgRoot;
+	global $thisPublicId;
 
-	FileDir::rrmdir($thisCcgRoot);
+	FileDir::rrmdir($thisPublicId);
 
 	$chooseTemplateFinalized = false;
 }

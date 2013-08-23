@@ -6,7 +6,7 @@ class Globals
 	private static $ROOT_DIR;
 	private static $TMP_DIR;
 
-	public function initialize()
+	public static function initialize()
 	{
 		self::$BASE_URL = "localhost/ccgbuilder/";
 		//self::$BASE_URL = "192.168.1.4/ccgbuilder/";

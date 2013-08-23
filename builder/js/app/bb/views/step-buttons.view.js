@@ -2,7 +2,7 @@ define(
 	[
 		"jquery",
 		"backbone",
-		"managers/step.manager"
+		"classes/managers/step.manager"
 	],
 function($, Backbone, StepManager)
 {

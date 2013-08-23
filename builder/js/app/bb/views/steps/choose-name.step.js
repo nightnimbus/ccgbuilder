@@ -2,11 +2,11 @@ define([
 	"jquery",
 	"backbone",
 	"modernizr",
-	"managers/hbs.manager",
-	"managers/view.manager",
-	"helpers/general.helper",
-	"genlib/objectevent.class",
-	"genlib/globals.class",
+	"shared/classes/managers/hbs.manager",
+	"shared/classes/managers/view.manager",
+	"shared/classes/helpers/general.helper",
+	"shared/classes/objectevent.class",
+	"shared/classes/globals.class",
 	"bb/views/steps/step.view"
 	],
 function(

@@ -2,17 +2,17 @@ define(
 	[
 		"jquery",
 		"backbone",
-		"genlib/position.enum",
-		"genlib/keys.enum",
-		"genlib/globals.class",
-		"genlib/objectevent.class",
-		"managers/view.manager",
-		"managers/modelview.manager",
-		"helpers/math.helper",
+		"shared/enums/position.enum",
+		"shared/enums/keys.enum",
+		"shared/classes/globals.class",
+		"shared/classes/objectevent.class",
+		"shared/classes/managers/view.manager",
+		"shared/classes/managers/modelview.manager",
+		"shared/classes/helpers/math.helper",
 		"bb/views/modelviews/component.modelview",
 		"bb/models/component.model",
-		"other/dialogs/editComponent.dialog",
-		"other/dialogs/deleteComponentYesNo.dialog"
+		"classes/dialogs/editComponent.dialog",
+		"classes/dialogs/deleteComponentYesNo.dialog"
 	],
 function(
 	$,
